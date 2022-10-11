@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    .app-content {
+        @apply bg-neutral-500 w-full;
+    }
+}
+
+.navbar-spacer {
+    flex: 1 1 auto;
+}

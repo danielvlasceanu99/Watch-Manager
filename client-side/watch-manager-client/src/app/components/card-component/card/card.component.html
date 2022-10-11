@@ -1,0 +1,8 @@
+<div class="card rounded overflow-hidden shadow-lg bg-neutral-600 text-slate-50" (click)="goTo()">
+    <img class="w-full" src="{{ media?.poster_path }}" alt="Sunset in the mountains" />
+    <div class="px-6 py-4">
+        <div class="font-bold text-xl mb-2">{{ title }}</div>
+
+        <div class="font-bold text-xl mb-2">{{ subtitle | date }}</div>
+    </div>
+</div>
