@@ -4,7 +4,7 @@
             <img src="../../../../assets/images/banner-2.png" alt="Homepage Banner" />
         </div>
 
-        <mat-tab-group mat-align-tabs="start" class="pt-6" (selectedTabChange)="onTabChanged()">
+        <mat-tab-group mat-align-tabs="start" class="pt-6">
             <mat-tab label="TV Shows" *ngIf="!isLoading">
                 <div class="flex flex-wrap gap-5 justify-center">
                     <mat-progress-bar mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>

@@ -13,5 +13,5 @@ export interface Tv {
     last_changed_by: string;
     created_at: Date;
     last_changed_at: Date;
-    gene: Genre[];
+    genre: Genre[];
 }

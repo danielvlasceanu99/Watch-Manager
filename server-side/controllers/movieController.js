@@ -64,6 +64,21 @@ const controller = {
             res.status(500).send({ message: "Server error" });
         }
     },
+
+    getById: async (req, res) => {
+        try {
+            const movie = await MovieDb.findByPk(req.params.id, {
+                include: [GenreDb],
+            });
+            if (movie) {
+                res.status(201).send(movie);
+            } else {
+                res.status(404).send({ message: "Movie not found" });
+            }
+        } catch {
+            res.status(500).send({ message: "Server error" });
+        }
+    },
 };
 
 module.exports = controller;

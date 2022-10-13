@@ -1,0 +1,24 @@
+<div>
+    <img class="w-full" src="{{ posterPath }}" alt="poster" />
+    <div class="flex flex-row pt-1.5">
+        <button mat-fab color="primary" aria-label="Example icon button with a delete icon">
+            <mat-icon>favorite</mat-icon>
+        </button>
+        <button mat-fab color="primary" aria-label="Example icon button with a delete icon">
+            <mat-icon> bookmark_add </mat-icon>
+        </button>
+        <button mat-fab color="primary" aria-label="Example icon button with a delete icon">
+            <mat-icon> grade</mat-icon>
+        </button>
+    </div>
+    <p class="pt-1.5 font-bold">{{ status }}</p>
+    <div class="pt-1.5">
+        <p class="font-bold">Producers</p>
+        <p *ngFor="let credit of producers">{{ credit.person.name }}</p>
+    </div>
+    <p class="pt-1.5" *ngIf="network">{{ network }}</p>
+    <div class="pt-1.5">
+        <p class="font-bold">Genres</p>
+        <p *ngFor="let genre of genres">{{ genre.name }}</p>
+    </div>
+</div>

@@ -1,0 +1,15 @@
+<div class="text-lg">
+    <div>
+        <span class="text-xl">{{ media?.title }}</span> <span>{{ media?.date | dateYear }}</span>
+    </div>
+    <div>
+        <span>{{ media?.date | date }}</span> <span *ngIf="media?.runtime">{{ media?.runtime }}</span>
+    </div>
+    <div class="italic my-2.5">
+        {{ media?.tagline }}
+    </div>
+    <div>
+        <h3>Overview</h3>
+        <p>{{ media?.overview }}</p>
+    </div>
+</div>

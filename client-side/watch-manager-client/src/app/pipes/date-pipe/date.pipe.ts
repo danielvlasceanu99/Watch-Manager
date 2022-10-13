@@ -20,7 +20,10 @@ export class DatePipe implements PipeTransform {
         "December",
     ];
 
-    transform(date: Date): string {
+    transform(date: Date | undefined): string {
+        if (!date) {
+            return "";
+        }
         const splits = date.toString().split("T")[0].split("-");
 
         return `${splits[2]} ${this.monthNames[Number(splits[1])]} ${splits[0]}`;

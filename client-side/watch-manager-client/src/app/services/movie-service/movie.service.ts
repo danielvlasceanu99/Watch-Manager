@@ -11,6 +11,9 @@ export class MovieService {
     constructor(private httpClient: HttpClient) {}
 
     getLatest() {
-        return this.httpClient.get<Movie[]>(this.MOVIE_URL + "/latest");
+        return this.httpClient.get<Movie[]>(`${this.MOVIE_URL}/latest`);
+    }
+    getById(movie_id: string) {
+        return this.httpClient.get<Movie>(`${this.MOVIE_URL}/get/${movie_id}`);
     }
 }

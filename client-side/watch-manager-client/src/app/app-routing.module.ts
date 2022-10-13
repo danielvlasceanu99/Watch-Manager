@@ -1,6 +1,6 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
-import { LatestComponent } from "./components/latest-component/latest/latest.component";
+import { LatestComponent } from "./components/latest-component/latest.component";
 
 const routes: Routes = [
     { path: "home", component: LatestComponent },

@@ -19,6 +19,7 @@ export class LatestComponent implements OnInit {
 
     ngOnInit(): void {
         this.getTvShows();
+        this.getMovies();
     }
 
     getTvShows() {
@@ -33,13 +34,9 @@ export class LatestComponent implements OnInit {
         this.isLoading = true;
         this.movieService.getLatest().subscribe((res) => {
             this.movies = res;
+            console.log(this.movies[0]);
+
             this.isLoading = false;
         });
-    }
-
-    onTabChanged() {
-        if (this.movies.length === 0) {
-            this.getMovies();
-        }
     }
 }
