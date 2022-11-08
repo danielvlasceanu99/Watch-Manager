@@ -1,0 +1,19 @@
+<div class="w-full mb-7">
+    <div class="text-3xl font-bold py-4">Cast</div>
+    <div class="flex flex-wrap gap-y-4 justify-between">
+        <app-card
+            class="card"
+            *ngFor="let credit of credits"
+            [mediaId]="credit.person.id"
+            [mediaTitle]="credit.person.name"
+            [mediaSubtitle]="credit.job"
+            [mediaPoster]="credit.person.poster_path"
+            [mediaType]="personMediaType">
+        </app-card>
+        <app-view-more-card
+            class="card"
+            [mediaId]="mediaId"
+            [mediaType]="movieMediaType"
+            [URL]="'credits'"></app-view-more-card>
+    </div>
+</div>

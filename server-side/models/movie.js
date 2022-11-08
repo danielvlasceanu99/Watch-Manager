@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTyes) => {
             overview: DataTyes.STRING,
             runtime: DataTyes.INTEGER,
             release_date: DataTyes.DATE,
-            stauts: {
+            status: {
                 type: DataTyes.STRING,
                 validate: {
                     isIn: [["Rumored", "Planned", "In Production", "Post Production", "Released", "Canceled"]],

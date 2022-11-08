@@ -1,0 +1,16 @@
+<div class="w-full mt-5">
+    <form class="w-full" [formGroup]="formGroup">
+        <mat-form-field appearance="fill" class="w-full">
+            <mat-label>Leave a review</mat-label>
+            <textarea rows="7" formControlName="review" matInput></textarea>
+        </mat-form-field>
+    </form>
+
+    <div>
+        <div class="text-3xl font-bold pb-3">Reviews</div>
+        <app-review *ngFor="let review of reviews" [review]="review"></app-review>
+        <div class="flex flex-wrap justify-center">
+            <a href="#" class="text-2xl">View all reviews</a>
+        </div>
+    </div>
+</div>

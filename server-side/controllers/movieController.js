@@ -9,7 +9,7 @@ const controller = {
                 order: [["created_at", "DESC"]],
                 limit: 15,
             });
-            res.status(201).send(movies);
+            res.status(200).send(movies);
         } catch {
             res.status(500).send({ message: "Server error" });
         }
@@ -56,7 +56,7 @@ const controller = {
                 distinct: true,
                 col: "id",
             });
-            res.status(201).send({
+            res.status(200).send({
                 movies,
                 movieCount,
             });
@@ -71,7 +71,7 @@ const controller = {
                 include: [GenreDb],
             });
             if (movie) {
-                res.status(201).send(movie);
+                res.status(200).send(movie);
             } else {
                 res.status(404).send({ message: "Movie not found" });
             }

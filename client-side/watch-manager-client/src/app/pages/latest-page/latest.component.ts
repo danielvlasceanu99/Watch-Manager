@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { MediaType } from "src/app/models/helpers/media-type.model";
 import { Movie } from "src/app/models/movie.model";
 import { Tv } from "src/app/models/tv.model";
 import { MovieService } from "src/app/services/movie-service/movie.service";
@@ -12,6 +13,9 @@ import { TvService } from "src/app/services/tv-service/tv.service";
 export class LatestComponent implements OnInit {
     tvShows: Tv[] = [];
     movies: Movie[] = [];
+
+    tvMediaType: MediaType = MediaType.TV;
+    movieMediaType: MediaType = MediaType.MOVIE;
 
     isLoading: Boolean = false;
 
@@ -34,8 +38,6 @@ export class LatestComponent implements OnInit {
         this.isLoading = true;
         this.movieService.getLatest().subscribe((res) => {
             this.movies = res;
-            console.log(this.movies[0]);
-
             this.isLoading = false;
         });
     }

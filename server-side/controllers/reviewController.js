@@ -9,7 +9,7 @@ const controller = {
                     movie_id: req.params.movie_id,
                 },
             });
-            res.status(500).send(reviews);
+            res.status(200).send(reviews);
         } catch {
             res.status(500).send({ message: "Server error" });
         }

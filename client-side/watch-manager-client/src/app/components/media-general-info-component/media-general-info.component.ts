@@ -8,7 +8,12 @@ import { Movie } from "src/app/models/movie.model";
     styleUrls: ["./media-general-info.component.scss"],
 })
 export class MediaGeneralInfoComponent implements OnInit {
-    @Input() media: Media | null = null;
+    @Input() mediaId: string | null = "";
+    @Input() title: string | undefined = "";
+    @Input() date: Date | undefined = new Date();
+    @Input() runtime: number | undefined = undefined;
+    @Input() tagline: string | undefined = "";
+    @Input() overview: string | undefined = "";
 
     constructor() {}
 

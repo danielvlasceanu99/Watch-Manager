@@ -1,15 +1,19 @@
-<div class="text-lg">
+<div class="text-xl w-full">
     <div>
-        <span class="text-xl">{{ media?.title }}</span> <span>{{ media?.date | dateYear }}</span>
+        <span class="text-5xl font-bold">
+            {{ title }} <span class="text-3xl">({{ date | dateYear }})</span>
+        </span>
     </div>
     <div>
-        <span>{{ media?.date | date }}</span> <span *ngIf="media?.runtime">{{ media?.runtime }}</span>
+        <span>
+            {{ date | date }} • <span *ngIf="runtime">{{ runtime | runtime }}</span>
+        </span>
     </div>
     <div class="italic my-2.5">
-        {{ media?.tagline }}
+        {{ tagline }}
     </div>
-    <div>
-        <h3>Overview</h3>
-        <p>{{ media?.overview }}</p>
+    <div class="text-justify">
+        <p class="text-3xl font-bold">Overview</p>
+        <p>{{ overview }}</p>
     </div>
 </div>

@@ -1,0 +1,28 @@
+<div class="w-full pb-2.5 min-h-full">
+    <div class="container mx-auto h-full flex">
+        <mat-progress-bar mode="indeterminate" *ngIf="movieIsLoading"></mat-progress-bar>
+        <div class="w-1/4 pt-10" *ngIf="!movieIsLoading">
+            <app-media-side-panel
+                [posterPath]="movie?.poster_path"
+                [status]="movie?.status"
+                [producers]="producers"
+                [genres]="movie?.genres">
+            </app-media-side-panel>
+        </div>
+        <div class="w-3/4 pt-16" *ngIf="!movieIsLoading">
+            <app-media-general-info
+                [mediaId]="id"
+                [title]="movie?.title"
+                [runtime]="movie?.runtime"
+                [tagline]="movie?.tagline"
+                [overview]="movie?.overview"
+                [date]="movie?.release_date">
+            </app-media-general-info>
+            <app-cast [credits]="cast.slice(0, 7)" [mediaId]="id"></app-cast>
+
+            <mat-divider></mat-divider>
+
+            <app-review-list [reviews]="reviews"></app-review-list>
+        </div>
+    </div>
+</div>

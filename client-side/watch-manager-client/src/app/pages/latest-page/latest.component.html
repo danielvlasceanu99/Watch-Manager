@@ -1,0 +1,39 @@
+<div class="w-full pb-2.5 min-h-full">
+    <div class="container mx-auto h-full">
+        <div class="w-full max-h-80">
+            <img src="../../../../assets/images/banner-2.png" alt="Homepage Banner" />
+        </div>
+
+        <mat-tab-group mat-align-tabs="start" class="pt-6">
+            <mat-tab label="TV Shows" *ngIf="!isLoading">
+                <div class="flex flex-wrap gap-7 justify-center">
+                    <mat-progress-bar mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>
+                    <app-card
+                        class="card"
+                        *ngFor="let media of tvShows"
+                        [mediaId]="media.id"
+                        [mediaTitle]="media.name"
+                        [mediaSubtitle]="media.first_air_date | date"
+                        [mediaPoster]="media.poster_path"
+                        [mediaType]="tvMediaType">
+                    </app-card>
+                </div>
+            </mat-tab>
+            <mat-tab label="Movies" *ngIf="!isLoading">
+                <div class="flex flex-wrap gap-y-7 justify-between">
+                    <mat-progress-bar mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>
+                    <app-card
+                        class="card"
+                        *ngFor="let media of movies"
+                        [mediaId]="media.id"
+                        [mediaTitle]="media.title"
+                        [mediaSubtitle]="media.release_date | date"
+                        [mediaPoster]="media.poster_path"
+                        [mediaType]="movieMediaType"
+                        >>
+                    </app-card>
+                </div>
+            </mat-tab>
+        </mat-tab-group>
+    </div>
+</div>

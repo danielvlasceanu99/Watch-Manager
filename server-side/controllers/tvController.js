@@ -9,7 +9,7 @@ const controller = {
                 order: [["created_at", "DESC"]],
                 limit: 15,
             });
-            res.status(201).send(tvs);
+            res.status(200).send(tvs);
         } catch {
             res.status(500).send({ message: "Server error" });
         }

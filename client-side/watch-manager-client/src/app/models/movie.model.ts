@@ -4,7 +4,7 @@ export interface Movie {
     id: string;
     title: string;
     tagline: string;
-    oferview: string;
+    overview: string;
     runtime: number;
     release_date: Date;
     status: string;
@@ -15,5 +15,5 @@ export interface Movie {
     last_changed_by: string;
     created_at: Date;
     last_changed_at: Date;
-    gene: Genre[];
+    genres: Genre[];
 }

@@ -11,7 +11,7 @@ const controller = {
                     movie_id: req.params.movie_id,
                 },
             });
-            res.status(201).send(cast);
+            res.status(200).send(cast);
         } catch {
             res.status(500).send({ message: "Server error" });
         }
