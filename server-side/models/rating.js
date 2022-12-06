@@ -1,16 +1,16 @@
 module.exports = (sequelize, DataTyes) => {
     return sequelize.define(
-        "tv_credit",
+        "rating",
         {
             id: {
                 type: DataTyes.CHAR(36),
                 primaryKey: true,
             },
-            job: DataTyes.STRING,
-            credit_type: {
+            score: DataTyes.INTEGER,
+            media_type: {
                 type: DataTyes.STRING,
                 validate: {
-                    isIn: [["Cast", "Crew"]],
+                    isIn: [["tv", "movie"]],
                 },
             },
             created_by: DataTyes.STRING,

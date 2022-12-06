@@ -1,6 +1,6 @@
 import { Person } from "./person.model";
 
-export interface MovieCredit {
+export interface Credit {
     id: string;
     job: string;
     credit_type: string;
@@ -9,6 +9,7 @@ export interface MovieCredit {
     created_at: Date;
     last_changed_at: Date;
     movie_id: string;
+    tv_id: string;
     person_id: string;
     person: Person;
 }

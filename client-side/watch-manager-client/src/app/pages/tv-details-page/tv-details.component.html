@@ -1,4 +1,4 @@
-<div class="w-full pb-2.5 min-h-full text-white">
+<!-- <div class="w-full pb-2.5 min-h-full text-white">
     <div class="container mx-auto h-full flex">
         <mat-progress-bar mode="indeterminate" *ngIf="movieIsLoading"></mat-progress-bar>
         <div class="w-1/4 pt-10" *ngIf="!movieIsLoading">
@@ -18,11 +18,12 @@
                 [overview]="movie?.overview"
                 [date]="movie?.release_date">
             </app-media-general-info>
-            <app-cast [credits]="cast.slice(0, 7)" [mediaId]="id" [mediaType]="mediaType"></app-cast>
+            <app-cast [credits]="cast.slice(0, 7)" [mediaId]="id"></app-cast>
 
             <mat-divider></mat-divider>
 
-            <app-review-list [reviews]="reviews.slice(0, 3)" [mediaId]="id" [mediaType]="mediaType"></app-review-list>
+            <app-review-list [reviews]="reviews"></app-review-list>
         </div>
     </div>
 </div>
+<p>tv-details works!</p> -->

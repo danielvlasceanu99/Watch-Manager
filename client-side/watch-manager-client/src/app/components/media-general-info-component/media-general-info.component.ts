@@ -1,6 +1,4 @@
 import { Component, Input, OnInit } from "@angular/core";
-import { Media } from "src/app/models/helpers/media.moedl";
-import { Movie } from "src/app/models/movie.model";
 
 @Component({
     selector: "app-media-general-info",

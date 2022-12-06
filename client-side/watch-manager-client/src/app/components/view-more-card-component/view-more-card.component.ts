@@ -8,9 +8,9 @@ import { MediaType } from "src/app/models/helpers/media-type.model";
     styleUrls: ["./view-more-card.component.scss"],
 })
 export class ViewMoreCardComponent implements OnInit {
-    @Input() mediaId: String | null = "";
-    @Input() mediaType: MediaType | null = null;
-    @Input() URL: String | null = "";
+    @Input() mediaId: string | null = "";
+    @Input() mediaType: MediaType | undefined = undefined;
+    @Input() URL: string | undefined = undefined;
 
     constructor(private router: Router) {}
 

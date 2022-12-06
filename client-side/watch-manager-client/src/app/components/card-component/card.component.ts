@@ -8,11 +8,11 @@ import { MediaType } from "src/app/models/helpers/media-type.model";
     styleUrls: ["./card.component.scss"],
 })
 export class CardComponent implements OnInit {
-    @Input() mediaId: String | null = "";
-    @Input() mediaTitle: String | null = "";
-    @Input() mediaSubtitle: String | null = "";
-    @Input() mediaPoster: String | null = "";
-    @Input() mediaType: MediaType | null = null;
+    @Input() mediaId: string | undefined = "";
+    @Input() mediaTitle: string | undefined = "";
+    @Input() mediaSubtitle: string | undefined = "";
+    @Input() mediaPoster: string | undefined = "";
+    @Input() mediaType: MediaType | undefined = undefined;
 
     constructor(private router: Router) {}
 

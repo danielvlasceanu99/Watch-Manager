@@ -31,6 +31,7 @@ import { CastComponent } from "./components/cast-component/cast.component";
 // CUSTOM PAGES
 import { LatestComponent } from "./pages/latest-page/latest.component";
 import { MovieDetailsComponent } from "./pages/movie-details-page/movie-details.component";
+import { TvDetailsComponent } from "./pages/tv-details-page/tv-details.component";
 
 // PIPES
 import { DatePipe } from "./pipes/date-pipe/date.pipe";
@@ -52,6 +53,7 @@ import { RuntimePipe } from "./pipes/runtime-pipe/runtime.pipe";
         // PAGES
         MovieDetailsComponent,
         LatestComponent,
+        TvDetailsComponent,
         // PIPES
         DateYearPipe,
         DatePipe,

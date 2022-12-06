@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTyes) => {
             },
             name: DataTyes.STRING(100),
             tagline: DataTyes.STRING(150),
-            overview: DataTyes.STRING,
+            overview: DataTyes.STRING(1000),
             first_air_date: DataTyes.DATE,
             in_production: DataTyes.BOOLEAN,
             network: DataTyes.STRING,

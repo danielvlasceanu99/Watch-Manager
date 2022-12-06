@@ -12,4 +12,8 @@ export class ReviewService {
     getByMovieId(movie_id: string) {
         return this.httpClient.get<Review[]>(`${this.REVIEW_URL}/getByMovieId/${movie_id}`);
     }
+
+    getByTvId(tv_id: string) {
+        return this.httpClient.get<Review[]>(`${this.REVIEW_URL}/getByTvId/${tv_id}`);
+    }
 }

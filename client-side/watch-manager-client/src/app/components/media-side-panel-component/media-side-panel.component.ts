@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from "@angular/core";
 import { Genre } from "src/app/models/genre.model";
-import { MovieCredit } from "src/app/models/movie-credit.model";
+import { Credit } from "src/app/models/credit.model";
 
 @Component({
     selector: "app-media-side-panel",
@@ -10,8 +10,8 @@ import { MovieCredit } from "src/app/models/movie-credit.model";
 export class MediaSidePanelComponent implements OnInit {
     @Input() posterPath: string | undefined = "";
     @Input() status: string | undefined = "";
-    @Input() producers: MovieCredit[] = [];
-    @Input() network: string | null = null;
+    @Input() producers: Credit[] = [];
+    @Input() network: string | undefined = undefined;
     @Input() genres: Genre[] | undefined = [];
 
     constructor() {}

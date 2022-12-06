@@ -1,14 +1,24 @@
 module.exports = (sequelize, DataTyes) => {
     return sequelize.define(
-        "tv_review",
+        "credit",
         {
             id: {
                 type: DataTyes.CHAR(36),
                 primaryKey: true,
             },
-            title: DataTyes.STRING,
-            content: DataTyes.STRING(1000),
-            user_name: DataTyes.STRING,
+            job: DataTyes.STRING,
+            credit_type: {
+                type: DataTyes.STRING,
+                validate: {
+                    isIn: [["Cast", "Crew"]],
+                },
+            },
+            media_type: {
+                type: DataTyes.STRING,
+                validate: {
+                    isIn: [["tv", "movie"]],
+                },
+            },
             created_by: DataTyes.STRING,
             last_changed_by: DataTyes.STRING,
         },

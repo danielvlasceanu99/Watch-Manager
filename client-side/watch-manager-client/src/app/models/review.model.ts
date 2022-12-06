@@ -8,4 +8,5 @@ export interface Review {
     created_at: Date;
     last_changed_at: Date;
     movie_id: string;
+    tv_id: string;
 }

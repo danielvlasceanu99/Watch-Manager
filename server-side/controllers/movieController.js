@@ -16,7 +16,7 @@ const controller = {
     },
 
     get: async (req, res) => {
-        const limit = 5;
+        const limit = 15;
         try {
             let movies = await MovieDb.findAll({
                 where: {

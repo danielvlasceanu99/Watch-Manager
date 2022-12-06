@@ -13,4 +13,8 @@ export class TvService {
     getLatest() {
         return this.httpClient.get<Tv[]>(this.TV_URL + "/latest");
     }
+
+    getById(movie_id: string) {
+        return this.httpClient.get<Tv>(`${this.TV_URL}/get/${movie_id}`);
+    }
 }

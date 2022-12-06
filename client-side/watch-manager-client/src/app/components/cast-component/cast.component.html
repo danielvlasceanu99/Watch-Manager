@@ -8,12 +8,12 @@
             [mediaTitle]="credit.person.name"
             [mediaSubtitle]="credit.job"
             [mediaPoster]="credit.person.poster_path"
-            [mediaType]="personMediaType">
+            [mediaType]="cardMediaType">
         </app-card>
         <app-view-more-card
             class="card"
             [mediaId]="mediaId"
-            [mediaType]="movieMediaType"
+            [mediaType]="mediaType"
             [URL]="'credits'"></app-view-more-card>
     </div>
 </div>
