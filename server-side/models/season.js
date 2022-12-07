@@ -7,7 +7,7 @@ module.exports = (sequelize, DataTyes) => {
                 primaryKey: true,
             },
             name: DataTyes.STRING(100),
-            overview: DataTyes.STRING,
+            overview: DataTyes.STRING(1000),
             season_number: DataTyes.INTEGER,
             air_date: DataTyes.DATE,
             poster_path: DataTyes.STRING,

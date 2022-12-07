@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTyes) => {
             },
             episode_number: DataTyes.INTEGER,
             name: DataTyes.STRING(100),
-            overview: DataTyes.STRING,
+            overview: DataTyes.STRING(1000),
             air_date: DataTyes.DATE,
             poster_path: DataTyes.STRING,
             created_by: DataTyes.STRING,

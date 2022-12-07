@@ -1,10 +1,10 @@
 const { Op } = require("sequelize");
-const Review = require("../models").Review;
+const ReviewDb = require("../models").Review;
 
 const controller = {
     getReviewsByMovieId: async (req, res) => {
         try {
-            const reviews = await Review.findAll({
+            const reviews = await ReviewDb.findAll({
                 where: {
                     movie_id: req.params.movie_id,
                 },
@@ -18,7 +18,7 @@ const controller = {
 
     getReviewsByTvId: async (req, res) => {
         try {
-            const reviews = await Review.findAll({
+            const reviews = await ReviewDb.findAll({
                 where: {
                     tv_id: req.params.tv_id,
                 },

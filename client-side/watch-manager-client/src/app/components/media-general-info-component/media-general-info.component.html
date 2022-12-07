@@ -6,7 +6,7 @@
     </div>
     <div>
         <span>
-            {{ date | date }} • <span *ngIf="runtime">{{ runtime | runtime }}</span>
+            {{ date | date }}<span *ngIf="runtime"> • {{ runtime | runtime }}</span>
         </span>
     </div>
     <div class="italic my-2.5">

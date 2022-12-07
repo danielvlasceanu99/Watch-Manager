@@ -1,6 +1,5 @@
-import { HttpClient, HttpResponse } from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { map, Observable } from "rxjs";
 import { Tv } from "src/app/models/tv.model";
 
 @Injectable({
@@ -14,7 +13,7 @@ export class TvService {
         return this.httpClient.get<Tv[]>(this.TV_URL + "/latest");
     }
 
-    getById(movie_id: string) {
-        return this.httpClient.get<Tv>(`${this.TV_URL}/get/${movie_id}`);
+    getById(tv_id: string) {
+        return this.httpClient.get<Tv>(`${this.TV_URL}/get/${tv_id}`);
     }
 }

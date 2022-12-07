@@ -16,5 +16,7 @@ export class MediaSidePanelComponent implements OnInit {
 
     constructor() {}
 
-    ngOnInit(): void {}
+    ngOnInit(): void {
+        console.log("network", this.network);
+    }
 }

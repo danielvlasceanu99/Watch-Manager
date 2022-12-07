@@ -11,9 +11,12 @@
             [mediaType]="cardMediaType">
         </app-card>
         <app-view-more-card
+            *ngIf="credits.length"
             class="card"
             [mediaId]="mediaId"
             [mediaType]="mediaType"
-            [URL]="'credits'"></app-view-more-card>
+            [URL]="'credits'">
+        </app-view-more-card>
+        <div class="text-2xl" *ngIf="!credits.length">There is no cast</div>
     </div>
 </div>

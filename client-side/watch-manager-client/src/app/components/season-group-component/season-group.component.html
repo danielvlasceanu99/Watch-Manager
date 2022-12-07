@@ -1,0 +1,11 @@
+<div class="w-full py-5">
+    <app-season-info
+        *ngFor="let season of seasons"
+        [seasonId]="season.id"
+        [name]="season.name"
+        [air_date]="season.air_date"
+        [overview]="season.overview"
+        [posterPath]="season.poster_path"
+        [episodes]="season.episodes">
+    </app-season-info>
+</div>

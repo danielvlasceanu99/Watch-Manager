@@ -27,6 +27,9 @@ import { ReviewComponent } from "./components/reivew-component/review.component"
 import { ViewMoreCardComponent } from "./components/view-more-card-component/view-more-card.component";
 import { ReviewListComponent } from "./components/review-list-component/review-list.component";
 import { CastComponent } from "./components/cast-component/cast.component";
+import { SeasonInfoComponent } from "./components/season-info-component/season-info.component";
+import { EpisodeInfoComponent } from "./components/episode-info-component/episode-info.component";
+import { SeasonGroupComponent } from "./components/season-group-component/season-group.component";
 
 // CUSTOM PAGES
 import { LatestComponent } from "./pages/latest-page/latest.component";
@@ -50,6 +53,7 @@ import { RuntimePipe } from "./pipes/runtime-pipe/runtime.pipe";
         ViewMoreCardComponent,
         ReviewListComponent,
         CastComponent,
+        SeasonInfoComponent,
         // PAGES
         MovieDetailsComponent,
         LatestComponent,
@@ -58,6 +62,8 @@ import { RuntimePipe } from "./pipes/runtime-pipe/runtime.pipe";
         DateYearPipe,
         DatePipe,
         RuntimePipe,
+        EpisodeInfoComponent,
+        SeasonGroupComponent,
     ],
     imports: [
         BrowserModule,

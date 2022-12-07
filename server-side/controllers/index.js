@@ -3,6 +3,7 @@ const movieController = require("./movieController");
 const tvController = require("./tvController");
 const creditController = require("./creditController");
 const reviewController = require("./reviewController");
+const seasonController = require("./seasoController");
 
 module.exports = {
     reset,
@@ -10,4 +11,5 @@ module.exports = {
     tvController,
     creditController,
     reviewController,
+    seasonController,
 };
