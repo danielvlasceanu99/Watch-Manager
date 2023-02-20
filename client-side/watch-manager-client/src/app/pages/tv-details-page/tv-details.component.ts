@@ -86,7 +86,6 @@ export class TvDetailsComponent implements OnInit {
         if (this.id) {
             this.seasonService.getByTvId(this.id).subscribe((res) => {
                 this.seasons = res;
-                console.log("Seasons: ", this.seasons);
             });
         }
     }

@@ -19,13 +19,13 @@
                 [overview]="tv?.overview"
                 [date]="tv?.first_air_date">
             </app-media-general-info>
-            <app-cast [credits]="cast.slice(0, 7)" [mediaId]="id"></app-cast>
+            <app-cast [credits]="cast.slice(0, 7)" [mediaId]="id" [mediaType]="mediaType"></app-cast>
 
             <mat-divider></mat-divider>
             <app-season-group [seasons]="seasons"></app-season-group>
 
             <mat-divider></mat-divider>
-            <app-review-list [reviews]="reviews.slice(0, 3)"></app-review-list>
+            <app-review-list [reviews]="reviews.slice(0, 3)" [mediaId]="id" [mediaType]="mediaType"></app-review-list>
         </div>
     </div>
 </div>

@@ -17,6 +17,6 @@ export class ViewMoreCardComponent implements OnInit {
     ngOnInit(): void {}
 
     goTo() {
-        this.router.navigate([`./${URL ? URL : ""}${this.mediaType}/${this.mediaId}`]);
+        this.router.navigate([`./${this.mediaType}/${this.mediaId}/cast`]);
     }
 }

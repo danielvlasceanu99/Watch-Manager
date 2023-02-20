@@ -35,6 +35,8 @@ import { SeasonGroupComponent } from "./components/season-group-component/season
 import { LatestComponent } from "./pages/latest-page/latest.component";
 import { MovieDetailsComponent } from "./pages/movie-details-page/movie-details.component";
 import { TvDetailsComponent } from "./pages/tv-details-page/tv-details.component";
+import { AllReviewsComponent } from "./pages/all-reviews-page/all-reviews.component";
+import { AllCastComponent } from "./pages/all-cast-page/all-cast.component";
 
 // PIPES
 import { DatePipe } from "./pipes/date-pipe/date.pipe";
@@ -54,16 +56,18 @@ import { RuntimePipe } from "./pipes/runtime-pipe/runtime.pipe";
         ReviewListComponent,
         CastComponent,
         SeasonInfoComponent,
+        EpisodeInfoComponent,
+        SeasonGroupComponent,
         // PAGES
         MovieDetailsComponent,
         LatestComponent,
         TvDetailsComponent,
+        AllReviewsComponent,
         // PIPES
         DateYearPipe,
         DatePipe,
         RuntimePipe,
-        EpisodeInfoComponent,
-        SeasonGroupComponent,
+        AllCastComponent,
     ],
     imports: [
         BrowserModule,

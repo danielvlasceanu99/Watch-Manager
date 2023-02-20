@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from "@angular/core";
 import { AbstractControl, FormControl, FormGroup, Validators } from "@angular/forms";
+import { Router } from "@angular/router";
 import { MediaType } from "src/app/models/helpers/media-type.model";
 import { Review } from "src/app/models/review.model";
 
@@ -21,7 +22,11 @@ export class ReviewListComponent implements OnInit {
     @Input() mediaId: string | null = "";
     @Input() mediaType: MediaType | undefined = undefined;
 
-    constructor() {}
+    constructor(private router: Router) {}
 
     ngOnInit(): void {}
+
+    viewAllReviews() {
+        this.router.navigate([`./${this.mediaType}/${this.mediaId}/reviews`]);
+    }
 }

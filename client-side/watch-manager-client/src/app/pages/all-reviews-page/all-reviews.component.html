@@ -1,0 +1,27 @@
+<div class="w-full pb-2.5 min-h-full text-white">
+    <div class="container mx-auto h-full flex">
+        <div class="w-1/4 pt-10 pr-10" *ngIf="!isLoading">
+            <img class="w-full shadow-2xl rounded-2xl" src="{{ posterPath }}" alt="poster" />
+        </div>
+
+        <div class="w-3/4 pt-16" *ngIf="!isLoading">
+            <div class="pb-3">
+                <span class="text-5xl font-bold">
+                    {{ title }} <span class="text-3xl">({{ date | date }})</span>
+                </span>
+            </div>
+            <div class="text-3xl font-bold pb-3">Reviews</div>
+            <content *ngIf="!reviewsAreLoading">
+                <app-review
+                    *ngFor="let review of reviews"
+                    [mediaId]="id"
+                    [title]="review.title"
+                    [created_at]="review.created_at"
+                    [last_changed_at]="review.last_changed_at"
+                    [user_name]="review.user_name"
+                    [content]="review.content">
+                </app-review>
+            </content>
+        </div>
+    </div>
+</div>

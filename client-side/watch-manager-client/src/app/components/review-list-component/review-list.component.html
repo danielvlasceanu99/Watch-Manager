@@ -18,7 +18,7 @@
             [content]="review.content">
         </app-review>
         <div class="flex flex-wrap justify-center" *ngIf="reviews.length">
-            <a href=".../reviews/{{ mediaType }}/{{ mediaId }}" class="text-2xl"> View all reviews </a>
+            <div class="text-2xl" (click)="viewAllReviews()">View all reviews</div>
         </div>
         <div class="text-2xl" *ngIf="!reviews.length">Be the first to leave a review</div>
     </div>
