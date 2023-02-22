@@ -17,6 +17,8 @@ import { MatDividerModule } from "@angular/material/divider";
 import { ReactiveFormsModule } from "@angular/forms";
 import { FormsModule } from "@angular/forms";
 import { MatInputModule } from "@angular/material/input";
+import { MatListModule } from "@angular/material/list";
+import { MatPaginatorModule } from "@angular/material/paginator";
 
 // CUSTOM COMPONENTS
 import { FooterComponent } from "./components/footer-component/footer.component";
@@ -30,6 +32,8 @@ import { CastComponent } from "./components/cast-component/cast.component";
 import { SeasonInfoComponent } from "./components/season-info-component/season-info.component";
 import { EpisodeInfoComponent } from "./components/episode-info-component/episode-info.component";
 import { SeasonGroupComponent } from "./components/season-group-component/season-group.component";
+import { SearchFilterComponent } from "./components/search-filter-component/search-filter.component";
+import { GridComponent } from "./components/grid-component/grid.component";
 
 // CUSTOM PAGES
 import { LatestComponent } from "./pages/latest-page/latest.component";
@@ -37,6 +41,7 @@ import { MovieDetailsComponent } from "./pages/movie-details-page/movie-details.
 import { TvDetailsComponent } from "./pages/tv-details-page/tv-details.component";
 import { AllReviewsComponent } from "./pages/all-reviews-page/all-reviews.component";
 import { AllCastComponent } from "./pages/all-cast-page/all-cast.component";
+import { MoviesComponent } from "./pages/movies-page/movies.component";
 
 // PIPES
 import { DatePipe } from "./pipes/date-pipe/date.pipe";
@@ -58,16 +63,19 @@ import { RuntimePipe } from "./pipes/runtime-pipe/runtime.pipe";
         SeasonInfoComponent,
         EpisodeInfoComponent,
         SeasonGroupComponent,
+        SearchFilterComponent,
+        GridComponent,
         // PAGES
         MovieDetailsComponent,
         LatestComponent,
         TvDetailsComponent,
         AllReviewsComponent,
+        AllCastComponent,
+        MoviesComponent,
         // PIPES
         DateYearPipe,
         DatePipe,
         RuntimePipe,
-        AllCastComponent,
     ],
     imports: [
         BrowserModule,
@@ -86,6 +94,8 @@ import { RuntimePipe } from "./pipes/runtime-pipe/runtime.pipe";
         ReactiveFormsModule,
         FormsModule,
         MatInputModule,
+        MatListModule,
+        MatPaginatorModule,
     ],
     providers: [],
     bootstrap: [AppComponent],

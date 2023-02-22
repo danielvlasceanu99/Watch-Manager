@@ -1,0 +1,41 @@
+<div class="flex flex-wrap gap-y-4 justify-start">
+    <content *ngIf="mediaType == movieMediaType">
+        <app-card
+            class="card"
+            *ngFor="let media of movies"
+            [mediaId]="media.id"
+            [mediaTitle]="media.title"
+            [mediaSubtitle]="media.release_date | date"
+            [mediaPoster]="media.poster_path"
+            [mediaType]="movieMediaType">
+        </app-card>
+        <app-view-more-card *ngIf="viewMore" class="card" [mediaId]="mediaId" [mediaType]="mediaType" [URL]="'movie'">
+        </app-view-more-card>
+    </content>
+    <content *ngIf="mediaType == tvMediaType">
+        <app-card
+            class="card"
+            *ngFor="let media of tvShows"
+            [mediaId]="media.id"
+            [mediaTitle]="media.name"
+            [mediaSubtitle]="media.first_air_date | date"
+            [mediaPoster]="media.poster_path"
+            [mediaType]="tvMediaType">
+        </app-card>
+        <app-view-more-card *ngIf="viewMore" class="card" [mediaId]="mediaId" [mediaType]="mediaType" [URL]="'tv'">
+        </app-view-more-card>
+    </content>
+    <content *ngIf="mediaType == personMediaType">
+        <app-card
+            class="card pr-3"
+            *ngFor="let person of cast"
+            [mediaId]="person.id"
+            [mediaTitle]="person.name"
+            [mediaPoster]="person.poster_path"
+            [mediaType]="personMediaType">
+        </app-card>
+        <app-view-more-card *ngIf="viewMore" class="card" [mediaId]="mediaId" [mediaType]="mediaType" [URL]="'cast'">
+        </app-view-more-card>
+    </content>
+    <div class="text-2xl" *ngIf="!(movies.length || tvShows.length || cast.length)">There is nothing to show</div>
+</div>

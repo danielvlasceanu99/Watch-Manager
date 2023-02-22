@@ -15,4 +15,16 @@ export class MovieService {
     getById(movie_id: string) {
         return this.httpClient.get<Movie>(`${this.MOVIE_URL}/get/${movie_id}`);
     }
+
+    filter(page: number, genreId: string) {
+        return this.httpClient.get<{ movies: Movie[]; movieCount: number; limit: number }>(
+            `${this.MOVIE_URL}/filter?page=${page}&genre=${genreId}`
+        );
+    }
+
+    search(page: number, title: string) {
+        return this.httpClient.get<{ movies: Movie[]; movieCount: number; limit: number }>(
+            `${this.MOVIE_URL}/search?page=${page}&title=${title}`
+        );
+    }
 }

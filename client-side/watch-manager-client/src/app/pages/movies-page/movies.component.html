@@ -1,0 +1,42 @@
+<div class="w-full pb-2.5 min-h-full text-white">
+    <div class="container mx-auto h-full flex">
+        <div class="w-1/4 pt-10 mr-8">
+            <app-search-filter (filterApplied)="onFilterApplied($event)"> </app-search-filter>
+        </div>
+        <div class="w-3/4 pt-10" *ngIf="!moviesAreLoading">
+            <form class="w-full" [formGroup]="formGroup">
+                <mat-form-field class="w-full" hideRequiredMarker="true">
+                    <mat-label>Movie Title</mat-label>
+                    <input type="text" formControlName="title" matInput />
+                    <button mat-button matSuffix aria-label="search" (click)="onSearch()">
+                        <mat-icon>search</mat-icon>
+                    </button>
+                </mat-form-field>
+            </form>
+            <content *ngIf="!moviesAreLoading">
+                <div class="flex flex-wrap gap-y-2 justify-between">
+                    <app-card
+                        class="card"
+                        *ngFor="let movie of movies"
+                        [mediaId]="movie.id"
+                        [mediaTitle]="movie.title"
+                        [mediaSubtitle]="movie.release_date | date"
+                        [mediaPoster]="movie.poster_path"
+                        [mediaType]="movieMediaType">
+                    </app-card>
+                </div>
+            </content>
+            <mat-paginator
+                #paginator
+                class="demo-paginator"
+                (page)="handlePageEvent($event)"
+                [length]="movieCount"
+                [pageSize]="pageSize"
+                [pageIndex]="page"
+                [hidePageSize]="true"
+                [showFirstLastButtons]="true"
+                aria-label="Select page">
+            </mat-paginator>
+        </div>
+    </div>
+</div>

@@ -15,15 +15,51 @@ const controller = {
         }
     },
 
-    get: async (req, res) => {
+    search: async (req, res) => {
         const limit = 15;
         try {
             let movies = await MovieDb.findAll({
                 where: {
                     title: {
-                        [Op.like]: req.query.title ? `%${req.query.title}` : "%%",
+                        [Op.like]: req.query.title ? `%${req.query.title}%` : "%%",
                     },
                 },
+                include: [
+                    {
+                        model: GenreDb,
+                    },
+                ],
+                offset: req.query.page * limit,
+                limit: limit,
+            });
+            const movieCount = await MovieDb.count({
+                where: {
+                    title: {
+                        [Op.like]: req.query.title ? `%${req.query.title}%` : "%%",
+                    },
+                },
+                include: [
+                    {
+                        model: GenreDb,
+                    },
+                ],
+                distinct: true,
+                col: "id",
+            });
+            res.status(200).send({
+                movies,
+                movieCount,
+                limit,
+            });
+        } catch {
+            res.status(500).send({ message: "Server error" });
+        }
+    },
+
+    filter: async (req, res) => {
+        const limit = 20;
+        try {
+            let movies = await MovieDb.findAll({
                 include: [
                     {
                         model: GenreDb,
@@ -34,15 +70,10 @@ const controller = {
                         },
                     },
                 ],
-                offset: (req.query.page - 1) * limit,
+                offset: req.query.page * limit,
                 limit: limit,
             });
             const movieCount = await MovieDb.count({
-                where: {
-                    title: {
-                        [Op.like]: req.query.title ? `%${req.query.title}` : "%%",
-                    },
-                },
                 include: [
                     {
                         model: GenreDb,
@@ -59,6 +90,7 @@ const controller = {
             res.status(200).send({
                 movies,
                 movieCount,
+                limit,
             });
         } catch {
             res.status(500).send({ message: "Server error" });

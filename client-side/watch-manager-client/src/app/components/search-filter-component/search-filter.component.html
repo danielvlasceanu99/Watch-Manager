@@ -1,0 +1,15 @@
+<div class="bg-neutral-900">
+    <div *ngIf="!genresAreLoading">
+        <mat-selection-list
+            #genres
+            [multiple]="false"
+            (selectionChange)="onSelectionChange(genres.selectedOptions.selected)">
+            <mat-list-option *ngFor="let genre of genresList" [value]="genre.id" class="text-xl">
+                {{ genre.name }}
+            </mat-list-option>
+        </mat-selection-list>
+        <button mat-flat-button class="mt-6 w-full text-xl" color="primary" (click)="applyFilter()">
+            Apply Filter
+        </button>
+    </div>
+</div>
