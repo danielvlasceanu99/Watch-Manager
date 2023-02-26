@@ -15,6 +15,88 @@ const controller = {
         }
     },
 
+    search: async (req, res) => {
+        const limit = 15;
+        try {
+            let tvs = await TvDb.findAll({
+                where: {
+                    name: {
+                        [Op.like]: req.query.name ? `%${req.query.name}%` : "%%",
+                    },
+                },
+                include: [
+                    {
+                        model: GenreDb,
+                    },
+                ],
+                offset: req.query.page * limit,
+                limit: limit,
+            });
+            const tvCount = await TvDb.count({
+                where: {
+                    name: {
+                        [Op.like]: req.query.name ? `%${req.query.name}%` : "%%",
+                    },
+                },
+                include: [
+                    {
+                        model: GenreDb,
+                    },
+                ],
+                distinct: true,
+                col: "id",
+            });
+            res.status(200).send({
+                tvs,
+                tvCount,
+                limit,
+            });
+        } catch {
+            res.status(500).send({ message: "Server error" });
+        }
+    },
+
+    filter: async (req, res) => {
+        const limit = 15;
+        try {
+            let tvs = await TvDb.findAll({
+                include: [
+                    {
+                        model: GenreDb,
+                        where: {
+                            id: {
+                                [Op.like]: req.query.genre ? `%${req.query.genre}` : "%%",
+                            },
+                        },
+                    },
+                ],
+                offset: req.query.page * limit,
+                limit: limit,
+            });
+            const tvCount = await TvDb.count({
+                include: [
+                    {
+                        model: GenreDb,
+                        where: {
+                            id: {
+                                [Op.like]: req.query.genre ? `%${req.query.genre}` : "%%",
+                            },
+                        },
+                    },
+                ],
+                distinct: true,
+                col: "id",
+            });
+            res.status(200).send({
+                tvs,
+                tvCount,
+                limit,
+            });
+        } catch {
+            res.status(500).send({ message: "Server error" });
+        }
+    },
+
     getById: async (req, res) => {
         try {
             const movie = await TvDb.findByPk(req.params.id, {

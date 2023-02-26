@@ -27,13 +27,11 @@ export class MoviesComponent implements OnInit {
     formGroup = new FormGroup({
         title: new FormControl(this.title, [Validators.maxLength(100), Validators.pattern("[a-zA-Z0-9 ]*")]),
     });
-
-    pageEvent: PageEvent = new PageEvent();
-
     get getTitle(): AbstractControl | null {
         return this.formGroup.get("title");
     }
 
+    pageEvent: PageEvent = new PageEvent();
     constructor(private movieService: MovieService) {}
 
     ngOnInit(): void {

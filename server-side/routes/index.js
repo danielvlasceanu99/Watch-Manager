@@ -8,6 +8,7 @@ const creditRouter = require("./creditRouter");
 const reviewRouter = require("./reviewRouter");
 const seasonRouter = require("./seasonRouter");
 const genreRouter = require("./genreRouter");
+const personRouter = require("./personRouter");
 
 router.use("/", resetRouter);
 router.use("/movie", movieRouter);
@@ -16,5 +17,6 @@ router.use("/credit", creditRouter);
 router.use("/review", reviewRouter);
 router.use("/season", seasonRouter);
 router.use("/genre", genreRouter);
+router.use("/person", personRouter);
 
 module.exports = router;

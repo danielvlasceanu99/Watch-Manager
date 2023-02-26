@@ -1,28 +1,25 @@
 <div class="w-full pb-2.5 min-h-full text-white">
     <div class="container mx-auto h-full flex">
-        <div class="w-1/4 pt-10 mr-8">
-            <app-search-filter (filterApplied)="onFilterApplied($event)"> </app-search-filter>
-        </div>
-        <div class="w-3/4 pt-10" *ngIf="!moviesAreLoading">
+        <div class="w-full pt-10" *ngIf="!peopleAreLoading">
             <form class="w-full" [formGroup]="formGroup">
                 <mat-form-field class="w-full" hideRequiredMarker="true">
-                    <mat-label>Movie Title</mat-label>
-                    <input type="text" formControlName="title" matInput />
+                    <mat-label>TV Show Name</mat-label>
+                    <input type="text" formControlName="name" matInput />
                     <button mat-button matSuffix aria-label="search" (click)="onSearch()">
                         <mat-icon>search</mat-icon>
                     </button>
                 </mat-form-field>
             </form>
-            <content *ngIf="!moviesAreLoading">
+            <content *ngIf="!peopleAreLoading">
                 <div class="flex flex-wrap gap-y-2 justify-between">
                     <app-card
                         class="card"
-                        *ngFor="let movie of movies"
-                        [mediaId]="movie.id"
-                        [mediaTitle]="movie.title"
-                        [mediaSubtitle]="movie.release_date | date"
-                        [mediaPoster]="movie.poster_path"
-                        [mediaType]="movieMediaType">
+                        *ngFor="let person of people"
+                        [mediaId]="person.id"
+                        [mediaTitle]="person.name"
+                        [mediaSubtitle]="person.birthday | date"
+                        [mediaPoster]="person.poster_path"
+                        [mediaType]="personMediaType">
                     </app-card>
                 </div>
             </content>
@@ -30,7 +27,7 @@
                 #paginator
                 class="mt-3"
                 (page)="handlePageEvent($event)"
-                [length]="movieCount"
+                [length]="peopleCount"
                 [pageSize]="pageSize"
                 [pageIndex]="page"
                 [hidePageSize]="true"
