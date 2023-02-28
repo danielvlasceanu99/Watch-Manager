@@ -33,7 +33,8 @@ import { SeasonInfoComponent } from "./components/season-info-component/season-i
 import { EpisodeInfoComponent } from "./components/episode-info-component/episode-info.component";
 import { SeasonGroupComponent } from "./components/season-group-component/season-group.component";
 import { SearchFilterComponent } from "./components/search-filter-component/search-filter.component";
-import { GridComponent } from "./components/grid-component/grid.component";
+import { PersonGeneralInfoComponent } from "./components/person-general-info-component/person-general-info.component";
+import { PersonSidePanelComponent } from "./components/person-side-panel-component//person-side-panel.component";
 
 // CUSTOM PAGES
 import { LatestComponent } from "./pages/latest-page/latest.component";
@@ -44,6 +45,7 @@ import { AllCastComponent } from "./pages/all-cast-page/all-cast.component";
 import { MoviesComponent } from "./pages/movies-page/movies.component";
 import { TvShowsComponent } from "./pages/tv-shows-page/tv-shows/tv-shows.component";
 import { PeopleComponent } from "./pages/people-page/people.component";
+import { PersonDetailsComponent } from "./pages/person-details-page/person-details.component";
 
 // PIPES
 import { DatePipe } from "./pipes/date-pipe/date.pipe";
@@ -66,7 +68,8 @@ import { RuntimePipe } from "./pipes/runtime-pipe/runtime.pipe";
         EpisodeInfoComponent,
         SeasonGroupComponent,
         SearchFilterComponent,
-        GridComponent,
+        PersonGeneralInfoComponent,
+        PersonSidePanelComponent,
         // PAGES
         MovieDetailsComponent,
         LatestComponent,
@@ -76,6 +79,7 @@ import { RuntimePipe } from "./pipes/runtime-pipe/runtime.pipe";
         MoviesComponent,
         TvShowsComponent,
         PeopleComponent,
+        PersonDetailsComponent,
         // PIPES
         DateYearPipe,
         DatePipe,

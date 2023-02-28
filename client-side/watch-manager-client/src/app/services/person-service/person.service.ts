@@ -19,9 +19,17 @@ export class PersonService {
         return this.httpClient.get<Credit[]>(`${this.CREDIT_URL}/getByTvId/${tv_id}`);
     }
 
-    search(page: number, title: string) {
+    getByPersonId(person_id: string) {
+        return this.httpClient.get<Credit[]>(`${this.CREDIT_URL}/getByPersonId/${person_id}`);
+    }
+
+    getById(person_id: string) {
+        return this.httpClient.get<Person>(`${this.PERSON_URL}/get/${person_id}`);
+    }
+
+    search(page: number, name: string) {
         return this.httpClient.get<{ people: Person[]; peopleCount: number; limit: number }>(
-            `${this.PERSON_URL}/search?page=${page}&name=${title}`
+            `${this.PERSON_URL}/search?page=${page}&name=${name}`
         );
     }
 }

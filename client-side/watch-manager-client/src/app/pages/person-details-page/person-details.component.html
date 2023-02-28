@@ -1,0 +1,39 @@
+<div class="w-full pb-2.5 min-h-full text-white">
+    <div class="container mx-auto h-full flex">
+        <mat-progress-bar mode="indeterminate" *ngIf="personIsLoading"></mat-progress-bar>
+        <div class="w-1/4 pt-10" *ngIf="!personIsLoading">
+            <app-person-side-panel
+                [posterPath]="person?.poster_path"
+                [gender]="person?.gender"
+                [dateOfBirth]="person?.birthday | date"
+                [dateOfDeath]="person?.death_date | date"
+                [birthPlace]="person?.place_of_birth">
+            </app-person-side-panel>
+        </div>
+        <div class="w-3/4 pt-16" *ngIf="!personIsLoading">
+            <app-person-general-info [personId]="id" [name]="person?.name" [biography]="person?.biography">
+            </app-person-general-info>
+
+            <div class="flex flex-wrap gap-y-4 justify-between">
+                <content *ngFor="let credit of cast" class="card">
+                    <app-card
+                        *ngIf="credit.movie_id"
+                        [mediaId]="credit.movie_id"
+                        [mediaTitle]="credit.movie.title"
+                        [mediaSubtitle]="credit.job"
+                        [mediaPoster]="credit.movie.poster_path"
+                        [mediaType]="movieMediaType">
+                    </app-card>
+                    <app-card
+                        *ngIf="credit.tv_id"
+                        [mediaId]="credit.tv_id"
+                        [mediaTitle]="credit.tv.name"
+                        [mediaSubtitle]="credit.job"
+                        [mediaPoster]="credit.tv.poster_path"
+                        [mediaType]="tvMediaType">
+                    </app-card>
+                </content>
+            </div>
+        </div>
+    </div>
+</div>

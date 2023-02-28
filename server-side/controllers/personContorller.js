@@ -32,6 +32,19 @@ const controller = {
             res.status(500).send({ message: "Server error" });
         }
     },
+
+    getById: async (req, res) => {
+        try {
+            const person = await PersonDb.findByPk(req.params.id);
+            if (person) {
+                res.status(200).send(person);
+            } else {
+                res.status(404).send({ message: "Person not found" });
+            }
+        } catch {
+            res.status(500).send({ message: "Server error" });
+        }
+    },
 };
 
 module.exports = controller;

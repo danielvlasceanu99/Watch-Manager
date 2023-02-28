@@ -6,6 +6,7 @@ import { LatestComponent } from "./pages/latest-page/latest.component";
 import { MovieDetailsComponent } from "./pages/movie-details-page/movie-details.component";
 import { MoviesComponent } from "./pages/movies-page/movies.component";
 import { PeopleComponent } from "./pages/people-page/people.component";
+import { PersonDetailsComponent } from "./pages/person-details-page/person-details.component";
 import { TvDetailsComponent } from "./pages/tv-details-page/tv-details.component";
 import { TvShowsComponent } from "./pages/tv-shows-page/tv-shows/tv-shows.component";
 
@@ -19,6 +20,7 @@ const routes: Routes = [
     { path: "tv", component: TvShowsComponent },
     { path: "tv/:id/reviews", component: AllReviewsComponent },
     { path: "tv/:id/cast", component: AllCastComponent },
+    { path: "person/:id", component: PersonDetailsComponent },
     { path: "people", component: PeopleComponent },
     { path: "**", redirectTo: "home", pathMatch: "full" },
 ];
