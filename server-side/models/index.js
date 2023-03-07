@@ -1,5 +1,6 @@
 const Sequelize = require("sequelize");
-const db = require("../config/dbConfig");
+const mySqlDb = require("../config/dbConfig");
+const mongoDb = require("../config/mongoDbConfig");
 
 const MovieModel = require("./movie");
 const TvModel = require("./tv");
@@ -11,15 +12,18 @@ const CreditModel = require("./credit");
 const ReviewModel = require("./review");
 const RatingModel = require("./rating");
 
-const Movie = MovieModel(db, Sequelize);
-const TV = TvModel(db, Sequelize);
-const Season = SeasonModel(db, Sequelize);
-const Episode = EpisodeModel(db, Sequelize);
-const Genre = GenreModel(db, Sequelize);
-const Person = PersonModel(db, Sequelize);
-const Credit = CreditModel(db, Sequelize);
-const Review = ReviewModel(db, Sequelize);
-const Rating = RatingModel(db, Sequelize);
+const Movie = MovieModel(mySqlDb, Sequelize);
+const TV = TvModel(mySqlDb, Sequelize);
+const Season = SeasonModel(mySqlDb, Sequelize);
+const Episode = EpisodeModel(mySqlDb, Sequelize);
+const Genre = GenreModel(mySqlDb, Sequelize);
+const Person = PersonModel(mySqlDb, Sequelize);
+const Credit = CreditModel(mySqlDb, Sequelize);
+const Review = ReviewModel(mySqlDb, Sequelize);
+const Rating = RatingModel(mySqlDb, Sequelize);
+
+const db = mongoDb.db("watch-manager");
+const Users = db.collection("users");
 
 Movie.hasMany(Review, {
     onDelete: "Cascade",
@@ -100,5 +104,6 @@ module.exports = {
     Credit,
     Review,
     Rating,
-    connection: db,
+    Users,
+    connection: mySqlDb,
 };
