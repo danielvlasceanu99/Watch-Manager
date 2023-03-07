@@ -6,6 +6,7 @@ const reviewController = require("./reviewController");
 const seasonController = require("./seasoController");
 const genreController = require("./genreController");
 const personController = require("./personContorller");
+const userController = require("./userController");
 
 module.exports = {
     reset,
@@ -16,4 +17,5 @@ module.exports = {
     seasonController,
     genreController,
     personController,
+    userController,
 };
