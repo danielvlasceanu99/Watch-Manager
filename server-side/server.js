@@ -4,8 +4,8 @@ const cors = require("cors");
 const dotenv = require("dotenv");
 
 dotenv.config({ path: "./config.env" });
-const mongoClient = require("./config/mongoDbConfig");
 
+const mongoClient = require("./config/mongoDbConfig");
 mongoClient.connect((err) => {
     if (err) {
         console.error("Failed to connect to MongoDB", err);
