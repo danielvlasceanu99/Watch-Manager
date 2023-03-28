@@ -19,6 +19,7 @@ import { FormsModule } from "@angular/forms";
 import { MatInputModule } from "@angular/material/input";
 import { MatListModule } from "@angular/material/list";
 import { MatPaginatorModule } from "@angular/material/paginator";
+import { MatSnackBarModule } from "@angular/material/snack-bar";
 
 // CUSTOM COMPONENTS
 import { FooterComponent } from "./components/footer-component/footer.component";
@@ -46,6 +47,9 @@ import { MoviesComponent } from "./pages/movies-page/movies.component";
 import { TvShowsComponent } from "./pages/tv-shows-page/tv-shows/tv-shows.component";
 import { PeopleComponent } from "./pages/people-page/people.component";
 import { PersonDetailsComponent } from "./pages/person-details-page/person-details.component";
+import { AboutUsComponent } from "./pages/about-us-page/about-us.component";
+import { PrivacyComponent } from "./pages/privacy-page/privacy.component";
+import { ContactUsComponent } from "./pages/contact-us-page/contact-us.component";
 
 // PIPES
 import { DatePipe } from "./pipes/date-pipe/date.pipe";
@@ -80,6 +84,9 @@ import { RuntimePipe } from "./pipes/runtime-pipe/runtime.pipe";
         TvShowsComponent,
         PeopleComponent,
         PersonDetailsComponent,
+        AboutUsComponent,
+        PrivacyComponent,
+        ContactUsComponent,
         // PIPES
         DateYearPipe,
         DatePipe,
@@ -104,6 +111,7 @@ import { RuntimePipe } from "./pipes/runtime-pipe/runtime.pipe";
         MatInputModule,
         MatListModule,
         MatPaginatorModule,
+        MatSnackBarModule,
     ],
     providers: [],
     bootstrap: [AppComponent],

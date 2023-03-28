@@ -1,0 +1,48 @@
+<div class="w-full pb-2.5 min-h-full text-white">
+    <div class="container mx-auto h-full flex justify-center">
+        <div class="w-3/5 pt-12">
+            <div class="text-3xl italic font-black my-auto">Contact Us</div>
+
+            <div class="text-2xl text-justify pt-7">
+                Thank you for using Watch Manager. We are here to help you with any questions, comments, or feedback you
+                may have. Please use one of the following methods to get in touch with us:
+            </div>
+
+            <div class="text-2xl text-justify pt-5">
+                <span class="font-bold">Email: </span> You can reach us by email at
+                <span class="font-bold">watch.manager@gmail.com</span>. We will respond to your message as soon as
+                possible.
+            </div>
+
+            <div class="text-2xl text-justify pt-7">
+                <span class="font-bold"> Social Media:</span> You can follow us on
+                <a href="https://twitter.com/home?lang=en" class="font-bold"> Twitter</a>,
+                <a href="https://www.facebook.com/" class="font-bold"> Facebook</a>, and
+                <a href="https://www.instagram.com/" class="font-bold"> Instagram</a> for updates and to connect with
+                other fans.
+            </div>
+
+            <div class="text-2xl text-justify pt-7">
+                <span class="font-bold"> Contact Form: </span> You can also fill out our contact form below. Please
+                provide as much detail as possible so that we can better assist you.
+            </div>
+
+            <div class="text-2xl text-justify pt-7">
+                Thank you for your interest in Watch Manager. We appreciate your feedback and are committed to providing
+                you with the best possible user experience.
+            </div>
+
+            <div class="text-2xl text-justify pt-12">
+                <div class="font-bold">Contact Form:</div>
+
+                <form class="w-full" [formGroup]="formGroup">
+                    <mat-form-field appearance="fill" class="w-full p-0" [hideRequiredMarker]="true">
+                        <mat-label>Leave a comment</mat-label>
+                        <textarea rows="5" formControlName="comment" matInput></textarea>
+                    </mat-form-field>
+                    <button mat-flat-button color="primary" (click)="postComment()">Post</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
