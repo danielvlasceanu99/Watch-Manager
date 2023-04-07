@@ -1,0 +1,46 @@
+<div class="w-full pb-2.5 min-h-full">
+    <div class="container mx-auto h-screen">
+        <div class="w-2/5 mx-auto my-10">
+            <form
+                class="login-form px-10 py-10 rounded overflow-hidden shadow-lg bg-neutral-600 text-slate-50"
+                [formGroup]="loginFormGroup">
+                <div class="font-title italic font-black">Login</div>
+                <mat-form-field appearance="outline" [hideRequiredMarker]="true" class="mt-6">
+                    <mat-label>Email</mat-label>
+                    <input matInput formControlName="emailFormControl" placeholder="Email" />
+                    <mat-error *ngIf="emailFormControl?.errors?.['required']"> The email is required! </mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" [hideRequiredMarker]="true" class="mt-6">
+                    <mat-label>Password</mat-label>
+                    <input
+                        matInput
+                        [type]="hidePassword ? 'password' : 'text'"
+                        formControlName="passwordFormControl"
+                        placeholder="Password" />
+                    <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword">
+                        <mat-icon>{{ hidePassword ? "visibility_off" : "visibility" }}</mat-icon>
+                    </button>
+                    <mat-error *ngIf="passwordFormControl?.errors?.['required']"> The password is required! </mat-error>
+                </mat-form-field>
+
+                <div class="w-full flex justify-center mt-10">
+                    <button
+                        mat-flat-button
+                        color="primary"
+                        [disabled]="loginFormGroup.invalid"
+                        class="w-4/6"
+                        (click)="login()">
+                        LOGIN
+                    </button>
+                </div>
+                <div class="w-full flex justify-center">
+                    <a href="/register">I don't have an account</a>
+                </div>
+                <div class="w-full flex justify-center">
+                    <a href="">Forgot password?</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

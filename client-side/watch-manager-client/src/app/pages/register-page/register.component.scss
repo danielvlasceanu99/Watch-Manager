@@ -1,0 +1,14 @@
+.container {
+    max-width: 1280px;
+}
+
+.login-form {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.font-title {
+    font-size: 2rem;
+    line-height: 1;
+}

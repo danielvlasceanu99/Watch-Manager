@@ -12,6 +12,8 @@ import { PersonDetailsComponent } from "./pages/person-details-page/person-detai
 import { PrivacyComponent } from "./pages/privacy-page/privacy.component";
 import { TvDetailsComponent } from "./pages/tv-details-page/tv-details.component";
 import { TvShowsComponent } from "./pages/tv-shows-page/tv-shows/tv-shows.component";
+import { LoginComponent } from "./pages/login-page/login.component";
+import { RegisterComponent } from "./pages/register-page/register.component";
 
 const routes: Routes = [
     { path: "home", component: LatestComponent },
@@ -28,6 +30,8 @@ const routes: Routes = [
     { path: "about-us", component: AboutUsComponent },
     { path: "privacy", component: PrivacyComponent },
     { path: "contact-us", component: ContactUsComponent },
+    { path: "login", component: LoginComponent },
+    { path: "register", component: RegisterComponent },
     { path: "**", redirectTo: "home", pathMatch: "full" },
 ];
 

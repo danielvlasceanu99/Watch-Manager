@@ -1,0 +1,73 @@
+<div class="w-full pb-2.5 min-h-full">
+    <div class="container mx-auto h-screen">
+        <div class="w-2/5 mx-auto my-10">
+            <form
+                class="login-form px-10 py-10 rounded shadow-lg bg-neutral-600 text-slate-50"
+                [formGroup]="registerFormGroup">
+                <div class="font-title italic font-black">Create account</div>
+                <mat-form-field appearance="outline" [hideRequiredMarker]="true" class="mt-6">
+                    <mat-label>First name</mat-label>
+                    <input matInput formControlName="firstNameFormControl" placeholder="First name" />
+                    <mat-error *ngIf="firstNameFormControl?.errors?.['required']">
+                        The first name is required
+                    </mat-error>
+                    <mat-error *ngIf="firstNameFormControl?.errors?.['maxlength']">
+                        The first name is too long
+                    </mat-error>
+                    <mat-error *ngIf="firstNameFormControl?.errors?.['pattern']">
+                        First name can only contain leters
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" [hideRequiredMarker]="true" class="mt-6">
+                    <mat-label>Last name</mat-label>
+                    <input matInput formControlName="lastNameFormControl" placeholder="Last name" />
+                    <mat-error *ngIf="lastNameFormControl?.errors?.['required']"> The last name is required </mat-error>
+                    <mat-error *ngIf="lastNameFormControl?.errors?.['maxlength']">
+                        The last name is too long
+                    </mat-error>
+                    <mat-error *ngIf="lastNameFormControl?.errors?.['pattern']">
+                        Last name can only contain leters
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" [hideRequiredMarker]="true" class="mt-6">
+                    <mat-label>Email</mat-label>
+                    <input matInput formControlName="emailFormControl" placeholder="Email" />
+                    <mat-error *ngIf="emailFormControl?.errors?.['required']"> The email is required </mat-error>
+                    <mat-error *ngIf="emailFormControl?.errors?.['email']"> The email is invali </mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" [hideRequiredMarker]="true" class="mt-6">
+                    <mat-label>Password</mat-label>
+                    <input
+                        matInput
+                        [type]="hidePassword ? 'password' : 'text'"
+                        formControlName="passwordFormControl"
+                        placeholder="Password" />
+                    <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword">
+                        <mat-icon>{{ hidePassword ? "visibility_off" : "visibility" }}</mat-icon>
+                    </button>
+                    <mat-error *ngIf="passwordFormControl?.errors?.['required']"> The password is required </mat-error>
+                    <mat-error *ngIf="passwordFormControl?.errors?.['pattern']">
+                        Password must contain one uppercase, one lowercase, one number and at least 8 characters
+                    </mat-error>
+                </mat-form-field>
+
+                <div class="w-full flex justify-center mt-10">
+                    <button
+                        mat-flat-button
+                        color="primary"
+                        [disabled]="registerFormGroup.invalid"
+                        class="w-4/6"
+                        (click)="register()">
+                        CREATE ACCOUNT
+                    </button>
+                </div>
+                <div class="w-full flex justify-center">
+                    <a href="/login">I already have an account</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

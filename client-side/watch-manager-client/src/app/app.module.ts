@@ -4,6 +4,7 @@ import { HttpClientModule } from "@angular/common/http";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app-component/app.component";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { CookieService } from "ngx-cookie-service";
 
 // MATERIAL
 import { MatToolbarModule } from "@angular/material/toolbar";
@@ -20,6 +21,7 @@ import { MatInputModule } from "@angular/material/input";
 import { MatListModule } from "@angular/material/list";
 import { MatPaginatorModule } from "@angular/material/paginator";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
+import { MatMenuModule } from "@angular/material/menu";
 
 // CUSTOM COMPONENTS
 import { FooterComponent } from "./components/footer-component/footer.component";
@@ -50,6 +52,8 @@ import { PersonDetailsComponent } from "./pages/person-details-page/person-detai
 import { AboutUsComponent } from "./pages/about-us-page/about-us.component";
 import { PrivacyComponent } from "./pages/privacy-page/privacy.component";
 import { ContactUsComponent } from "./pages/contact-us-page/contact-us.component";
+import { LoginComponent } from "./pages/login-page/login.component";
+import { RegisterComponent } from "./pages/register-page/register.component";
 
 // PIPES
 import { DatePipe } from "./pipes/date-pipe/date.pipe";
@@ -87,6 +91,8 @@ import { RuntimePipe } from "./pipes/runtime-pipe/runtime.pipe";
         AboutUsComponent,
         PrivacyComponent,
         ContactUsComponent,
+        LoginComponent,
+        RegisterComponent,
         // PIPES
         DateYearPipe,
         DatePipe,
@@ -97,6 +103,7 @@ import { RuntimePipe } from "./pipes/runtime-pipe/runtime.pipe";
         AppRoutingModule,
         BrowserAnimationsModule,
         HttpClientModule,
+        FormsModule,
         // MATERIAL
         MatToolbarModule,
         MatTabsModule,
@@ -107,11 +114,11 @@ import { RuntimePipe } from "./pipes/runtime-pipe/runtime.pipe";
         MatFormFieldModule,
         MatDividerModule,
         ReactiveFormsModule,
-        FormsModule,
         MatInputModule,
         MatListModule,
         MatPaginatorModule,
         MatSnackBarModule,
+        MatMenuModule,
     ],
     providers: [],
     bootstrap: [AppComponent],
