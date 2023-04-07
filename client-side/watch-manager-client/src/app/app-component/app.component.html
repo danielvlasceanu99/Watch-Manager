@@ -7,9 +7,29 @@
             <a href="/people" class="mr-8">People</a>
 
             <span class="flex-auto"></span>
-            <div id="auth">
-                <a href="#" class="mr-8">Sign Up</a>
-                <a href="#" class="mr-8">Log In</a>
+            <div *ngIf="!user">
+                <a href="/register" class="mr-8">Sign Up</a>
+                <a href="/login" class="mr-8">Log In</a>
+            </div>
+            <div *ngIf="user">
+                <button mat-icon-button [matMenuTriggerFor]="menu">
+                    <mat-icon>account_circle</mat-icon>
+                </button>
+                <mat-menu #menu="matMenu">
+                    <a href="#" mat-menu-item>
+                        <span>Watchlist</span>
+                    </a>
+                    <a href="#" mat-menu-item>
+                        <span>Rated</span>
+                    </a>
+                    <a href="#" mat-menu-item>
+                        <span>Favourite</span>
+                    </a>
+                    <a href="#" mat-menu-item>
+                        <span>Account</span>
+                    </a>
+                </mat-menu>
+                <button mat-button class="mr-8" (click)="logout()">Log Out</button>
             </div>
         </div>
     </mat-toolbar>
