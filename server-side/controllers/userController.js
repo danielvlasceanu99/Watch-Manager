@@ -12,24 +12,23 @@ const controller = {
     login: async (req, res) => {
         const { email, password } = req.body;
 
+        const filter = { email: email };
+        const projection = { _id: 1, name: 1, email: 1, password: 1 };
+
         try {
-            const user = await UserDb.findOne({ email: email });
+            const user = await UserDb.findOne(filter, { projection });
             if (!user) {
                 res.status(404).send({ message: "No account with this email" });
-                return;
             }
             bcrypt.compare(password, user.password, (err, result) => {
                 if (err) {
                     res.status(500).send({ message: "Server error" });
-                    return;
                 }
-
                 if (result) {
                     const token = jwt.sign({ user }, secret);
-                    res.status(200).send({ token, user });
+                    res.status(200).send({ token: token });
                 } else {
                     res.status(400).send({ message: "Incorect password" });
-                    return;
                 }
             });
         } catch {
@@ -37,13 +36,17 @@ const controller = {
         }
     },
 
-    getUserData: (req, res) => {
+    getUserData: async (req, res) => {
         const token = req.headers["authorization"];
-        if (!token) return res.status(401).send({ message: "No token provided" });
-
+        if (!token) {
+            res.status(401).send({ message: "No token provided" });
+        }
         try {
-            const decodedUser = jwt.verify(token, secret);
-            res.status(200).send({ decodedUser });
+            const user = await UserDb.findOne({ _id: ObjectId(jwt.verify(token, secret).user._id) });
+            if (!user) {
+                res.status(404).send({ message: "There is no such account" });
+            }
+            res.status(200).send({ user });
         } catch (err) {
             res.status(401).send({ message: "Invalid token" });
         }
@@ -55,6 +58,7 @@ const controller = {
             movieWatchlist: [],
             tvWatchlist: [],
             watchedMovies: [],
+            watchedTvs: [],
             watchedEpisodes: [],
             ratedMovies: [],
             ratedTv: [],
@@ -72,7 +76,6 @@ const controller = {
             bcrypt.hash(req.body.password, 10, async (err, hashedPassword) => {
                 if (err) {
                     res.status(500).send("Failed to register");
-                    return;
                 }
                 user.password = hashedPassword;
                 try {
@@ -84,6 +87,54 @@ const controller = {
             });
         } else {
             res.status(400).send(errors);
+        }
+    },
+
+    addToCollection: async (req, res) => {
+        const token = req.headers["authorization"];
+        if (!token) {
+            res.status(401).send({ message: "No token provided" });
+        }
+        const { mediaId, collection } = req.body;
+        if (!mediaId || !collection) {
+            res.status(400).send({ message: "Invalid request" });
+        }
+        try {
+            const user = await UserDb.findOne({ _id: ObjectId(jwt.verify(token, secret).user._id) });
+            if (!user) {
+                res.status(404).send({ message: "There is no such account" });
+            }
+
+            if (user[collection] && !user[collection].includes(mediaId)) {
+                user[collection].push(mediaId);
+                await UserDb.updateOne({ _id: ObjectId(user._id) }, { $set: { [collection]: user[collection] } });
+            }
+            res.status(200).send({ message: `Collection updated` });
+        } catch (err) {
+            res.status(401).send({ message: "Invalid token" });
+        }
+    },
+
+    removeFromCollection: async (req, res) => {
+        const token = req.headers["authorization"];
+        if (!token) {
+            res.status(401).send({ message: "No token provided" });
+        }
+        const { mediaId, collection } = req.body;
+        if (!mediaId || !collection) {
+            res.status(400).send({ message: "Invalid request" });
+        }
+        try {
+            const user = await UserDb.findOne({ _id: ObjectId(jwt.verify(token, secret).user._id) });
+            const index = user[collection].indexOf(mediaId);
+
+            if (index > -1) {
+                user[collection].splice(index, 1);
+                await UserDb.updateOne({ _id: ObjectId(user._id) }, { $set: { [collection]: user[collection] } });
+            }
+            res.status(200).send({ message: `Collection updated` });
+        } catch (err) {
+            res.status(401).send({ message: "Invalid token" });
         }
     },
 };

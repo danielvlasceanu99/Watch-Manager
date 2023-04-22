@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { CookieService } from "ngx-cookie-service";
+import { UserColections } from "src/app/models/helpers/user-collection.model";
 import { User } from "src/app/models/user.model";
 
 @Injectable({
@@ -8,10 +9,10 @@ import { User } from "src/app/models/user.model";
 })
 export class UserService {
     USER_URL: string = "http://localhost:8080/user";
-    constructor(private httpClient: HttpClient) {}
+    constructor(private httpClient: HttpClient, private cookieService: CookieService) {}
 
     login(email: string, password: string) {
-        return this.httpClient.post<{ token: string; user: User } | any>(this.USER_URL + "/login", { email, password });
+        return this.httpClient.post<{ token: string } | any>(this.USER_URL + "/login", { email, password });
     }
 
     getUser(token: string) {
@@ -27,5 +28,31 @@ export class UserService {
             email,
             password,
         });
+    }
+
+    addToCollection(mediaId: string, collection: UserColections) {
+        return this.httpClient.put<string>(
+            this.USER_URL + "/addToCollection",
+            {
+                mediaId: mediaId,
+                collection: collection,
+            },
+            {
+                headers: new HttpHeaders().set("authorization", this.cookieService.get("auth-token")),
+            }
+        );
+    }
+
+    removeFromCollection(mediaId: string, collection: UserColections) {
+        return this.httpClient.put<string>(
+            this.USER_URL + "/removeFromCollection",
+            {
+                mediaId: mediaId,
+                collection: collection,
+            },
+            {
+                headers: new HttpHeaders().set("authorization", this.cookieService.get("auth-token")),
+            }
+        );
     }
 }

@@ -1,15 +1,16 @@
 <div class="w-full pb-2.5 min-h-full text-white">
     <div class="container mx-auto h-full flex">
         <mat-progress-bar mode="indeterminate" *ngIf="tvIsLoading"></mat-progress-bar>
-        <div class="w-1/4 pt-10">
+        <div class="w-1/4 pt-10" *ngIf="!tvIsLoading">
             <app-media-side-panel
-                [posterPath]="tv?.poster_path"
-                [status]="tv?.in_production ? 'In Production' : 'Finished'"
-                [network]="tv?.network"
-                [producers]="producers"
-                [genres]="tv?.genres"
-                >></app-media-side-panel
-            >
+                [mediaId]="tv?.id"
+                [mediaStatus]="tv?.in_production ? 'In Production' : 'Finished'"
+                [mediaProducers]="producers"
+                [mediaNetwork]="tv?.network"
+                [MediaGenres]="tv?.genres"
+                [mediaPoster]="tv?.poster_path"
+                [mediaType]="mediaType">
+            </app-media-side-panel>
         </div>
         <div class="w-3/4 pt-16" *ngIf="!tvIsLoading">
             <app-media-general-info
