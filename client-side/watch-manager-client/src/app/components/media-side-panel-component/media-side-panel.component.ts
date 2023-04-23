@@ -41,6 +41,8 @@ export class MediaSidePanelComponent implements OnInit {
 
     ngOnInit(): void {
         this.session.userObservable.subscribe((user) => {
+            console.log("session in init");
+
             this.user = user;
             if (this.user?.role == UserRoles.ADMIN) {
                 this.isAdmin = true;
@@ -54,7 +56,7 @@ export class MediaSidePanelComponent implements OnInit {
                 this.isFavourite = this.user?.likedTv.includes(this.mediaId) ? true : false;
                 this.isBookmarked = this.user?.tvWatchlist.includes(this.mediaId) ? true : false;
                 this.isRated = this.user?.ratedTv.some((tv) => tv.id === this.mediaId) ? true : false;
-                this.isWatched = this.user?.watchedMovies.includes(this.mediaId) ? true : false;
+                this.isWatched = this.user?.watchedTvs.includes(this.mediaId) ? true : false;
             }
         });
     }
@@ -67,19 +69,17 @@ export class MediaSidePanelComponent implements OnInit {
 
             this.userService.addToCollection(this.mediaId, collection).subscribe({
                 next: (res) => {
-                    this.session.userObservable.subscribe((user) => {
-                        if (user) {
-                            user[collection].push(this.mediaId);
-                            this.session.setUser(user);
-                        }
-                    });
+                    if (this.user && this.mediaId) {
+                        this.user[collection].push(this.mediaId);
+                        this.session.setUser(this.user);
+                    }
                 },
                 error: (error) => {
                     this.isFavourite = false;
                     if (error.status === 401 || error.status === 404) {
                         this.router.navigate(["/login"]);
                     } else {
-                        this._snackBar.open(error.error.message, "", {
+                        this._snackBar.open("There was an error. Please try again!", "OK", {
                             panelClass: "snack-bar-err",
                             duration: 2000,
                         });
@@ -96,20 +96,17 @@ export class MediaSidePanelComponent implements OnInit {
 
             this.userService.removeFromCollection(this.mediaId, collection).subscribe({
                 next: (res) => {
-                    this.session.userObservable.subscribe((user) => {
-                        if (user) {
-                            const index = user[collection].indexOf(this.mediaId);
-                            if (index > -1) {
-                                user[collection].splice(index, 1);
-                                this.session.setUser(user);
-                            }
+                    if (this.user && this.mediaId) {
+                        const index = this.user[collection].indexOf(this.mediaId);
+                        if (index > -1) {
+                            this.user[collection].splice(index, 1);
+                            this.session.setUser(this.user);
                         }
-                    });
+                    }
                 },
                 error: (error) => {
                     this.isFavourite = true;
-
-                    this._snackBar.open(error.error.message, "", {
+                    this._snackBar.open("There was an error. Please try again!", "OK", {
                         panelClass: "snack-bar-err",
                         duration: 2000,
                     });
@@ -118,11 +115,113 @@ export class MediaSidePanelComponent implements OnInit {
         }
     }
 
-    addToWatchlist() {}
-    removeFromWatchlist() {}
+    addToWatchlist() {
+        if (this.mediaId) {
+            this.isBookmarked = true;
+            const collection =
+                this.mediaType === MediaType.MOVIE ? UserColections.MOVIE_WATCHLIST : UserColections.TV_WATCHLIST;
+
+            this.userService.addToCollection(this.mediaId, collection).subscribe({
+                next: (res) => {
+                    if (this.user && this.mediaId) {
+                        this.user[collection].push(this.mediaId);
+                        this.session.setUser(this.user);
+                    }
+                },
+                error: (error) => {
+                    this.isBookmarked = false;
+                    if (error.status === 401 || error.status === 404) {
+                        this.router.navigate(["/login"]);
+                    } else {
+                        this._snackBar.open("There was an error. Please try again!", "OK", {
+                            panelClass: "snack-bar-err",
+                            duration: 2000,
+                        });
+                    }
+                },
+            });
+        }
+    }
+    removeFromWatchlist() {
+        if (this.mediaId) {
+            this.isBookmarked = false;
+            const collection =
+                this.mediaType === MediaType.MOVIE ? UserColections.MOVIE_WATCHLIST : UserColections.TV_WATCHLIST;
+
+            this.userService.removeFromCollection(this.mediaId, collection).subscribe({
+                next: (res) => {
+                    if (this.user && this.mediaId) {
+                        const index = this.user[collection].indexOf(this.mediaId);
+                        if (index > -1) {
+                            this.user[collection].splice(index, 1);
+                            this.session.setUser(this.user);
+                        }
+                    }
+                },
+                error: (error) => {
+                    this.isBookmarked = true;
+                    this._snackBar.open("There was an error. Please try again!", "OK", {
+                        panelClass: "snack-bar-err",
+                        duration: 2000,
+                    });
+                },
+            });
+        }
+    }
 
     rate() {}
 
-    addToWatched() {}
-    removeFromWatched() {}
+    addToWatched() {
+        if (this.mediaId) {
+            this.isWatched = true;
+            const collection =
+                this.mediaType === MediaType.MOVIE ? UserColections.WATCHED_MOVIES : UserColections.WATCHED_TVS;
+
+            this.userService.addToCollection(this.mediaId, collection).subscribe({
+                next: (res) => {
+                    if (this.user && this.mediaId) {
+                        this.user[collection].push(this.mediaId);
+                        this.session.setUser(this.user);
+                    }
+                },
+                error: (error) => {
+                    this.isWatched = false;
+                    if (error.status === 401 || error.status === 404) {
+                        this.router.navigate(["/login"]);
+                    } else {
+                        this._snackBar.open("There was an error. Please try again!", "OK", {
+                            panelClass: "snack-bar-err",
+                            duration: 2000,
+                        });
+                    }
+                },
+            });
+        }
+    }
+    removeFromWatched() {
+        if (this.mediaId) {
+            this.isWatched = false;
+            const collection =
+                this.mediaType === MediaType.MOVIE ? UserColections.WATCHED_MOVIES : UserColections.WATCHED_TVS;
+
+            this.userService.removeFromCollection(this.mediaId, collection).subscribe({
+                next: (res) => {
+                    if (this.user && this.mediaId) {
+                        const index = this.user[collection].indexOf(this.mediaId);
+                        if (index > -1) {
+                            this.user[collection].splice(index, 1);
+                            this.session.setUser(this.user);
+                        }
+                    }
+                },
+                error: (error) => {
+                    this.isWatched = true;
+                    this._snackBar.open("There was an error. Please try again!", "OK", {
+                        panelClass: "snack-bar-err",
+                        duration: 2000,
+                    });
+                },
+            });
+        }
+    }
 }

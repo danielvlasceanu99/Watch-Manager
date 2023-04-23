@@ -137,6 +137,38 @@ const controller = {
             res.status(401).send({ message: "Invalid token" });
         }
     },
+
+    addRating: async (req, res) => {
+        const token = req.headers["authorization"];
+        if (!token) {
+            res.status(401).send({ message: "No token provided" });
+        }
+        const { mediaId, rating, collection } = req.body;
+        if (!mediaId || !rating || !collection) {
+            res.status(400).send({ message: "Invalid request" });
+        } else if (rating > 10 || rating < 1) {
+            res.status(400).send({ message: "Invalid rating" });
+        }
+        try {
+            const user = await UserDb.findOne({ _id: ObjectId(jwt.verify(token, secret).user._id) });
+            if (!user) {
+                res.status(404).send({ message: "There is no such account" });
+            }
+            if (user[collection]) {
+                const index = user[collection].findIndex((media) => media.id === mediaId);
+                console.log(index);
+                if (index === -1) {
+                    user[collection].push({ id: mediaId, rating: rating });
+                } else {
+                    user[collection][index].rating = rating;
+                }
+            }
+            await UserDb.updateOne({ _id: ObjectId(user._id) }, { $set: { [collection]: user[collection] } });
+            res.status(200).send({ message: `Collection updated` });
+        } catch (err) {
+            res.status(401).send({ message: "Invalid token" });
+        }
+    },
 };
 
 const validateUser = async (newUser) => {
