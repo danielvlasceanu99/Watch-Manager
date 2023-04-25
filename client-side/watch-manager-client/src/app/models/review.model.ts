@@ -1,8 +1,11 @@
+import { MediaType } from "./helpers/media-type.model";
+
 export interface Review {
     id: string;
     title: string;
     content: string;
     user_name: string;
+    media_type: MediaType;
     created_by: string;
     last_changed_by: string;
     created_at: Date;

@@ -25,7 +25,7 @@ export class AppComponent implements OnInit {
 
     ngOnInit() {
         if (this.cookieService.get("auth-token")) {
-            this.userService.getUser(this.cookieService.get("auth-token")).subscribe({
+            this.userService.getUser().subscribe({
                 next: (response) => {
                     this.session.setUser(response.user);
                 },

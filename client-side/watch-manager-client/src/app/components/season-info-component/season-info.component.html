@@ -7,9 +7,11 @@
             </span>
             <div class="text-justify">{{ overview }}</div>
             <div class="flex justify-end pt-2 gap-x-0.5">
-                <button mat-flat-button color="primary">Mark All</button>
-                <button mat-flat-button color="primary" (click)="expandAndCollapse()">
-                    {{ expanded ? "Collapse" : "Expand" }}
+                <button mat-button *ngIf="!expanded" matTooltip="Expand" color="primary" (click)="expandAndCollapse()">
+                    <mat-icon> expand_more </mat-icon>
+                </button>
+                <button mat-button *ngIf="expanded" matTooltip="Colapse" color="primary" (click)="expandAndCollapse()">
+                    <mat-icon> expand_less </mat-icon>
                 </button>
             </div>
         </div>

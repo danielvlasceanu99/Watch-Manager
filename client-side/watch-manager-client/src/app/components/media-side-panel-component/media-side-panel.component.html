@@ -3,21 +3,24 @@
     <div class="flex flex-row justify-between around pt-2 px-1.5">
         <button
             mat-fab
+            matTooltip="{{ !isFavourite ? 'Like' : 'Dislike' }}"
             color="{{ !isFavourite ? 'primary' : 'accent' }}"
             (click)="!isFavourite ? addToFavourite() : removeFromFavourite()">
             <mat-icon> favorite </mat-icon>
         </button>
         <button
             mat-fab
+            matTooltip="{{ !isBookmarked ? 'Bookmark' : 'Remove from bookmark' }}"
             color="{{ !isBookmarked ? 'primary' : 'accent' }}"
             (click)="!isBookmarked ? addToWatchlist() : removeFromWatchlist()">
             <mat-icon> bookmark_add </mat-icon>
         </button>
-        <button mat-fab color="{{ !isRated ? 'primary' : 'accent' }}" (click)="rate()">
+        <button mat-fab matTooltip="Rate" color="{{ !isRated ? 'primary' : 'accent' }}" (click)="rate()">
             <mat-icon> grade </mat-icon>
         </button>
         <button
             mat-fab
+            matTooltip="{{ !isWatched ? 'Mark as watched' : 'Mark as unwatched' }}"
             color="{{ !isWatched ? 'primary' : 'accent' }}"
             (click)="!isWatched ? addToWatched() : removeFromWatched()">
             <mat-icon> check </mat-icon>

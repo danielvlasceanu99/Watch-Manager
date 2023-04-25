@@ -4,6 +4,8 @@ export enum UserColections {
     WATCHED_MOVIES = "watchedMovies",
     WATCHED_TVS = "watchedTvs",
     WATCHED_EPISODES = "watchedEpisodes",
+    RATED_MOVIES = "ratedMovies",
+    RATED_TV = "ratedTv",
     REVIEWED_MOVIES = "reviewedMovies",
     REVIEWED_TV = "reviewedTv",
     LIKED_MOVIES = "likedMovies",

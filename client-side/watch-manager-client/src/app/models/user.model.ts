@@ -7,8 +7,8 @@ export interface User {
     watchedMovies: string[];
     watchedTvs: string[];
     watchedEpisodes: string[];
-    ratedMovies: { id: string; rate: number }[];
-    ratedTv: { id: string; rate: number }[];
+    ratedMovies: { id: string; rating: number }[];
+    ratedTv: { id: string; rating: number }[];
     reviewedMovies: string[];
     reviewedTv: string[];
     likedMovies: string[];

@@ -22,6 +22,7 @@ import { MatListModule } from "@angular/material/list";
 import { MatPaginatorModule } from "@angular/material/paginator";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { MatMenuModule } from "@angular/material/menu";
+import { MatDialogModule } from "@angular/material/dialog";
 
 // CUSTOM COMPONENTS
 import { FooterComponent } from "./components/footer-component/footer.component";
@@ -38,6 +39,7 @@ import { SeasonGroupComponent } from "./components/season-group-component/season
 import { SearchFilterComponent } from "./components/search-filter-component/search-filter.component";
 import { PersonGeneralInfoComponent } from "./components/person-general-info-component/person-general-info.component";
 import { PersonSidePanelComponent } from "./components/person-side-panel-component//person-side-panel.component";
+import { RatingDialogComponent } from "./components/rating-dialog-comnponent/rating-dialog.component";
 
 // CUSTOM PAGES
 import { LatestComponent } from "./pages/latest-page/latest.component";
@@ -54,6 +56,7 @@ import { PrivacyComponent } from "./pages/privacy-page/privacy.component";
 import { ContactUsComponent } from "./pages/contact-us-page/contact-us.component";
 import { LoginComponent } from "./pages/login-page/login.component";
 import { RegisterComponent } from "./pages/register-page/register.component";
+import { MatTooltipModule } from "@angular/material/tooltip";
 
 // PIPES
 import { DatePipe } from "./pipes/date-pipe/date.pipe";
@@ -78,6 +81,7 @@ import { RuntimePipe } from "./pipes/runtime-pipe/runtime.pipe";
         SearchFilterComponent,
         PersonGeneralInfoComponent,
         PersonSidePanelComponent,
+        RatingDialogComponent,
         // PAGES
         MovieDetailsComponent,
         LatestComponent,
@@ -119,6 +123,8 @@ import { RuntimePipe } from "./pipes/runtime-pipe/runtime.pipe";
         MatPaginatorModule,
         MatSnackBarModule,
         MatMenuModule,
+        MatDialogModule,
+        MatTooltipModule,
     ],
     providers: [],
     bootstrap: [AppComponent],

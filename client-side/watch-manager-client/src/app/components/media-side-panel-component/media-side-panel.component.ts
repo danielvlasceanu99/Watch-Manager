@@ -9,6 +9,8 @@ import { UserService } from "src/app/services/user-service/user.service";
 import { UserColections } from "src/app/models/helpers/user-collection.model";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { Router } from "@angular/router";
+import { MatDialog } from "@angular/material/dialog";
+import { RatingDialogComponent } from "../rating-dialog-comnponent/rating-dialog.component";
 
 @Component({
     selector: "app-media-side-panel",
@@ -29,6 +31,8 @@ export class MediaSidePanelComponent implements OnInit {
     isRated: boolean = false;
     isWatched: boolean = false;
 
+    rating: number | undefined = 0;
+
     user: User | null = null;
     isAdmin: boolean = false;
 
@@ -36,13 +40,12 @@ export class MediaSidePanelComponent implements OnInit {
         private session: SessionService,
         private userService: UserService,
         private _snackBar: MatSnackBar,
+        public dialog: MatDialog,
         private router: Router
     ) {}
 
     ngOnInit(): void {
         this.session.userObservable.subscribe((user) => {
-            console.log("session in init");
-
             this.user = user;
             if (this.user?.role == UserRoles.ADMIN) {
                 this.isAdmin = true;
@@ -52,6 +55,11 @@ export class MediaSidePanelComponent implements OnInit {
                 this.isBookmarked = this.user?.movieWatchlist.includes(this.mediaId) ? true : false;
                 this.isRated = this.user?.ratedMovies.some((movie) => movie.id === this.mediaId) ? true : false;
                 this.isWatched = this.user?.watchedMovies.includes(this.mediaId) ? true : false;
+
+                const index = this.user?.ratedMovies.findIndex((movie) => movie.id === this.mediaId);
+                if (index && index > -1) {
+                    this.rating = this.user?.ratedMovies[index].rating;
+                }
             } else if (this.mediaType == MediaType.TV && this.mediaId) {
                 this.isFavourite = this.user?.likedTv.includes(this.mediaId) ? true : false;
                 this.isBookmarked = this.user?.tvWatchlist.includes(this.mediaId) ? true : false;
@@ -169,7 +177,37 @@ export class MediaSidePanelComponent implements OnInit {
         }
     }
 
-    rate() {}
+    rate() {
+        const dialogRef = this.dialog.open(RatingDialogComponent, {
+            data: { rating: this.rating },
+        });
+
+        dialogRef.afterClosed().subscribe((result) => {
+            if (result) {
+                this.rating = result;
+                this.isRated = true;
+                if (this.mediaId && this.rating) {
+                    const collection =
+                        this.mediaType === MediaType.MOVIE ? UserColections.RATED_MOVIES : UserColections.RATED_TV;
+                    this.userService.addRating(this.mediaId, this.rating, collection).subscribe({
+                        next: (res) => {
+                            if (this.user && this.mediaId && this.rating) {
+                                this.user[collection].push({ id: this.mediaId, rating: this.rating });
+                                this.session.setUser(this.user);
+                            }
+                        },
+                        error: (error) => {
+                            this.isRated = true;
+                            this._snackBar.open("There was an error. Please try again!", "OK", {
+                                panelClass: "snack-bar-err",
+                                duration: 2000,
+                            });
+                        },
+                    });
+                }
+            }
+        });
+    }
 
     addToWatched() {
         if (this.mediaId) {

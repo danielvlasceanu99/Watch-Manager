@@ -15,9 +15,9 @@ export class UserService {
         return this.httpClient.post<{ token: string } | any>(this.USER_URL + "/login", { email, password });
     }
 
-    getUser(token: string) {
+    getUser() {
         return this.httpClient.get<User | any>(this.USER_URL + "/getUserData", {
-            headers: new HttpHeaders().set("authorization", token),
+            headers: new HttpHeaders().set("authorization", this.cookieService.get("auth-token")),
         });
     }
 
@@ -48,6 +48,20 @@ export class UserService {
             this.USER_URL + "/removeFromCollection",
             {
                 mediaId: mediaId,
+                collection: collection,
+            },
+            {
+                headers: new HttpHeaders().set("authorization", this.cookieService.get("auth-token")),
+            }
+        );
+    }
+
+    addRating(mediaId: string, rating: number, collection: UserColections) {
+        return this.httpClient.put<string>(
+            this.USER_URL + "/addRating",
+            {
+                mediaId: mediaId,
+                rating: rating,
                 collection: collection,
             },
             {

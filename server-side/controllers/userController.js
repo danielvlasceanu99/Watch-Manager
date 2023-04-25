@@ -68,7 +68,13 @@ const controller = {
             likedTv: [],
         };
 
-        const errors = await validateUser(req.body);
+        let errors = {};
+        try {
+            errors = await validateUser(req.body);
+        } catch {
+            res.status(500).send({ message: "Failed to register" });
+        }
+
         if (Object.keys(errors).length === 0) {
             user.name = `${req.body.firstName} ${req.body.lastName}`;
             user.email = req.body.email;
@@ -82,7 +88,7 @@ const controller = {
                     await UserDb.insertOne(user);
                     res.status(200).send({ message: "Registered" });
                 } catch {
-                    res.status(500).send("Failed to register");
+                    res.status(500).send({ message: "Failed to register" });
                 }
             });
         } else {
@@ -202,16 +208,11 @@ const validateUser = async (newUser) => {
         errors.password = "Invalid password";
     }
 
-    try {
-        const user = await UserDb.findOne({ email: newUser.email });
-        if (user) {
-            errors.email = "There is already an account with this email";
-        }
-        return errors;
-    } catch {
-        res.status(500).send("Failed to register");
-        return;
+    const user = await UserDb.findOne({ email: newUser.email });
+    if (user) {
+        errors.email = "There is already an account with this email";
     }
+    return errors;
 };
 
 module.exports = controller;

@@ -48,7 +48,7 @@ export class LoginComponent implements OnInit {
         this.userService.login(this.emailFormControl?.value, this.passwordFormControl?.value).subscribe({
             next: (res) => {
                 this.cookieService.set("auth-token", res.token);
-                this.userService.getUser(this.cookieService.get("auth-token")).subscribe({
+                this.userService.getUser().subscribe({
                     next: (response) => {
                         this.session.setUser(response.user);
                     },
