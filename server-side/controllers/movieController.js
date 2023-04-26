@@ -111,6 +111,23 @@ const controller = {
             res.status(500).send({ message: "Server error" });
         }
     },
+
+    getByList: async (req, res) => {
+        let idArray = req.query.idList;
+        idArray = idArray.split(",");
+        try {
+            const movies = await MovieDb.findAll({
+                where: {
+                    id: {
+                        [Op.in]: idArray,
+                    },
+                },
+            });
+            res.status(200).send(movies);
+        } catch {
+            res.status(500).send({ message: "Server error" });
+        }
+    },
 };
 
 module.exports = controller;

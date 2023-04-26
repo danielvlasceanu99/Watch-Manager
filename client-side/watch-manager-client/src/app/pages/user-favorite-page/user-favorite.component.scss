@@ -1,0 +1,45 @@
+.container {
+    max-width: 1280px;
+}
+.min-h {
+    min-height: 73.8vh;
+}
+table {
+    width: 100%;
+}
+
+tr.example-detail-row {
+    height: 0;
+}
+
+tr.example-element-row:not(.example-expanded-row):hover {
+    background: #808080;
+}
+
+tr.example-element-row:not(.example-expanded-row):active {
+    background: #808080;
+}
+
+.example-element-row td {
+    border-bottom-width: 0;
+}
+
+.example-element-detail {
+    overflow: hidden;
+    display: flex;
+}
+
+.example-element-diagram {
+    min-width: 80px;
+    margin: 0 0 8px 0;
+    height: 110px;
+}
+
+.example-element-description {
+    text-align: justify;
+    padding: 0 16px;
+}
+
+.example-element-description-attribution {
+    opacity: 0.5;
+}

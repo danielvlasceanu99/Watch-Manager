@@ -1,0 +1,112 @@
+<div class="w-full pb-2.5 min-h">
+    <div class="container mx-auto h-full">
+        <mat-tab-group mat-align-tabs="start" class="pt-6">
+            <mat-tab label="TV Shows" *ngIf="!isLoading">
+                <table mat-table [dataSource]="tvDataSource" multiTemplateDataRows class="mat-elevation-z8">
+                    <ng-container matColumnDef="{{ column }}" *ngFor="let column of tvColumnsToDisplay; index as i">
+                        <th mat-header-cell *matHeaderCellDef>{{ column | column }}</th>
+                        <td mat-cell *matCellDef="let element">
+                            {{ i == 3 ? (element[column] | date) : element[column] }}
+                        </td>
+                    </ng-container>
+                    <ng-container matColumnDef="expand">
+                        <th mat-header-cell *matHeaderCellDef aria-label="row actions">&nbsp;</th>
+                        <td mat-cell *matCellDef="let element">
+                            <button
+                                mat-icon-button
+                                aria-label="expand row"
+                                (click)="
+                                    tvExpandedElement = tvExpandedElement === element ? null : element;
+                                    $event.stopPropagation()
+                                ">
+                                <mat-icon *ngIf="tvExpandedElement !== element">keyboard_arrow_down</mat-icon>
+                                <mat-icon *ngIf="tvExpandedElement === element">keyboard_arrow_up</mat-icon>
+                            </button>
+                        </td>
+                    </ng-container>
+
+                    <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+                    <ng-container matColumnDef="expandedDetail">
+                        <td mat-cell *matCellDef="let element" [attr.colspan]="tvColumnsToDisplayWithExpand.length">
+                            <div
+                                class="example-element-detail"
+                                [@detailExpand]="element == tvExpandedElement ? 'expanded' : 'collapsed'">
+                                <a href="{{ '/tv/' + element.id }}">
+                                    <img
+                                        class="example-element-diagram"
+                                        src="{{ element.poster_path }}"
+                                        alt="{{ element.title }} poster" />
+                                </a>
+                                <div class="example-element-description">
+                                    {{ element.overview }}
+                                </div>
+                            </div>
+                        </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="tvColumnsToDisplayWithExpand"></tr>
+                    <tr
+                        mat-row
+                        *matRowDef="let element; columns: tvColumnsToDisplayWithExpand"
+                        class="example-element-row"
+                        [class.example-expanded-row]="tvExpandedElement === element"
+                        (click)="tvExpandedElement = tvExpandedElement === element ? null : element"></tr>
+                    <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+                </table>
+            </mat-tab>
+            <mat-tab label="Movies" *ngIf="!isLoading">
+                <table mat-table [dataSource]="movieDataSource" multiTemplateDataRows class="mat-elevation-z8">
+                    <ng-container matColumnDef="{{ column }}" *ngFor="let column of movieColumnsToDisplay; index as i">
+                        <th mat-header-cell *matHeaderCellDef>{{ column | column }}</th>
+                        <td mat-cell *matCellDef="let element">
+                            {{ i == 3 ? (element[column] | date) : element[column] }}
+                        </td>
+                    </ng-container>
+                    <ng-container matColumnDef="expand">
+                        <th mat-header-cell *matHeaderCellDef aria-label="row actions">&nbsp;</th>
+                        <td mat-cell *matCellDef="let element">
+                            <button
+                                mat-icon-button
+                                aria-label="expand row"
+                                (click)="
+                                    movieExpandedElement = movieExpandedElement === element ? null : element;
+                                    $event.stopPropagation()
+                                ">
+                                <mat-icon *ngIf="movieExpandedElement !== element">keyboard_arrow_down</mat-icon>
+                                <mat-icon *ngIf="movieExpandedElement === element">keyboard_arrow_up</mat-icon>
+                            </button>
+                        </td>
+                    </ng-container>
+
+                    <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+                    <ng-container matColumnDef="expandedDetail">
+                        <td mat-cell *matCellDef="let element" [attr.colspan]="movieColumnsToDisplayWithExpand.length">
+                            <div
+                                class="example-element-detail"
+                                [@detailExpand]="element == movieExpandedElement ? 'expanded' : 'collapsed'">
+                                <a href="{{ '/movie/' + element.id }}">
+                                    <img
+                                        class="example-element-diagram"
+                                        src="{{ element.poster_path }}"
+                                        alt="{{ element.title }} poster" />
+                                </a>
+                                <div class="example-element-description">
+                                    {{ element.overview }}
+                                </div>
+                            </div>
+                        </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="movieColumnsToDisplayWithExpand"></tr>
+                    <tr
+                        mat-row
+                        *matRowDef="let element; columns: movieColumnsToDisplayWithExpand"
+                        class="example-element-row"
+                        [class.example-expanded-row]="movieExpandedElement === element"
+                        (click)="movieExpandedElement = movieExpandedElement === element ? null : element"></tr>
+                    <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+                </table>
+            </mat-tab>
+        </mat-tab-group>
+    </div>
+</div>

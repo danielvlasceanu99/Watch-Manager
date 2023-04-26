@@ -6,5 +6,6 @@ router.get("/latest", movieController.getLatest);
 router.get("/search", movieController.search);
 router.get("/filter", movieController.filter);
 router.get("/get/:id", movieController.getById);
+router.get("/getByList", movieController.getByList);
 
 module.exports = router;
