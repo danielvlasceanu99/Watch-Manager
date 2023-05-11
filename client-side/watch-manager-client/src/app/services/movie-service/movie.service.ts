@@ -27,4 +27,8 @@ export class MovieService {
             `${this.MOVIE_URL}/search?page=${page}&title=${title}`
         );
     }
+
+    getbyList(idList: string[]) {
+        return this.httpClient.get<Movie[]>(`${this.MOVIE_URL}/getByList?idList=${idList}`);
+    }
 }

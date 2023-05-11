@@ -22,6 +22,10 @@ import { MatListModule } from "@angular/material/list";
 import { MatPaginatorModule } from "@angular/material/paginator";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { MatMenuModule } from "@angular/material/menu";
+import { MatDialogModule } from "@angular/material/dialog";
+import { MatTooltipModule } from "@angular/material/tooltip";
+import { MatTableModule } from "@angular/material/table";
+import { NgChartsModule } from "ng2-charts";
 
 // CUSTOM COMPONENTS
 import { FooterComponent } from "./components/footer-component/footer.component";
@@ -38,6 +42,7 @@ import { SeasonGroupComponent } from "./components/season-group-component/season
 import { SearchFilterComponent } from "./components/search-filter-component/search-filter.component";
 import { PersonGeneralInfoComponent } from "./components/person-general-info-component/person-general-info.component";
 import { PersonSidePanelComponent } from "./components/person-side-panel-component//person-side-panel.component";
+import { RatingDialogComponent } from "./components/rating-dialog-comnponent/rating-dialog.component";
 
 // CUSTOM PAGES
 import { LatestComponent } from "./pages/latest-page/latest.component";
@@ -54,11 +59,17 @@ import { PrivacyComponent } from "./pages/privacy-page/privacy.component";
 import { ContactUsComponent } from "./pages/contact-us-page/contact-us.component";
 import { LoginComponent } from "./pages/login-page/login.component";
 import { RegisterComponent } from "./pages/register-page/register.component";
+import { UserWatchlistComponent } from "./pages/user-watchlist-page/user-watchlist.component";
+import { UserRatedComponent } from "./pages/user-rated-page/user-rated.component";
+import { UserFavoriteComponent } from "./pages/user-favorite-page/user-favorite.component";
+import { UserWatchedComponent } from "./pages/user-watched-page/user-watched.component";
+import { UserAccountComponent } from "./pages/user-account-page/user-account.component";
 
 // PIPES
 import { DatePipe } from "./pipes/date-pipe/date.pipe";
 import { DateYearPipe } from "./pipes/date-year-pipe/date-year.pipe";
 import { RuntimePipe } from "./pipes/runtime-pipe/runtime.pipe";
+import { ColumnPipe } from "./pipes/column-pipe/column.pipe";
 
 @NgModule({
     declarations: [
@@ -78,6 +89,7 @@ import { RuntimePipe } from "./pipes/runtime-pipe/runtime.pipe";
         SearchFilterComponent,
         PersonGeneralInfoComponent,
         PersonSidePanelComponent,
+        RatingDialogComponent,
         // PAGES
         MovieDetailsComponent,
         LatestComponent,
@@ -93,10 +105,16 @@ import { RuntimePipe } from "./pipes/runtime-pipe/runtime.pipe";
         ContactUsComponent,
         LoginComponent,
         RegisterComponent,
+        UserWatchlistComponent,
+        UserRatedComponent,
+        UserFavoriteComponent,
+        UserWatchedComponent,
+        UserAccountComponent,
         // PIPES
         DateYearPipe,
         DatePipe,
         RuntimePipe,
+        ColumnPipe,
     ],
     imports: [
         BrowserModule,
@@ -119,6 +137,10 @@ import { RuntimePipe } from "./pipes/runtime-pipe/runtime.pipe";
         MatPaginatorModule,
         MatSnackBarModule,
         MatMenuModule,
+        MatDialogModule,
+        MatTooltipModule,
+        MatTableModule,
+        NgChartsModule,
     ],
     providers: [],
     bootstrap: [AppComponent],

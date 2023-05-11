@@ -1,0 +1,15 @@
+<div>
+    <button
+        mat-icon-button
+        color="primary"
+        *ngFor="let ratingId of ratingArr; index as i"
+        (click)="rate(i + 1)"
+        [matTooltip]="(ratingId + 1).toString()"
+        matTooltipPosition="above">
+        <mat-icon>
+            {{ showIcon(i) }}
+        </mat-icon>
+    </button>
+    <br />
+    <button mat-button [mat-dialog-close]="data.rating" cdkFocusInitial>Rate</button>
+</div>

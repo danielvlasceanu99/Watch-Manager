@@ -15,21 +15,31 @@
                 <button mat-icon-button [matMenuTriggerFor]="menu">
                     <mat-icon>account_circle</mat-icon>
                 </button>
-                <mat-menu #menu="matMenu">
-                    <a href="#" mat-menu-item>
+                <mat-menu #menu="matMenu" class="text-slate-50">
+                    <a href="/user-watchlist" mat-menu-item>
+                        <mat-icon> bookmark_add </mat-icon>
                         <span>Watchlist</span>
                     </a>
-                    <a href="#" mat-menu-item>
+                    <a href="/user-rated" mat-menu-item>
+                        <mat-icon> grade</mat-icon>
                         <span>Rated</span>
                     </a>
-                    <a href="#" mat-menu-item>
+                    <a href="/user-favorite" mat-menu-item>
+                        <mat-icon>favorite</mat-icon>
                         <span>Favourite</span>
                     </a>
-                    <a href="#" mat-menu-item>
+                    <a href="/user-watched" mat-menu-item>
+                        <mat-icon>check</mat-icon>
+                        <span>Watched</span>
+                    </a>
+                    <a href="/user-account" mat-menu-item>
+                        <mat-icon>manage_accounts </mat-icon>
                         <span>Account</span>
                     </a>
                 </mat-menu>
-                <button mat-button class="mr-8" (click)="logout()">Log Out</button>
+                <button mat-button class="ml-4 mr-5" (click)="logout()">
+                    <span class="mr-1">Logout</span> <mat-icon>logout</mat-icon>
+                </button>
             </div>
         </div>
     </mat-toolbar>

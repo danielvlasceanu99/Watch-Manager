@@ -28,4 +28,8 @@ export class TvService {
             `${this.TV_URL}/search?page=${page}&name=${title}`
         );
     }
+
+    getbyList(idList: string[]) {
+        return this.httpClient.get<Tv[]>(`${this.TV_URL}/getByList?idList=${idList}`);
+    }
 }

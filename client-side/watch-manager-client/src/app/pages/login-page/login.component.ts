@@ -47,8 +47,12 @@ export class LoginComponent implements OnInit {
     login() {
         this.userService.login(this.emailFormControl?.value, this.passwordFormControl?.value).subscribe({
             next: (res) => {
-                this.cookieService.set("token", res.token);
-                this.session.setUser(res.user);
+                this.cookieService.set("auth-token", res.token);
+                this.userService.getUser().subscribe({
+                    next: (response) => {
+                        this.session.setUser(response.user);
+                    },
+                });
                 this.router.navigate(["/home"]);
             },
             error: (error) => {

@@ -14,6 +14,11 @@ import { TvDetailsComponent } from "./pages/tv-details-page/tv-details.component
 import { TvShowsComponent } from "./pages/tv-shows-page/tv-shows/tv-shows.component";
 import { LoginComponent } from "./pages/login-page/login.component";
 import { RegisterComponent } from "./pages/register-page/register.component";
+import { UserWatchlistComponent } from "./pages/user-watchlist-page/user-watchlist.component";
+import { UserFavoriteComponent } from "./pages/user-favorite-page/user-favorite.component";
+import { UserRatedComponent } from "./pages/user-rated-page/user-rated.component";
+import { UserWatchedComponent } from "./pages/user-watched-page/user-watched.component";
+import { UserAccountComponent } from "./pages/user-account-page/user-account.component";
 
 const routes: Routes = [
     { path: "home", component: LatestComponent },
@@ -32,6 +37,11 @@ const routes: Routes = [
     { path: "contact-us", component: ContactUsComponent },
     { path: "login", component: LoginComponent },
     { path: "register", component: RegisterComponent },
+    { path: "user-watchlist", component: UserWatchlistComponent },
+    { path: "user-rated", component: UserRatedComponent },
+    { path: "user-favorite", component: UserFavoriteComponent },
+    { path: "user-watched", component: UserWatchedComponent },
+    { path: "user-account", component: UserAccountComponent },
     { path: "**", redirectTo: "home", pathMatch: "full" },
 ];
 

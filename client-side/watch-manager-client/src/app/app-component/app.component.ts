@@ -24,10 +24,10 @@ export class AppComponent implements OnInit {
     ) {}
 
     ngOnInit() {
-        if (this.cookieService.get("token")) {
-            this.userService.getUser(this.cookieService.get("token")).subscribe({
+        if (this.cookieService.get("auth-token")) {
+            this.userService.getUser().subscribe({
                 next: (response) => {
-                    this.session.setUser(response.decodedUser.user);
+                    this.session.setUser(response.user);
                 },
             });
         }
@@ -40,8 +40,8 @@ export class AppComponent implements OnInit {
     }
 
     logout() {
+        this.cookieService.delete("auth-token");
         this.session.clearUser();
-        this.cookieService.delete("token");
         this.router.navigate(["./home"]);
     }
 }

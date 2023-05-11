@@ -1,0 +1,105 @@
+<div class="w-full pb-2.5 min-h-full">
+    <div class="container mx-auto h-full">
+        <div class="flex justify-between text-slate-50">
+            <div id="account-info" class="mt-5 w-1/2 mr-20">
+                <h1>Account info</h1>
+                <img src="../../../assets/images/no-user.jpg" alt="avatar" class="card-img" />
+
+                <table class="w-full">
+                    <tbody class="w-full">
+                        <tr class="w-full">
+                            <td class="min-w"><h2>First name</h2></td>
+                            <td>
+                                <h2>{{ firstName }}</h2>
+                            </td>
+                        </tr>
+                        <tr class="w-full">
+                            <td class="min-w"><h2>Last name</h2></td>
+                            <td>
+                                <h2>{{ lastName }}</h2>
+                            </td>
+                        </tr>
+                        <tr class="w-full">
+                            <td class="min-w"><h2>Email</h2></td>
+                            <td>
+                                <h2>{{ user?.email }}</h2>
+                            </td>
+                        </tr>
+                        <tr class="w-full">
+                            <td colspan="2"><h2>Change password</h2></td>
+                        </tr>
+                        <tr class="w-full">
+                            <td colspan="2"><h2>Delete account</h2></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="stats" class="mt-5 w-1/2 ml-40">
+                <h1>STATS</h1>
+                <div class="flex justify-between">
+                    <h2>Total episodes watched</h2>
+                    <h2>{{ user?.watchedEpisodes?.length }}</h2>
+                </div>
+                <div class="flex justify-between">
+                    <h2>Total movies watched</h2>
+                    <h2>{{ user?.watchedMovies?.length }}</h2>
+                </div>
+                <div class="flex justify-between">
+                    <h2>Total TV show watched</h2>
+                    <h2>{{ user?.watchedTvs?.length }}</h2>
+                </div>
+                <div class="flex justify-between">
+                    <h2>Number of movies liked</h2>
+                    <h2>{{ user?.likedMovies?.length }}</h2>
+                </div>
+                <div class="flex justify-between">
+                    <h2>Number of TV shows liked</h2>
+                    <h2>{{ user?.likedTv?.length }}</h2>
+                </div>
+                <div class="flex justify-between">
+                    <h2>Number of movies rated</h2>
+                    <h2>{{ user?.ratedMovies?.length }}</h2>
+                </div>
+                <div class="flex justify-between">
+                    <h2>Number of TV shows rated</h2>
+                    <h2>{{ user?.ratedTv?.length }}</h2>
+                </div>
+                <div class="flex justify-between">
+                    <h2>Number of movies in watchlist</h2>
+                    <h2>{{ user?.movieWatchlist?.length }}</h2>
+                </div>
+                <div class="flex justify-between">
+                    <h2>Number of shows in watchlist</h2>
+                    <h2>{{ user?.ratedMovies?.length }}</h2>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <canvas
+                *ngIf="!isLoadingChartOne"
+                class="w-full height"
+                baseChart
+                [data]="barChartDataOne"
+                [options]="barChartOptions"
+                [plugins]="barChartPlugins"
+                [legend]="barChartLegend"
+                [type]="'bar'">
+            </canvas>
+        </div>
+
+        <div>
+            <canvas
+                *ngIf="!isLoadingChartTwo"
+                class="w-full height"
+                baseChart
+                [data]="barChartDataTwo"
+                [options]="barChartOptions"
+                [plugins]="barChartPlugins"
+                [legend]="barChartLegend"
+                [type]="'bar'">
+            </canvas>
+        </div>
+    </div>
+</div>

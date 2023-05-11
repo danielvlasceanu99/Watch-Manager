@@ -4,10 +4,13 @@ export interface User {
     role: string;
     movieWatchlist: string[];
     tvWatchlist: string[];
-    moviesWatched: string[];
-    episodesWatched: string[];
-    ratedMovies: { id: string; rate: number }[];
-    ratedTV: { id: string; rate: number }[];
+    watchedMovies: string[];
+    watchedTvs: string[];
+    watchedEpisodes: string[];
+    ratedMovies: { id: string; rating: number }[];
+    ratedTv: { id: string; rating: number }[];
     reviewedMovies: string[];
     reviewedTv: string[];
+    likedMovies: string[];
+    likedTv: string[];
 }

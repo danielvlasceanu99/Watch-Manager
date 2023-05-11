@@ -3,10 +3,12 @@
         <mat-progress-bar mode="indeterminate" *ngIf="movieIsLoading"></mat-progress-bar>
         <div class="w-1/4 pt-10" *ngIf="!movieIsLoading">
             <app-media-side-panel
-                [posterPath]="movie?.poster_path"
-                [status]="movie?.status"
-                [producers]="producers"
-                [genres]="movie?.genres">
+                [mediaId]="movie?.id"
+                [mediaStatus]="movie?.status"
+                [mediaProducers]="producers"
+                [MediaGenres]="movie?.genres"
+                [mediaPoster]="movie?.poster_path"
+                [mediaType]="mediaType">
             </app-media-side-panel>
         </div>
         <div class="w-3/4 pt-16" *ngIf="!movieIsLoading">
@@ -22,7 +24,7 @@
 
             <mat-divider></mat-divider>
 
-            <app-review-list [reviews]="reviews.slice(0, 3)" [mediaId]="id" [mediaType]="mediaType"></app-review-list>
+            <app-review-list [reviews]="reviews" [mediaId]="id" [mediaType]="mediaType"></app-review-list>
         </div>
     </div>
 </div>

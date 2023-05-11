@@ -6,5 +6,8 @@ const userController = require("../controllers").userController;
 router.post("/login", userController.login);
 router.get("/getUserData", userController.getUserData);
 router.post("/register", userController.register);
+router.put("/addToCollection", userController.addToCollection);
+router.put("/removeFromCollection", userController.removeFromCollection);
+router.put("/addRating", userController.addRating);
 
 module.exports = router;

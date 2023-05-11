@@ -6,7 +6,22 @@
         </span>
         <div class="text-justify">{{ overview }}</div>
         <div class="flex justify-end pt-2 gap-x-0.5">
-            <button mat-flat-button color="primary">Mark</button>
+            <button
+                *ngIf="!isWatched"
+                mat-button
+                matTooltip="Mark as watched"
+                color="primary"
+                (click)="markAsWatched()">
+                <mat-icon> checklist </mat-icon>
+            </button>
+            <button
+                *ngIf="isWatched"
+                mat-button
+                matTooltip="Mark as watched"
+                color="primary"
+                (click)="markAsUnwatched()">
+                <mat-icon> rule </mat-icon>
+            </button>
         </div>
     </div>
 </div>
