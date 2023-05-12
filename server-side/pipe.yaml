@@ -1,0 +1,20 @@
+version: 2.1
+
+jobs:
+    fetch-and-insert:
+        docker:
+            - image: node:14
+
+        steps:
+            - checkout
+
+            # install dependencies
+            - run: npm install
+
+            # run fetch and insert script
+            - run: node fetch-and-insert.js
+
+        # schedule job to run every 24 hours
+        schedule:
+            # every day at 1:00am UTC
+            cron: "0 1 * * *"

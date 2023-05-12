@@ -26,6 +26,10 @@ import { MatDialogModule } from "@angular/material/dialog";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { MatTableModule } from "@angular/material/table";
 import { NgChartsModule } from "ng2-charts";
+import { MatSelectModule } from "@angular/material/select";
+import { MatDatepickerModule } from "@angular/material/datepicker";
+import { MatNativeDateModule } from "@angular/material/core";
+import { MatSlideToggleModule } from "@angular/material/slide-toggle";
 
 // CUSTOM COMPONENTS
 import { FooterComponent } from "./components/footer-component/footer.component";
@@ -43,6 +47,8 @@ import { SearchFilterComponent } from "./components/search-filter-component/sear
 import { PersonGeneralInfoComponent } from "./components/person-general-info-component/person-general-info.component";
 import { PersonSidePanelComponent } from "./components/person-side-panel-component//person-side-panel.component";
 import { RatingDialogComponent } from "./components/rating-dialog-comnponent/rating-dialog.component";
+import { MovieDialogComponent } from "./components/movie-dialog-component/movie-dialog.component";
+import { ConfirmActionDialogComponent } from "./components/confirm-action-dialog-component/confirm-action-dialog.component";
 
 // CUSTOM PAGES
 import { LatestComponent } from "./pages/latest-page/latest.component";
@@ -64,6 +70,8 @@ import { UserRatedComponent } from "./pages/user-rated-page/user-rated.component
 import { UserFavoriteComponent } from "./pages/user-favorite-page/user-favorite.component";
 import { UserWatchedComponent } from "./pages/user-watched-page/user-watched.component";
 import { UserAccountComponent } from "./pages/user-account-page/user-account.component";
+import { AdminMoviesComponent } from "./pages/admin-movies-page/admin-movies.component";
+import { AdminDashboardComponent } from "./pages/admin-dashboard-page/admin-dashboard.component";
 
 // PIPES
 import { DatePipe } from "./pipes/date-pipe/date.pipe";
@@ -90,6 +98,8 @@ import { ColumnPipe } from "./pipes/column-pipe/column.pipe";
         PersonGeneralInfoComponent,
         PersonSidePanelComponent,
         RatingDialogComponent,
+        MovieDialogComponent,
+        ConfirmActionDialogComponent,
         // PAGES
         MovieDetailsComponent,
         LatestComponent,
@@ -110,6 +120,8 @@ import { ColumnPipe } from "./pipes/column-pipe/column.pipe";
         UserFavoriteComponent,
         UserWatchedComponent,
         UserAccountComponent,
+        AdminMoviesComponent,
+        AdminDashboardComponent,
         // PIPES
         DateYearPipe,
         DatePipe,
@@ -141,6 +153,10 @@ import { ColumnPipe } from "./pipes/column-pipe/column.pipe";
         MatTooltipModule,
         MatTableModule,
         NgChartsModule,
+        MatSelectModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
+        MatSlideToggleModule,
     ],
     providers: [],
     bootstrap: [AppComponent],

@@ -16,22 +16,51 @@
                     <mat-icon>account_circle</mat-icon>
                 </button>
                 <mat-menu #menu="matMenu" class="text-slate-50">
-                    <a href="/user-watchlist" mat-menu-item>
-                        <mat-icon> bookmark_add </mat-icon>
-                        <span>Watchlist</span>
-                    </a>
-                    <a href="/user-rated" mat-menu-item>
-                        <mat-icon> grade</mat-icon>
-                        <span>Rated</span>
-                    </a>
-                    <a href="/user-favorite" mat-menu-item>
-                        <mat-icon>favorite</mat-icon>
-                        <span>Favourite</span>
-                    </a>
-                    <a href="/user-watched" mat-menu-item>
-                        <mat-icon>check</mat-icon>
-                        <span>Watched</span>
-                    </a>
+                    <ng-container *ngIf="!isAdmin">
+                        <a href="/user-watchlist" mat-menu-item>
+                            <mat-icon> bookmark_add </mat-icon>
+                            <span>Watchlist</span>
+                        </a>
+                        <a href="/user-rated" mat-menu-item>
+                            <mat-icon> grade</mat-icon>
+                            <span>Rated</span>
+                        </a>
+                        <a href="/user-favorite" mat-menu-item>
+                            <mat-icon>favorite</mat-icon>
+                            <span>Favourite</span>
+                        </a>
+                        <a href="/user-watched" mat-menu-item>
+                            <mat-icon>check</mat-icon>
+                            <span>Watched</span>
+                        </a>
+                    </ng-container>
+                    <ng-container *ngIf="isAdmin">
+                        <a href="/admin-movies" mat-menu-item>
+                            <mat-icon> theaters </mat-icon>
+                            <span>Mange Movies</span>
+                        </a>
+                        <a href="/admin-tv-shows" mat-menu-item>
+                            <mat-icon> tv </mat-icon>
+                            <span>Manage TV Shows</span>
+                        </a>
+                        <a href="/admin-people" mat-menu-item>
+                            <mat-icon>people</mat-icon>
+                            <span>Manage Actors</span>
+                        </a>
+                        <a href="/admin-reviews" mat-menu-item>
+                            <mat-icon>rate_review</mat-icon>
+                            <span>Manage Reviews</span>
+                        </a>
+                        <a href="/admin-users" mat-menu-item>
+                            <mat-icon>account_box</mat-icon>
+                            <span>Manage Users</span>
+                        </a>
+                        <a href="/admin-dashboard" mat-menu-item>
+                            <mat-icon>dashboard</mat-icon>
+                            <span>Dashboard</span>
+                        </a>
+                    </ng-container>
+
                     <a href="/user-account" mat-menu-item>
                         <mat-icon>manage_accounts </mat-icon>
                         <span>Account</span>
