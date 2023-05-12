@@ -128,6 +128,141 @@ const controller = {
             res.status(500).send({ message: "Server error" });
         }
     },
+
+    getAll: async (req, res) => {
+        try {
+            const movies = await MovieDb.findAll({
+                order: [["created_at", "DESC"]],
+            });
+            res.status(200).send(movies);
+        } catch {
+            res.status(500).send({ message: "Server error" });
+        }
+    },
+
+    addMovie: async (req, res) => {
+        const movie = {
+            id: req.body.movie.title + Date.now(),
+            title: req.body.movie.title,
+            tagline: req.body.movie.tagline,
+            overview: req.body.movie.overview,
+            runtime: req.body.movie.runtime,
+            release_date: req.body.movie.release_date,
+            status: req.body.movie.status,
+            budget: req.body.movie.budget,
+            revenue: req.body.movie.revenue,
+            poster_path: req.body.movie.poster_path,
+            created_by: req.user._id.toString(),
+            last_changed_by: req.user._id.toString(),
+            created_at: new Date(Date.now()),
+            last_changed_at: new Date(Date.now()),
+        };
+
+        let errors = validateMovie(movie);
+        if (Object.keys(errors).length === 0) {
+            await MovieDb.create(movie)
+                .then((movie) => {
+                    res.status(200).send(movie);
+                })
+                .catch((err) => {
+                    res.status(500).send({ message: "Server error" });
+                });
+        } else {
+            res.status(400).send(errors);
+        }
+    },
+
+    editMovie: async (req, res) => {
+        const movie = await MovieDb.findByPk(req.params.id);
+        if (!movie) {
+            res.status(404).send({ message: "No movie with that id" });
+        }
+
+        const newMovie = {
+            title: req.body.movie.title,
+            tagline: req.body.movie.tagline,
+            overview: req.body.movie.overview,
+            runtime: req.body.movie.runtime,
+            release_date: req.body.movie.release_date,
+            status: req.body.movie.status,
+            budget: req.body.movie.budget,
+            revenue: req.body.movie.revenue,
+            poster_path: req.body.movie.poster_path,
+            created_by: req.user._id.toString(),
+            last_changed_by: req.user._id.toString(),
+            created_at: new Date(Date.now()),
+            last_changed_at: new Date(Date.now()),
+        };
+
+        let errors = validateMovie(newMovie);
+        if (Object.keys(errors).length === 0) {
+            await movie
+                .update(newMovie)
+                .then((movie) => {
+                    res.status(200).send(movie);
+                })
+                .catch(() => {
+                    res.status(500).send({ message: "Server error" });
+                });
+        } else {
+            res.status(400).send(errors);
+        }
+    },
+
+    deleteMovie: async (req, res) => {
+        const movie = await MovieDb.findByPk(req.params.id);
+        if (!movie) {
+            res.status(404).send({ message: "No movie with that id" });
+        }
+
+        try {
+            await movie.destroy();
+            res.status(200).send({ message: "Movie removed" });
+        } catch {
+            res.status(500).send({ message: "Server error" });
+        }
+    },
+};
+
+const validateMovie = async (movie) => {
+    const errors = {};
+
+    if (!movie.title) {
+        errors.title = "Missing title";
+    } else if (movie.title.length > 100) {
+        errors.title = "Title too long";
+    }
+
+    if (movie.tagline && movie.tagline.length > 150) {
+        errors.tagline = "Tagline too long";
+    }
+
+    if (movie.overview && movie.overview.length > 1000) {
+        errors.overview = "Overview too long";
+    }
+
+    if (movie.runtime && movie.runtime < 0) {
+        errors.runtime = "Runtime is negative";
+    }
+
+    if (!movie.status) {
+        errors.status = "Missing status";
+    } else {
+        const avaibleStatus = ["Rumored", "Planned", "In Production", "Post Production", "Released", "Canceled"];
+        if (!avaibleStatus.includes(movie.status)) {
+            errors.status = "Invalid status";
+        }
+    }
+
+    if (movie.budget && movie.budget < 0) {
+        errors.budget = "Budget is negative";
+    }
+
+    if (!movie.poster_path) {
+        errors.poster_path = "Poster path is missing";
+    }
+
+    return errors;
 };
 
 module.exports = controller;

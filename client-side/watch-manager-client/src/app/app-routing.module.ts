@@ -19,6 +19,8 @@ import { UserFavoriteComponent } from "./pages/user-favorite-page/user-favorite.
 import { UserRatedComponent } from "./pages/user-rated-page/user-rated.component";
 import { UserWatchedComponent } from "./pages/user-watched-page/user-watched.component";
 import { UserAccountComponent } from "./pages/user-account-page/user-account.component";
+import { AdminMoviesComponent } from "./pages/admin-movies-page/admin-movies.component";
+import { AdminDashboardComponent } from "./pages/admin-dashboard-page/admin-dashboard.component";
 
 const routes: Routes = [
     { path: "home", component: LatestComponent },
@@ -42,6 +44,8 @@ const routes: Routes = [
     { path: "user-favorite", component: UserFavoriteComponent },
     { path: "user-watched", component: UserWatchedComponent },
     { path: "user-account", component: UserAccountComponent },
+    { path: "admin-movies", component: AdminMoviesComponent },
+    { path: "admin-dashboard", component: AdminDashboardComponent },
     { path: "**", redirectTo: "home", pathMatch: "full" },
 ];
 

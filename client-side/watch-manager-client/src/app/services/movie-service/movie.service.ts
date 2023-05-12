@@ -1,5 +1,6 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { CookieService } from "ngx-cookie-service";
 import { Movie } from "src/app/models/movie.model";
 
 @Injectable({
@@ -7,7 +8,7 @@ import { Movie } from "src/app/models/movie.model";
 })
 export class MovieService {
     MOVIE_URL: string = "http://localhost:8080/movie";
-    constructor(private httpClient: HttpClient) {}
+    constructor(private httpClient: HttpClient, private cookieService: CookieService) {}
 
     getLatest() {
         return this.httpClient.get<Movie[]>(`${this.MOVIE_URL}/latest`);
@@ -30,5 +31,39 @@ export class MovieService {
 
     getbyList(idList: string[]) {
         return this.httpClient.get<Movie[]>(`${this.MOVIE_URL}/getByList?idList=${idList}`);
+    }
+
+    getAll() {
+        return this.httpClient.get<Movie[]>(`${this.MOVIE_URL}/getAll`);
+    }
+
+    addMovie(movie: any) {
+        return this.httpClient.post<Movie | any>(
+            `${this.MOVIE_URL}/addMovie`,
+            {
+                movie,
+            },
+            {
+                headers: new HttpHeaders().set("authorization", this.cookieService.get("auth-token")),
+            }
+        );
+    }
+
+    editMovie(id: string | undefined, movie: any) {
+        return this.httpClient.put<Movie | any>(
+            `${this.MOVIE_URL}/editMovie/${id}`,
+            {
+                movie,
+            },
+            {
+                headers: new HttpHeaders().set("authorization", this.cookieService.get("auth-token")),
+            }
+        );
+    }
+
+    deleteMovie(id: string) {
+        return this.httpClient.delete<any>(`${this.MOVIE_URL}/deleteMovie/${id}`, {
+            headers: new HttpHeaders().set("authorization", this.cookieService.get("auth-token")),
+        });
     }
 }

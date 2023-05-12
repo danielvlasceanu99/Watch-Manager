@@ -1,0 +1,78 @@
+<h2 *ngIf="!data" mat-dialog-title>Add a new movie</h2>
+<h2 *ngIf="data" mat-dialog-title>Edit</h2>
+<mat-dialog-content>
+    <form [formGroup]="movieFormGroup">
+        <mat-form-field class="w-full" appearance="fill" hideRequiredMarker="true">
+            <mat-label>Title</mat-label>
+            <input type="text" formControlName="title" matInput placeholder="Movie title" />
+            <mat-error *ngIf="title?.errors?.['required']"> Title is required </mat-error>
+            <mat-error *ngIf="title?.errors?.['maxLength']"> Title must have less than 100 characters </mat-error>
+            <mat-hint align="end">{{ title?.value?.length }} / 100</mat-hint>
+        </mat-form-field>
+
+        <mat-form-field class="w-full" appearance="fill" hideRequiredMarker="true">
+            <mat-label>Tagline</mat-label>
+            <input type="text" formControlName="tagline" matInput placeholder="Movie tagline" />
+            <mat-error *ngIf="tagline?.errors?.['maxLength']"> Tagline must have less than 150 characters </mat-error>
+            <mat-hint align="end">{{ tagline?.value?.length }} / 150</mat-hint>
+        </mat-form-field>
+
+        <mat-form-field class="w-full" appearance="fill" hideRequiredMarker="true">
+            <mat-label>Overview</mat-label>
+            <textarea formControlName="overview" matInput placeholder="Movie overview" rows="5"> </textarea>
+            <mat-error *ngIf="overview?.errors?.['maxLength']">
+                Overview must have less than 1000 characters
+            </mat-error>
+            <mat-hint align="end">{{ overview?.value?.length }} / 1000</mat-hint>
+        </mat-form-field>
+
+        <mat-form-field class="w-1/2 pr-2" appearance="fill" hideRequiredMarker="true">
+            <mat-label>Status</mat-label>
+            <mat-select formControlName="status">
+                <mat-option value="Rumored">Rumored</mat-option>
+                <mat-option value="Planned">Planned</mat-option>
+                <mat-option value="In Production">In Production</mat-option>
+                <mat-option value="Post Production">Post Production</mat-option>
+                <mat-option value="Released">Released</mat-option>
+                <mat-option value="Canceled">Canceled</mat-option>
+            </mat-select>
+            <mat-error *ngIf="status?.errors?.['required']"> Status is required! </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="w-1/2 pl-2" appearance="fill">
+            <mat-label>Choose the release date</mat-label>
+            <input formControlName="release_date" matInput [matDatepicker]="releaseDate" (click)="releaseDate.open()" />
+            <mat-datepicker-toggle matSuffix [for]="releaseDate"></mat-datepicker-toggle>
+            <mat-datepicker #releaseDate></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field class="w-1/3 pr-2" appearance="fill" hideRequiredMarker="true">
+            <mat-label>Runtime</mat-label>
+            <input type="number" formControlName="runtime" matInput placeholder="Movie runtime (min)" />
+            <mat-error *ngIf="runtime?.errors?.['min']"> Runtime must be above zero </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="w-1/3 px-2" appearance="fill" hideRequiredMarker="true">
+            <mat-label>Budget</mat-label>
+            <input type="number" formControlName="budget" matInput placeholder="Movie budget (USD)" />
+            <mat-error *ngIf="budget?.errors?.['min']"> Budget can't be less than $10000 </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="w-1/3 pl-2" appearance="fill" hideRequiredMarker="true">
+            <mat-label>Revenue</mat-label>
+            <input type="number" formControlName="revenue" matInput placeholder="Movie revenue (min)" />
+        </mat-form-field>
+
+        <mat-form-field class="w-full" appearance="fill" hideRequiredMarker="true">
+            <mat-label>Poster</mat-label>
+            <input type="text" formControlName="poster_path" matInput placeholder="Movie poster URL" />
+            <mat-error *ngIf="poster_path?.errors?.['required']"> Poster URL is required </mat-error>
+        </mat-form-field>
+    </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close cdkFocusInitial>Cancel</button>
+    <button mat-button (click)="addMovie()" [disabled]="movieFormGroup.invalid" *ngIf="!data">Add</button>
+    <button mat-button (click)="editMovie()" [disabled]="movieFormGroup.invalid" *ngIf="data">Edit</button>
+</mat-dialog-actions>

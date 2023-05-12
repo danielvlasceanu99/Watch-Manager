@@ -69,4 +69,10 @@ export class UserService {
             }
         );
     }
+
+    getDashboardData() {
+        return this.httpClient.get<any>(this.USER_URL + "/getDashboardData", {
+            headers: new HttpHeaders().set("authorization", this.cookieService.get("auth-token")),
+        });
+    }
 }
