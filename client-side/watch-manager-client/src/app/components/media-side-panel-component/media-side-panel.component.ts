@@ -197,11 +197,15 @@ export class MediaSidePanelComponent implements OnInit {
                             }
                         },
                         error: (error) => {
-                            this.isRated = true;
-                            this._snackBar.open("There was an error. Please try again!", "OK", {
-                                panelClass: "snack-bar-err",
-                                duration: 2000,
-                            });
+                            this.isRated = false;
+                            if (error.status === 401 || error.status === 404) {
+                                this.router.navigate(["/login"]);
+                            } else {
+                                this._snackBar.open("There was an error. Please try again!", "OK", {
+                                    panelClass: "snack-bar-err",
+                                    duration: 2000,
+                                });
+                            }
                         },
                     });
                 }

@@ -72,6 +72,7 @@ import { UserWatchedComponent } from "./pages/user-watched-page/user-watched.com
 import { UserAccountComponent } from "./pages/user-account-page/user-account.component";
 import { AdminMoviesComponent } from "./pages/admin-movies-page/admin-movies.component";
 import { AdminDashboardComponent } from "./pages/admin-dashboard-page/admin-dashboard.component";
+import { RecomandationsComponent } from "./pages/recomandations-page/recomandations.component";
 
 // PIPES
 import { DatePipe } from "./pipes/date-pipe/date.pipe";
@@ -122,6 +123,7 @@ import { ColumnPipe } from "./pipes/column-pipe/column.pipe";
         UserAccountComponent,
         AdminMoviesComponent,
         AdminDashboardComponent,
+        RecomandationsComponent,
         // PIPES
         DateYearPipe,
         DatePipe,

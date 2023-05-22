@@ -23,6 +23,8 @@ export class UserAccountComponent implements OnInit {
     movieCount = [0, 0, 0, 0];
     tvCount = [0, 0, 0, 0];
 
+    constructor(private session: SessionService, private router: Router) {}
+
     ngOnInit(): void {
         this.isLoadingChartOne = true;
         this.isLoadingChartTwo = true;
@@ -87,5 +89,4 @@ export class UserAccountComponent implements OnInit {
             { data: this.tvCount, label: "TV Shows" },
         ],
     };
-    constructor(private session: SessionService, private router: Router) {}
 }

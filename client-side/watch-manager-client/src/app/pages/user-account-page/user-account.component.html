@@ -25,12 +25,12 @@
                                 <h2>{{ user?.email }}</h2>
                             </td>
                         </tr>
-                        <tr class="w-full">
+                        <!-- <tr class="w-full">
                             <td colspan="2"><h2>Change password</h2></td>
                         </tr>
                         <tr class="w-full">
                             <td colspan="2"><h2>Delete account</h2></td>
-                        </tr>
+                        </tr> -->
                     </tbody>
                 </table>
             </div>
@@ -76,7 +76,8 @@
             </div>
         </div>
 
-        <div>
+        <div class="text-slate-50">
+            <h2>Number of movies and TV shows for each grade</h2>
             <canvas
                 *ngIf="!isLoadingChartOne"
                 class="w-full height"
@@ -89,7 +90,8 @@
             </canvas>
         </div>
 
-        <div>
+        <div class="text-slate-50 mt-10">
+            <h2>Number of movies and TV shows in watchlist, watched, liked and rated</h2>
             <canvas
                 *ngIf="!isLoadingChartTwo"
                 class="w-full height"

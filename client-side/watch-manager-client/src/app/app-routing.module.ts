@@ -21,6 +21,7 @@ import { UserWatchedComponent } from "./pages/user-watched-page/user-watched.com
 import { UserAccountComponent } from "./pages/user-account-page/user-account.component";
 import { AdminMoviesComponent } from "./pages/admin-movies-page/admin-movies.component";
 import { AdminDashboardComponent } from "./pages/admin-dashboard-page/admin-dashboard.component";
+import { RecomandationsComponent } from "./pages/recomandations-page/recomandations.component";
 
 const routes: Routes = [
     { path: "home", component: LatestComponent },
@@ -46,6 +47,7 @@ const routes: Routes = [
     { path: "user-account", component: UserAccountComponent },
     { path: "admin-movies", component: AdminMoviesComponent },
     { path: "admin-dashboard", component: AdminDashboardComponent },
+    { path: "recomandations", component: RecomandationsComponent },
     { path: "**", redirectTo: "home", pathMatch: "full" },
 ];
 

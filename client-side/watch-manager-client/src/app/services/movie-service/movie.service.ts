@@ -33,6 +33,10 @@ export class MovieService {
         return this.httpClient.get<Movie[]>(`${this.MOVIE_URL}/getByList?idList=${idList}`);
     }
 
+    getRecomandations(idList: string[]) {
+        return this.httpClient.get<Movie[]>(`${this.MOVIE_URL}/getRecomandations?idList=${idList}`);
+    }
+
     getAll() {
         return this.httpClient.get<Movie[]>(`${this.MOVIE_URL}/getAll`);
     }

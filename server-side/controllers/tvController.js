@@ -1,4 +1,5 @@
-const { Op } = require("sequelize");
+const { Op, Sequelize } = require("sequelize");
+const sequelize = require("../config/dbConfig");
 const TvDb = require("../models").TV;
 const GenreDb = require("../models").Genre;
 
@@ -127,6 +128,44 @@ const controller = {
         } catch {
             res.status(500).send({ message: "Server error" });
         }
+    },
+
+    getRecomandations: async (req, res) => {
+        let idArray = req.query.idList;
+        idArray = idArray.split(",");
+
+        const querryString =
+            "select count(tv.id) as tvCount, genre_to_tv.genre_id from `tvs` as tv join `genre_to_tv` as genre_to_tv  on tv.id = genre_to_tv.tv_id where tv.id in  (" +
+            idArray +
+            ") GROUP by genre_to_tv.genre_id order by tvCount desc;";
+
+        await sequelize
+            .query(querryString, {
+                type: Sequelize.QueryTypes.SELECT,
+            })
+            .then(async (response) => {
+                genresId = response
+                    .map((item) => {
+                        return item.genre_id;
+                    })
+                    .slice(0, 3);
+                let tvs = await TvDb.findAll({
+                    include: [
+                        {
+                            model: GenreDb,
+                            where: {
+                                id: {
+                                    [Op.in]: genresId,
+                                },
+                            },
+                        },
+                    ],
+                });
+                res.status(200).send(tvs);
+            })
+            .catch((error) => {
+                res.status(500).send({ message: "Server error" });
+            });
     },
 };
 

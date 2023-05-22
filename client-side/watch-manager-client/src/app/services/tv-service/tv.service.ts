@@ -32,4 +32,8 @@ export class TvService {
     getbyList(idList: string[]) {
         return this.httpClient.get<Tv[]>(`${this.TV_URL}/getByList?idList=${idList}`);
     }
+
+    getRecomandations(idList: string[]) {
+        return this.httpClient.get<Tv[]>(`${this.TV_URL}/getRecomandations?idList=${idList}`);
+    }
 }

@@ -7,5 +7,6 @@ router.get("/search", tvController.search);
 router.get("/filter", tvController.filter);
 router.get("/get/:id", tvController.getById);
 router.get("/getByList", tvController.getByList);
+router.get("/getRecomandations", tvController.getRecomandations);
 
 module.exports = router;

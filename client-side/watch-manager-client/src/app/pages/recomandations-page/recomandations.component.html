@@ -1,0 +1,37 @@
+<div class="w-full pb-2.5 min-h-full">
+    <div class="container mx-auto h-full">
+        <div class="pt-6">
+            <h1 class="text-slate-50">Recomandations based on your liked TV Shows and Movies</h1>
+        </div>
+        <mat-tab-group mat-align-tabs="start">
+            <mat-tab label="TV Shows" *ngIf="!isLoading">
+                <div class="flex flex-wrap gap-7 justify-center">
+                    <mat-progress-bar mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>
+                    <app-card
+                        class="card"
+                        *ngFor="let media of tvShows"
+                        [mediaId]="media.id"
+                        [mediaTitle]="media.name"
+                        [mediaSubtitle]="media.first_air_date | date"
+                        [mediaPoster]="media.poster_path"
+                        [mediaType]="tvMediaType">
+                    </app-card>
+                </div>
+            </mat-tab>
+            <mat-tab label="Movies" *ngIf="!isLoading">
+                <div class="flex flex-wrap gap-y-7 justify-between">
+                    <mat-progress-bar mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>
+                    <app-card
+                        class="card"
+                        *ngFor="let media of movies"
+                        [mediaId]="media.id"
+                        [mediaTitle]="media.title"
+                        [mediaSubtitle]="media.release_date | date"
+                        [mediaPoster]="media.poster_path"
+                        [mediaType]="movieMediaType">
+                    </app-card>
+                </div>
+            </mat-tab>
+        </mat-tab-group>
+    </div>
+</div>

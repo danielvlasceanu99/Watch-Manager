@@ -1,4 +1,6 @@
-const { Op } = require("sequelize");
+const { Op, Sequelize } = require("sequelize");
+const sequelize = require("../config/dbConfig");
+const genre = require("../models/genre");
 const MovieDb = require("../models").Movie;
 const GenreDb = require("../models").Genre;
 
@@ -127,6 +129,44 @@ const controller = {
         } catch {
             res.status(500).send({ message: "Server error" });
         }
+    },
+
+    getRecomandations: async (req, res) => {
+        let idArray = req.query.idList;
+        idArray = idArray.split(",");
+
+        const querryString =
+            "select count(movies.id) as movieCount, genre_to_movie.genre_id  from `movies` as movies join `genre_to_movie` as genre_to_movie on movies.id = genre_to_movie.movie_id where movies.id in (" +
+            idArray +
+            ") GROUP by genre_to_movie.genre_id order by movieCount desc;";
+
+        await sequelize
+            .query(querryString, {
+                type: Sequelize.QueryTypes.SELECT,
+            })
+            .then(async (response) => {
+                genresId = response
+                    .map((item) => {
+                        return item.genre_id;
+                    })
+                    .slice(0, 3);
+                let movies = await MovieDb.findAll({
+                    include: [
+                        {
+                            model: GenreDb,
+                            where: {
+                                id: {
+                                    [Op.in]: genresId,
+                                },
+                            },
+                        },
+                    ],
+                });
+                res.status(200).send(movies);
+            })
+            .catch((error) => {
+                res.status(500).send({ message: "Server error" });
+            });
     },
 
     getAll: async (req, res) => {
