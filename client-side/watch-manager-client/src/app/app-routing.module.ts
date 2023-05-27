@@ -11,7 +11,7 @@ import { PeopleComponent } from "./pages/people-page/people.component";
 import { PersonDetailsComponent } from "./pages/person-details-page/person-details.component";
 import { PrivacyComponent } from "./pages/privacy-page/privacy.component";
 import { TvDetailsComponent } from "./pages/tv-details-page/tv-details.component";
-import { TvShowsComponent } from "./pages/tv-shows-page/tv-shows/tv-shows.component";
+import { TvShowsComponent } from "./pages/tv-shows-page/tv-shows.component";
 import { LoginComponent } from "./pages/login-page/login.component";
 import { RegisterComponent } from "./pages/register-page/register.component";
 import { UserWatchlistComponent } from "./pages/user-watchlist-page/user-watchlist.component";

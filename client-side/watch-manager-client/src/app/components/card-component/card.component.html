@@ -1,8 +1,7 @@
 <div class="rounded overflow-hidden shadow-lg bg-neutral-600 text-slate-50" (click)="goTo()">
     <img class="w-full card-img" src="{{ mediaPoster }}" alt="{{ mediaTitle }} poster" />
-    <div class="px-6 py-1">
-        <div class="font-bold text-lg mb-2">{{ mediaTitle }}</div>
-
-        <div class="font-bold text-lg mb-2">{{ mediaSubtitle }}</div>
+    <div class="px-2 py-1">
+        <div class="font-bold text-sm mb-2 min text-justify">{{ mediaTitle }}</div>
+        <div class="italic text-sm text-justify">{{ mediaSubtitle }}</div>
     </div>
 </div>

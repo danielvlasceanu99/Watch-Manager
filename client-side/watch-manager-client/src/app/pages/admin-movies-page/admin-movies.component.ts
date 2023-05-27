@@ -24,8 +24,6 @@ export class AdminMoviesComponent implements OnInit {
 
     displayedColumns = [
         "title",
-        // "tagline",
-        "runtime",
         "release_date",
         "status",
         "created_by",

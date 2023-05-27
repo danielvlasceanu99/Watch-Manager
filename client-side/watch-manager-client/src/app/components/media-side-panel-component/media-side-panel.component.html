@@ -1,40 +1,40 @@
-<div class="pr-10">
+<div>
     <img class="w-full shadow-2xl rounded-2xl" src="{{ mediaPoster }}" alt="poster" />
-    <div class="flex flex-row justify-between around pt-2 px-1.5">
+    <div class="flex flex-row justify-between pt-2">
         <button
-            mat-fab
+            mat-mini-fab
             matTooltip="{{ !isFavourite ? 'Like' : 'Dislike' }}"
             color="{{ !isFavourite ? 'primary' : 'accent' }}"
             (click)="!isFavourite ? addToFavourite() : removeFromFavourite()">
             <mat-icon> favorite </mat-icon>
         </button>
         <button
-            mat-fab
+            mat-mini-fab
             matTooltip="{{ !isBookmarked ? 'Bookmark' : 'Remove from bookmark' }}"
             color="{{ !isBookmarked ? 'primary' : 'accent' }}"
             (click)="!isBookmarked ? addToWatchlist() : removeFromWatchlist()">
             <mat-icon> bookmark_add </mat-icon>
         </button>
-        <button mat-fab matTooltip="Rate" color="{{ !isRated ? 'primary' : 'accent' }}" (click)="rate()">
+        <button mat-mini-fab matTooltip="Rate" color="{{ !isRated ? 'primary' : 'accent' }}" (click)="rate()">
             <mat-icon> grade </mat-icon>
         </button>
         <button
-            mat-fab
+            mat-mini-fab
             matTooltip="{{ !isWatched ? 'Mark as watched' : 'Mark as unwatched' }}"
             color="{{ !isWatched ? 'primary' : 'accent' }}"
             (click)="!isWatched ? addToWatched() : removeFromWatched()">
             <mat-icon> check </mat-icon>
         </button>
     </div>
-    <p class="pt-5 text-2xl"><span class="font-bold">Status: </span> {{ mediaStatus }}</p>
+    <p class="pt-5 text-xl"><span class="font-bold">Status: </span> {{ mediaStatus }}</p>
     <div class="pt-1.5">
-        <p class="font-bold text-2xl">Producers</p>
-        <p class="text-xl" *ngFor="let credit of mediaProducers">{{ credit.person.name }}</p>
+        <p class="font-bold text-xl">Producers</p>
+        <p class="text-lg" *ngFor="let credit of mediaProducers">{{ credit.person.name }}</p>
     </div>
-    <p class="pt-1.5 font-bold text-2xl" *ngIf="mediaNetwork">{{ mediaNetwork }}</p>
+    <p class="pt-1.5 font-bold text-xl" *ngIf="mediaNetwork">{{ mediaNetwork }}</p>
     <mat-divider *ngIf="!mediaNetwork"></mat-divider>
     <div class="pt-1.5">
-        <p class="font-bold text-2xl">Genres</p>
+        <p class="font-bold text-xl">Genres</p>
         <p class="text-xl" *ngFor="let genre of MediaGenres">{{ genre.name }}</p>
     </div>
 </div>

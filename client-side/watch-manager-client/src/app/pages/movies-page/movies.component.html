@@ -1,9 +1,9 @@
 <div class="w-full pb-2.5 min-h-full text-white">
     <div class="container mx-auto h-full flex">
-        <div class="w-1/4 pt-10 mr-8">
+        <div class="w-1/5 pt-7 mr-2">
             <app-search-filter (filterApplied)="onFilterApplied($event)"> </app-search-filter>
         </div>
-        <div class="w-3/4 pt-10" *ngIf="!moviesAreLoading">
+        <div class="w-4/5 pt-4" *ngIf="!moviesAreLoading">
             <form class="w-full" [formGroup]="formGroup">
                 <mat-form-field class="w-full" hideRequiredMarker="true">
                     <mat-label>Movie Title</mat-label>

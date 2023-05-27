@@ -5,7 +5,7 @@
         </div>
         <mat-tab-group mat-align-tabs="start">
             <mat-tab label="TV Shows" *ngIf="!isLoading">
-                <div class="flex flex-wrap gap-7 justify-center">
+                <div class="flex flex-wrap gap-y-2 justify-between">
                     <mat-progress-bar mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>
                     <app-card
                         class="card"
@@ -19,7 +19,7 @@
                 </div>
             </mat-tab>
             <mat-tab label="Movies" *ngIf="!isLoading">
-                <div class="flex flex-wrap gap-y-7 justify-between">
+                <div class="flex flex-wrap gap-y-2 justify-between">
                     <mat-progress-bar mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>
                     <app-card
                         class="card"

@@ -1,7 +1,7 @@
-<div class="text-xl w-full">
+<div class="text-base w-full">
     <div>
-        <span class="text-5xl font-bold">
-            {{ title }} <span class="text-3xl">({{ date | dateYear }})</span>
+        <span class="text-2xl font-bold">
+            {{ title }} <span class="text-xl">({{ date | dateYear }})</span>
         </span>
     </div>
     <div>
@@ -9,11 +9,11 @@
             {{ date | date }}<span *ngIf="runtime"> • {{ runtime | runtime }}</span>
         </span>
     </div>
-    <div class="italic my-2.5">
+    <div class="italic my-1.5">
         {{ tagline }}
     </div>
     <div class="text-justify">
-        <p class="text-3xl font-bold">Overview</p>
+        <p class="text-xl font-bold">Overview</p>
         <p>{{ overview }}</p>
     </div>
 </div>

@@ -1,7 +1,7 @@
 <div class="w-full pb-2.5 min-h-full text-white">
-    <div class="container mx-auto h-full flex">
+    <div class="container mx-auto h-full flex gap-x-6">
         <mat-progress-bar mode="indeterminate" *ngIf="movieIsLoading"></mat-progress-bar>
-        <div class="w-1/4 pt-10" *ngIf="!movieIsLoading">
+        <div class="w-2/12 pt-8" *ngIf="!movieIsLoading">
             <app-media-side-panel
                 [mediaId]="movie?.id"
                 [mediaStatus]="movie?.status"
@@ -11,7 +11,7 @@
                 [mediaType]="mediaType">
             </app-media-side-panel>
         </div>
-        <div class="w-3/4 pt-16" *ngIf="!movieIsLoading">
+        <div class="w-10/12 pt-8" *ngIf="!movieIsLoading">
             <app-media-general-info
                 [mediaId]="id"
                 [title]="movie?.title"
