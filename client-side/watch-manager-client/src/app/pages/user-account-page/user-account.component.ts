@@ -31,7 +31,7 @@ export class UserAccountComponent implements OnInit {
         this.session.userObservable.subscribe((user) => {
             this.user = user;
             if (this.user?.name.split(" ")) {
-                const names = this.user?.name.split("_");
+                const names = this.user?.name.split(" ");
                 this.lastName = names[names.length - 1];
                 this.firstName = names.splice(0, names.length - 1).join(" ");
 

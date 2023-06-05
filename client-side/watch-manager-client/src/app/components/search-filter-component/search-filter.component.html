@@ -1,5 +1,8 @@
 <div class="bg-neutral-900">
     <div *ngIf="!genresAreLoading">
+        <button mat-flat-button class="mt-6 w-full text-base" color="primary" (click)="applyFilter()">
+            Apply Filter
+        </button>
         <mat-selection-list
             #genres
             [multiple]="false"
@@ -8,8 +11,5 @@
                 {{ genre.name }}
             </mat-list-option>
         </mat-selection-list>
-        <button mat-flat-button class="mt-6 w-full text-base" color="primary" (click)="applyFilter()">
-            Apply Filter
-        </button>
     </div>
 </div>

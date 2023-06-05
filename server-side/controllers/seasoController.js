@@ -6,6 +6,7 @@ const controller = {
         try {
             const seasons = await SeasonDb.findAll({
                 where: { tv_id: req.params.tv_id },
+                order: [["season_number", "DESC"]],
                 include: [EpisodeDb],
             });
 

@@ -183,17 +183,13 @@ const controller = {
         let response = {};
         await sequelize
             .query(
-                "SELECT COUNT(movie_id) as count, genres.name FROM (SELECT movies.id AS movie_id, genre_to_movie.genre_id FROM `movies` AS movies JOIN `genre_to_movie` AS genre_to_movie ON movies.id = genre_to_movie.movie_id) AS genre_movies JOIN `genres` AS genres ON genre_movies.genre_id = genres.id WHERE 1 GROUP BY genres.name",
+                "SELECT COUNT(movie_id) as count, genres.name FROM (SELECT movies.id AS movie_id, genre_to_movie.genre_id FROM `movies` AS movies JOIN `genre_to_movie` AS genre_to_movie ON movies.id = genre_to_movie.movie_id) AS genre_movies JOIN `genres` AS genres ON genre_movies.genre_id = genres.id WHERE 1 GROUP BY genres.name order by count desc limit 10",
                 {
                     type: Sequelize.QueryTypes.SELECT,
                 }
             )
             .then((results) => {
                 response.movies_genre = results;
-                response.movies_genre[0].count = 17;
-                response.movies_genre[1].count = 20;
-                response.movies_genre[2].count = 13;
-                response.movies_genre[3].count = 22;
             })
             .catch((error) => {
                 res.status(500).send({ message: "Server error" });
@@ -201,17 +197,13 @@ const controller = {
 
         await sequelize
             .query(
-                "SELECT count(tv_id) count, genres.name FROM (SELECT tvs.id as tv_id, genre_to_tv.genre_id FROM `tvs` as tvs join `genre_to_tv` as genre_to_tv on tvs.id = genre_to_tv.tv_id) as genre_tv join `genres` genres on genre_tv.genre_id = genres.id where 1 GROUP BY genres.name; ",
+                "SELECT count(tv_id) count, genres.name FROM (SELECT tvs.id as tv_id, genre_to_tv.genre_id FROM `tvs` as tvs join `genre_to_tv` as genre_to_tv on tvs.id = genre_to_tv.tv_id) as genre_tv join `genres` genres on genre_tv.genre_id = genres.id where 1 GROUP BY genres.name order by count desc limit 10; ",
                 {
                     type: Sequelize.QueryTypes.SELECT,
                 }
             )
             .then((results) => {
                 response.tv_genre = results;
-                response.tv_genre[0].count = 22;
-                response.tv_genre[1].count = 24;
-                response.tv_genre[2].count = 20;
-                response.tv_genre[3].count = 24;
             })
             .catch((error) => {
                 res.status(500).send({ message: "Server error" });
@@ -230,49 +222,13 @@ const controller = {
 
         await sequelize
             .query(
-                "select sum(seasons_episodes.ep_count) as episode_count, tvs.name from ( select count(episodes.id) as ep_count, seasons.id, seasons.tv_id from `seasons` as seasons join `episodes` as episodes on seasons.id = episodes.season_id group by seasons.id ) as seasons_episodes join `tvs` as tvs on seasons_episodes.tv_id = tvs.id group by tvs.id;",
+                "select sum(seasons_episodes.ep_count) as episode_count, tvs.name from ( select count(episodes.id) as ep_count, seasons.id, seasons.tv_id from `seasons` as seasons join `episodes` as episodes on seasons.id = episodes.season_id group by seasons.id ) as seasons_episodes join `tvs` as tvs on seasons_episodes.tv_id = tvs.id group by tvs.id order by episode_count desc limit 10;",
                 {
                     type: Sequelize.QueryTypes.SELECT,
                 }
             )
             .then((results) => {
                 response.ep_number = results;
-                response.ep_number.push({
-                    episode_count: "20",
-                    name: "Dummy_TV_2",
-                });
-                response.ep_number.push({
-                    episode_count: "86",
-                    name: "Dummy_TV_3",
-                });
-                response.ep_number.push({
-                    episode_count: "55",
-                    name: "Dummy_TV_4",
-                });
-                response.ep_number.push({
-                    episode_count: "32",
-                    name: "Dummy_TV_5",
-                });
-                response.ep_number.push({
-                    episode_count: "46",
-                    name: "Dummy_TV_6",
-                });
-                response.ep_number.push({
-                    episode_count: "82",
-                    name: "Dummy_TV_7",
-                });
-                response.ep_number.push({
-                    episode_count: "78",
-                    name: "Dummy_TV_8",
-                });
-                response.ep_number.push({
-                    episode_count: "68",
-                    name: "Dummy_TV_9",
-                });
-                response.ep_number.push({
-                    episode_count: "65",
-                    name: "Dummy_TV_10",
-                });
             })
             .catch((error) => {
                 res.status(500).send({ message: "Server error" });

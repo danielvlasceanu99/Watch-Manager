@@ -37,6 +37,7 @@ export class ReviewListComponent implements OnInit {
     }
 
     addReview() {
+        console.log(this.mediaId, this.mediaType);
         if (this.mediaId && this.mediaType) {
             this.reviewService
                 .addReview(this.reviewTitle?.value, this.review?.value, this.mediaType, this.mediaId)

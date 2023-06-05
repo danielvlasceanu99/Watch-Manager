@@ -12,7 +12,7 @@ jobs:
             - run: npm install
 
             # run fetch and insert script
-            - run: node fetch-and-insert.js
+            - run: node pipes/fetch-and-insert.js
 
         # schedule job to run every 24 hours
         schedule:

@@ -4,7 +4,7 @@ const secret = process.env.SECRET;
 
 const ReviewDb = require("../models").Review;
 const MovieDb = require("../models").Movie;
-const TvDb = require("../models").Movie;
+const TvDb = require("../models").TV;
 
 const ObjectId = require("mongodb").ObjectId;
 const UserDb = require("../models").Users;
@@ -45,6 +45,7 @@ const controller = {
         }
 
         const review = req.body;
+        console.log(review);
         let errors = {};
         try {
             errors = await validateReview(review, token);
@@ -98,6 +99,7 @@ validateReview = async (newReview, token) => {
         errors.mediaId = "Missing media Id";
     } else if (newReview.mediaType === "movie") {
         const media = await MovieDb.findByPk(newReview.mediaId);
+        console.log("HERE");
         if (!media) {
             errors.mediaId = "No movie with this Id";
         }

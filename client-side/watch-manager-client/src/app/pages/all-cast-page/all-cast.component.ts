@@ -45,6 +45,7 @@ export class AllCastComponent implements OnInit {
             this.getMovie();
             this.getMovieCredits();
             this.mediaType = MediaType.MOVIE;
+            console.log(this.cast);
         } else {
             this.getTv();
             this.getTvCredits();
@@ -68,7 +69,7 @@ export class AllCastComponent implements OnInit {
     getMovieCredits() {
         this.creditsAreLoading = true;
         if (this.id) {
-            this.personService.getByTvId(this.id).subscribe((res) => {
+            this.personService.getByMovieId(this.id).subscribe((res) => {
                 this.cast = res;
                 this.creditsAreLoading = false;
             });

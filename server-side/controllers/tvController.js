@@ -17,7 +17,7 @@ const controller = {
     },
 
     search: async (req, res) => {
-        const limit = 15;
+        const limit = 20;
         try {
             let tvs = await TvDb.findAll({
                 where: {
@@ -58,7 +58,7 @@ const controller = {
     },
 
     filter: async (req, res) => {
-        const limit = 15;
+        const limit = 20;
         try {
             let tvs = await TvDb.findAll({
                 include: [
@@ -100,11 +100,11 @@ const controller = {
 
     getById: async (req, res) => {
         try {
-            const movie = await TvDb.findByPk(req.params.id, {
+            const tv = await TvDb.findByPk(req.params.id, {
                 include: [GenreDb],
             });
-            if (movie) {
-                res.status(200).send(movie);
+            if (tv) {
+                res.status(200).send(tv);
             } else {
                 res.status(404).send({ message: "TV not found" });
             }

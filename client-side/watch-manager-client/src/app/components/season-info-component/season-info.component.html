@@ -1,19 +1,15 @@
 <div class="w-full py-2.5">
-    <div class="w-full max-h-56 flex justify-start bg-neutral-600">
-        <img src="{{ posterPath }}" alt="{{ name }}" class="w-40" />
-        <div class="px-2.5 py-2">
-            <span class="text-xl">
-                {{ name }} <span class="text-lg">({{ air_date | date }})</span>
-            </span>
-            <div class="text-justify">{{ overview }}</div>
-            <div class="flex justify-end pt-2 gap-x-0.5">
-                <button mat-button *ngIf="!expanded" matTooltip="Expand" color="primary" (click)="expandAndCollapse()">
-                    <mat-icon> expand_more </mat-icon>
-                </button>
-                <button mat-button *ngIf="expanded" matTooltip="Colapse" color="primary" (click)="expandAndCollapse()">
-                    <mat-icon> expand_less </mat-icon>
-                </button>
-            </div>
+    <div class="w-full max-h-56 flex justify-between bg-neutral-600 px-2.5 py-2">
+        <div class="text-xl">
+            {{ name }} <span class="text-lg">({{ air_date | date }})</span>
+        </div>
+        <div>
+            <button mat-button *ngIf="!expanded" matTooltip="Expand" color="primary" (click)="expandAndCollapse()">
+                <mat-icon> expand_more </mat-icon>
+            </button>
+            <button mat-button *ngIf="expanded" matTooltip="Colapse" color="primary" (click)="expandAndCollapse()">
+                <mat-icon> expand_less </mat-icon>
+            </button>
         </div>
     </div>
     <ng-container *ngIf="expanded">
