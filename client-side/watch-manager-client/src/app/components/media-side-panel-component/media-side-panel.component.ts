@@ -25,13 +25,12 @@ export class MediaSidePanelComponent implements OnInit {
     @Input() MediaGenres: Genre[] | undefined = [];
     @Input() mediaPoster: string | undefined = "";
     @Input() mediaType: MediaType | undefined = undefined;
+    @Input() rating: number | undefined = 0;
 
     isFavourite: boolean = false;
     isBookmarked: boolean = false;
     isRated: boolean = false;
     isWatched: boolean = false;
-
-    rating: number | undefined = 0;
 
     user: User | null = null;
     isAdmin: boolean = false;

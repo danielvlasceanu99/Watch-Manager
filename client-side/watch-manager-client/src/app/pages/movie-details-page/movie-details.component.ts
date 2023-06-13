@@ -19,6 +19,8 @@ export class MovieDetailsComponent implements OnInit {
     cast: Credit[] = [];
     producers: Credit[] = [];
 
+    rating: number | undefined = 0;
+
     mediaType: MediaType = MediaType.MOVIE;
 
     id: string | null = "";
@@ -42,6 +44,7 @@ export class MovieDetailsComponent implements OnInit {
         this.getMovie();
         this.getReviews();
         this.getCredits();
+        this.getAverageRating();
     }
 
     getMovie() {
@@ -71,6 +74,16 @@ export class MovieDetailsComponent implements OnInit {
                 this.cast = res;
                 this.producers = this.cast.filter((credit) => credit.job === "Producer");
                 this.creditsAreLoading = false;
+            });
+        }
+    }
+
+    getAverageRating() {
+        if (this.id) {
+            this.movieService.getAverageMovieScore(this.id).subscribe((res) => {
+                if (res.length) {
+                    this.rating = res[0].averageScore;
+                }
             });
         }
     }

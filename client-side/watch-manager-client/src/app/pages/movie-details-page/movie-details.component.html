@@ -8,7 +8,8 @@
                 [mediaProducers]="producers"
                 [MediaGenres]="movie?.genres"
                 [mediaPoster]="movie?.poster_path"
-                [mediaType]="mediaType">
+                [mediaType]="mediaType"
+                [rating]="rating">
             </app-media-side-panel>
         </div>
         <div class="w-10/12 pt-8" *ngIf="!movieIsLoading">

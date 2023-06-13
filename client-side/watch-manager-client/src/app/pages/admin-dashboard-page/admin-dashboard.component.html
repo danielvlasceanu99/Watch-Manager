@@ -1,105 +1,117 @@
 <div class="w-full pb-2.5 min-h-full">
     <div class="container mx-auto h-full">
-        <div class="mt-5 text-slate-50">
-            <mat-slide-toggle color="primary" [(ngModel)]="onTV">
-                {{ onTV ? "Switch to Movies" : "Switch to TV shows" }}
-            </mat-slide-toggle>
-        </div>
-        <div class="flex justify-between">
-            <div class="w-3/6">
-                <canvas
-                    *ngIf="!isLoading"
-                    class="w-full height"
-                    baseChart
-                    [type]="'pie'"
-                    [datasets]="!onTV ? movie_pieChartDatasets : tv_pieChartDatasets"
-                    [labels]="!onTV ? movie_pieChartLabels : tv_pieChartLabels"
-                    [options]="pieChartOptions"
-                    [plugins]="pieChartPlugins"
-                    [legend]="pieChartLegend">
-                </canvas>
-            </div>
-            <div class="w-2/6 mt-3 text-slate-50">
-                <h2>
-                    <span *ngIf="!onTV"> Number of Movies in each genre</span>
-                    <span *ngIf="onTV"> Number of TV Shows in each genre</span>
-                </h2>
-                <table mat-table [dataSource]="!onTV ? movieToGenres : tvToGenres" class="w-full">
-                    <ng-container matColumnDef="genre">
-                        <th mat-header-cell *matHeaderCellDef>Genre</th>
-                        <td mat-cell *matCellDef="let element">{{ element.name }}</td>
-                    </ng-container>
-                    <ng-container matColumnDef="count">
-                        <th mat-header-cell *matHeaderCellDef>No.</th>
-                        <td mat-cell *matCellDef="let element">{{ element.count }}</td>
-                    </ng-container>
+        <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start" class="mt-5">
+            <mat-tab label="Genres ">
+                <div class="mb-4">
+                    <h2 class="text-slate-50 pt-4">
+                        <span *ngIf="!onTV"> Number of Movies in each genre</span>
+                        <span *ngIf="onTV"> Number of TV Shows in each genre</span>
+                    </h2>
+                    <div class="mt-2 text-slate-50">
+                        <mat-slide-toggle color="primary" [(ngModel)]="onTV">
+                            {{ onTV ? "Switch to Movies" : "Switch to TV shows" }}
+                        </mat-slide-toggle>
+                    </div>
+                    <div class="flex justify-between">
+                        <div class="w-3/6 text-slate-50 mt-2">
+                            <canvas
+                                *ngIf="!isLoading"
+                                class="w-full height"
+                                baseChart
+                                [type]="'pie'"
+                                [datasets]="!onTV ? movie_pieChartDatasets : tv_pieChartDatasets"
+                                [labels]="!onTV ? movie_pieChartLabels : tv_pieChartLabels"
+                                [options]="pieChartOptions"
+                                [plugins]="pieChartPlugins"
+                                [legend]="pieChartLegend">
+                            </canvas>
+                        </div>
+                        <div class="w-2/6 text-slate-50">
+                            <table mat-table [dataSource]="!onTV ? movieToGenres : tvToGenres" class="w-full">
+                                <ng-container matColumnDef="genre">
+                                    <th mat-header-cell *matHeaderCellDef>Genre</th>
+                                    <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+                                </ng-container>
+                                <ng-container matColumnDef="count">
+                                    <th mat-header-cell *matHeaderCellDef>No.</th>
+                                    <td mat-cell *matCellDef="let element">{{ element.count }}</td>
+                                </ng-container>
 
-                    <tr mat-header-row *matHeaderRowDef="['genre', 'count']"></tr>
-                    <tr mat-row *matRowDef="let row; columns: ['genre', 'count']"></tr>
-                </table>
-            </div>
-        </div>
+                                <tr mat-header-row *matHeaderRowDef="['genre', 'count']"></tr>
+                                <tr mat-row *matRowDef="let row; columns: ['genre', 'count']"></tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </mat-tab>
+            <mat-tab label="Status">
+                <div class="my-32">
+                    <h2 class="text-slate-50 mt-5">Number of movies for each status</h2>
+                    <div class="flex justify-between">
+                        <div class="w-2/6 text-slate-50">
+                            <table mat-table [dataSource]="movieToStatus" class="w-full">
+                                <ng-container matColumnDef="status">
+                                    <th mat-header-cell *matHeaderCellDef>Status</th>
+                                    <td mat-cell *matCellDef="let element">{{ element.status }}</td>
+                                </ng-container>
+                                <ng-container matColumnDef="count">
+                                    <th mat-header-cell *matHeaderCellDef>No.</th>
+                                    <td mat-cell *matCellDef="let element">{{ element.count }}</td>
+                                </ng-container>
 
-        <div class="flex justify-between">
-            <div class="w-2/6 mt-3 text-slate-50">
-                <h2>Number of movies for each status</h2>
-                <table mat-table [dataSource]="movieToStatus" class="w-full">
-                    <ng-container matColumnDef="status">
-                        <th mat-header-cell *matHeaderCellDef>Status</th>
-                        <td mat-cell *matCellDef="let element">{{ element.status }}</td>
-                    </ng-container>
-                    <ng-container matColumnDef="count">
-                        <th mat-header-cell *matHeaderCellDef>No.</th>
-                        <td mat-cell *matCellDef="let element">{{ element.count }}</td>
-                    </ng-container>
+                                <tr mat-header-row *matHeaderRowDef="['status', 'count']"></tr>
+                                <tr mat-row *matRowDef="let row; columns: ['status', 'count']"></tr>
+                            </table>
+                        </div>
+                        <div class="w-4/6 pl-20">
+                            <canvas
+                                *ngIf="!isLoading"
+                                class="w-full"
+                                baseChart
+                                [data]="statusBarChartData"
+                                [options]="barChartOptions"
+                                [plugins]="barChartPlugins"
+                                [legend]="barChartLegend"
+                                [type]="'bar'">
+                            </canvas>
+                        </div>
+                    </div>
+                </div>
+            </mat-tab>
+            <mat-tab label="Episodes">
+                <div class="my-8">
+                    <h2 class="text-slate-50 mt-5">Number of episodes for each TV Show</h2>
+                    <div class="flex justify-between">
+                        <div class="w-4/6 pt-24 pr-20">
+                            <canvas
+                                *ngIf="!isLoading"
+                                class="w-full"
+                                baseChart
+                                [data]="episodeBarChartData"
+                                [options]="barChartOptions"
+                                [plugins]="barChartPlugins"
+                                [legend]="barChartLegend"
+                                [type]="'bar'">
+                            </canvas>
+                        </div>
+                        <div class="w-2/6 text-slate-50">
+                            <table mat-table [dataSource]="episodesToShow" class="w-full">
+                                <ng-container matColumnDef="name">
+                                    <th mat-header-cell *matHeaderCellDef>TV Show</th>
+                                    <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+                                </ng-container>
+                                <ng-container matColumnDef="episode_count">
+                                    <th mat-header-cell *matHeaderCellDef>No.</th>
+                                    <td mat-cell *matCellDef="let element">{{ element.episode_count }}</td>
+                                </ng-container>
 
-                    <tr mat-header-row *matHeaderRowDef="['status', 'count']"></tr>
-                    <tr mat-row *matRowDef="let row; columns: ['status', 'count']"></tr>
-                </table>
-            </div>
-            <div class="w-4/6 pt-20 pl-20">
-                <canvas
-                    *ngIf="!isLoading"
-                    class="w-full"
-                    baseChart
-                    [data]="statusBarChartData"
-                    [options]="barChartOptions"
-                    [plugins]="barChartPlugins"
-                    [legend]="barChartLegend"
-                    [type]="'bar'">
-                </canvas>
-            </div>
-        </div>
-
-        <div class="flex justify-between">
-            <div class="w-4/6 pt-20 pr-20">
-                <canvas
-                    *ngIf="!isLoading"
-                    class="w-full"
-                    baseChart
-                    [data]="episodeBarChartData"
-                    [options]="barChartOptions"
-                    [plugins]="barChartPlugins"
-                    [legend]="barChartLegend"
-                    [type]="'bar'">
-                </canvas>
-            </div>
-            <div class="w-2/6 mt-3 text-slate-50">
-                <h2>Number of episodes for each TV Show</h2>
-                <table mat-table [dataSource]="episodesToShow" class="w-full">
-                    <ng-container matColumnDef="name">
-                        <th mat-header-cell *matHeaderCellDef>TV Show</th>
-                        <td mat-cell *matCellDef="let element">{{ element.name }}</td>
-                    </ng-container>
-                    <ng-container matColumnDef="episode_count">
-                        <th mat-header-cell *matHeaderCellDef>No.</th>
-                        <td mat-cell *matCellDef="let element">{{ element.episode_count }}</td>
-                    </ng-container>
-
-                    <tr mat-header-row *matHeaderRowDef="['name', 'episode_count']"></tr>
-                    <tr mat-row *matRowDef="let row; columns: ['name', 'episode_count']"></tr>
-                </table>
-            </div>
-        </div>
+                                <tr mat-header-row *matHeaderRowDef="['name', 'episode_count']"></tr>
+                                <tr mat-row *matRowDef="let row; columns: ['name', 'episode_count']"></tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </mat-tab>
+        </mat-tab-group>
     </div>
 </div>

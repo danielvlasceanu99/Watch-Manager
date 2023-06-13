@@ -7,6 +7,8 @@ import { Tv } from "src/app/models/tv.model";
 })
 export class TvService {
     TV_URL: string = "http://localhost:8080/tv";
+    RATING_URL: string = "http://localhost:8080/rating";
+
     constructor(private httpClient: HttpClient) {}
 
     getLatest() {
@@ -35,5 +37,11 @@ export class TvService {
 
     getRecomandations(idList: string[]) {
         return this.httpClient.get<Tv[]>(`${this.TV_URL}/getRecomandations?idList=${idList}`);
+    }
+
+    getAverageTvScore(id: string) {
+        return this.httpClient.get<{ _id: string; averageScore: number }[]>(
+            `${this.RATING_URL}/getAverageTvRating/${id}`
+        );
     }
 }

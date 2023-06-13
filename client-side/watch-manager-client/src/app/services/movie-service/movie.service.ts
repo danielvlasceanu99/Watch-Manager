@@ -8,6 +8,7 @@ import { Movie } from "src/app/models/movie.model";
 })
 export class MovieService {
     MOVIE_URL: string = "http://localhost:8080/movie";
+    RATING_URL: string = "http://localhost:8080/rating";
     constructor(private httpClient: HttpClient, private cookieService: CookieService) {}
 
     getLatest() {
@@ -69,5 +70,11 @@ export class MovieService {
         return this.httpClient.delete<any>(`${this.MOVIE_URL}/deleteMovie/${id}`, {
             headers: new HttpHeaders().set("authorization", this.cookieService.get("auth-token")),
         });
+    }
+
+    getAverageMovieScore(id: string) {
+        return this.httpClient.get<{ _id: string; averageScore: number }[]>(
+            `${this.RATING_URL}/getAverageMovieRating/${id}`
+        );
     }
 }

@@ -33,32 +33,199 @@ export class AdminDashboardComponent implements OnInit {
     }
 
     public pieChartOptions: ChartOptions<"pie"> = {
-        responsive: false,
+        responsive: true,
+        plugins: {
+            legend: {
+                labels: { color: "white" },
+            },
+        },
     };
     public movie_pieChartLabels = [""];
-    public movie_pieChartDatasets = [{ data: [0] }];
+    public movie_pieChartDatasets = [
+        {
+            data: [0],
+            backgroundColor: [
+                "rgba(255, 99, 132, 0.2)",
+                "rgba(255, 159, 64, 0.2)",
+                "rgba(255, 205, 86, 0.2)",
+                "rgba(75, 192, 192, 0.2)",
+                "rgba(54, 162, 235, 0.2)",
+                "rgba(153, 102, 255, 0.2)",
+                "rgba(201, 203, 207, 0.2)",
+                "rgba(0, 35, 207, 0.2)",
+                "rgba(125, 12, 12, 0.2)",
+                "rgba(17, 122, 5, 0.2)",
+                "rgba(0, 65, 135, 0.2)",
+                "rgba(230, 230, 0, 0.2)",
+                "rgba(230, 0, 35, 0.2)",
+                "rgba(110, 115, 125, 0.2)",
+                "rgba(240, 70, 214, 0.2)",
+            ],
+            borderColor: [
+                "rgb(255, 99, 132)",
+                "rgb(255, 159, 64)",
+                "rgb(255, 205, 86)",
+                "rgb(75, 192, 192)",
+                "rgb(54, 162, 235)",
+                "rgb(153, 102, 255)",
+                "rgb(201, 203, 207)",
+                "rgb(0, 35, 207)",
+                "rgb(125, 12, 12)",
+                "rgb(17, 122, 5)",
+                "rgb(0, 65, 135)",
+                "rgba(230, 230, 0)",
+                "rgba(230, 0, 35)",
+                "rgba(110, 115, 125)",
+                "rgba(240, 70, 214)",
+            ],
+            borderWidth: 1,
+        },
+    ];
     public tv_pieChartLabels = [""];
-    public tv_pieChartDatasets = [{ data: [0] }];
+    public tv_pieChartDatasets = [
+        {
+            data: [0],
+            backgroundColor: [
+                "rgba(255, 99, 132, 0.2)",
+                "rgba(255, 159, 64, 0.2)",
+                "rgba(255, 205, 86, 0.2)",
+                "rgba(75, 192, 192, 0.2)",
+                "rgba(54, 162, 235, 0.2)",
+                "rgba(153, 102, 255, 0.2)",
+                "rgba(201, 203, 207, 0.2)",
+                "rgba(0, 35, 207, 0.2)",
+                "rgba(125, 12, 12, 0.2)",
+                "rgba(17, 122, 5, 0.2)",
+                "rgba(0, 65, 135, 0.2)",
+                "rgba(230, 230, 0, 0.2)",
+                "rgba(230, 0, 35, 0.2)",
+                "rgba(110, 115, 125, 0.2)",
+                "rgba(240, 70, 214, 0.2)",
+            ],
+            borderColor: [
+                "rgb(255, 99, 132)",
+                "rgb(255, 159, 64)",
+                "rgb(255, 205, 86)",
+                "rgb(75, 192, 192)",
+                "rgb(54, 162, 235)",
+                "rgb(153, 102, 255)",
+                "rgb(201, 203, 207)",
+                "rgb(0, 35, 207)",
+                "rgb(125, 12, 12)",
+                "rgb(17, 122, 5)",
+                "rgb(0, 65, 135)",
+                "rgba(230, 230, 0)",
+                "rgba(230, 0, 35)",
+                "rgba(110, 115, 125)",
+                "rgba(240, 70, 214)",
+            ],
+            borderWidth: 1,
+        },
+    ];
     public pieChartLegend = true;
     public pieChartPlugins = [];
 
-    public barChartLegend = true;
+    public barChartLegend = false;
     public barChartPlugins = [];
     public barChartOptions: ChartConfiguration<"bar">["options"] = {
-        responsive: false,
+        responsive: true,
+        scales: {
+            x: { ticks: { color: "white" } },
+            y: { ticks: { color: "white" } },
+        },
     };
     statusLabel: string[] = [];
     statusCount: number[] = [];
     public statusBarChartData: ChartConfiguration<"bar">["data"] = {
         labels: this.statusLabel,
-        datasets: [{ data: this.statusCount, label: "Count" }],
+        datasets: [
+            {
+                data: this.statusCount,
+                label: "Count",
+                backgroundColor: [
+                    "rgba(255, 99, 132, 0.2)",
+                    "rgba(255, 159, 64, 0.2)",
+                    "rgba(255, 205, 86, 0.2)",
+                    "rgba(75, 192, 192, 0.2)",
+                    "rgba(54, 162, 235, 0.2)",
+                    "rgba(153, 102, 255, 0.2)",
+                    "rgba(201, 203, 207, 0.2)",
+                    "rgba(0, 35, 207, 0.2)",
+                    "rgba(125, 12, 12, 0.2)",
+                    "rgba(17, 122, 5, 0.2)",
+                    "rgba(0, 65, 135, 0.2)",
+                    "rgba(230, 230, 0, 0.2)",
+                    "rgba(230, 0, 35, 0.2)",
+                    "rgba(110, 115, 125, 0.2)",
+                    "rgba(240, 70, 214, 0.2)",
+                ],
+                borderColor: [
+                    "rgb(255, 99, 132)",
+                    "rgb(255, 159, 64)",
+                    "rgb(255, 205, 86)",
+                    "rgb(75, 192, 192)",
+                    "rgb(54, 162, 235)",
+                    "rgb(153, 102, 255)",
+                    "rgb(201, 203, 207)",
+                    "rgb(0, 35, 207)",
+                    "rgb(125, 12, 12)",
+                    "rgb(17, 122, 5)",
+                    "rgb(0, 65, 135)",
+                    "rgba(230, 230, 0)",
+                    "rgba(230, 0, 35)",
+                    "rgba(110, 115, 125)",
+                    "rgba(240, 70, 214)",
+                ],
+                borderWidth: 1,
+            },
+        ],
     };
 
     showLabel: string[] = [];
     episodeCount: number[] = [];
     public episodeBarChartData: ChartConfiguration<"bar">["data"] = {
         labels: this.showLabel,
-        datasets: [{ data: this.episodeCount, label: "Count" }],
+        datasets: [
+            {
+                data: this.episodeCount,
+                label: "Count",
+                backgroundColor: [
+                    "rgba(255, 99, 132, 0.2)",
+                    "rgba(255, 159, 64, 0.2)",
+                    "rgba(255, 205, 86, 0.2)",
+                    "rgba(75, 192, 192, 0.2)",
+                    "rgba(54, 162, 235, 0.2)",
+                    "rgba(153, 102, 255, 0.2)",
+                    "rgba(201, 203, 207, 0.2)",
+                    "rgba(0, 35, 207, 0.2)",
+                    "rgba(125, 12, 12, 0.2)",
+                    "rgba(17, 122, 5, 0.2)",
+                    "rgba(0, 65, 135, 0.2)",
+                    "rgba(230, 230, 0, 0.2)",
+                    "rgba(230, 0, 35, 0.2)",
+                    "rgba(110, 115, 125, 0.2)",
+                    "rgba(240, 70, 214, 0.2)",
+                ],
+                borderColor: [
+                    "rgb(255, 99, 132)",
+                    "rgb(255, 159, 64)",
+                    "rgb(255, 205, 86)",
+                    "rgb(75, 192, 192)",
+                    "rgb(54, 162, 235)",
+                    "rgb(153, 102, 255)",
+                    "rgb(201, 203, 207)",
+                    "rgb(0, 35, 207)",
+                    "rgb(125, 12, 12)",
+                    "rgb(17, 122, 5)",
+                    "rgb(0, 65, 135)",
+                    "rgba(230, 230, 0)",
+                    "rgba(230, 0, 35)",
+                    "rgba(110, 115, 125)",
+                    "rgba(240, 70, 214)",
+                ],
+                borderWidth: 1,
+            },
+        ],
     };
 
     mapData() {

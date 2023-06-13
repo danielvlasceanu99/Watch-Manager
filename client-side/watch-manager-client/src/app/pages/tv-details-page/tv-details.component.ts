@@ -22,6 +22,8 @@ export class TvDetailsComponent implements OnInit {
     producers: Credit[] = [];
     seasons: Season[] = [];
 
+    rating: number | undefined = 0;
+
     mediaType: MediaType = MediaType.TV;
 
     id: string | null = "";
@@ -47,6 +49,7 @@ export class TvDetailsComponent implements OnInit {
         this.getTv();
         this.getReviews();
         this.getCredits();
+        this.getAverageRating();
         this.getSeasons();
     }
 
@@ -86,6 +89,17 @@ export class TvDetailsComponent implements OnInit {
         if (this.id) {
             this.seasonService.getByTvId(this.id).subscribe((res) => {
                 this.seasons = res;
+            });
+        }
+    }
+
+    getAverageRating() {
+        if (this.id) {
+            this.tvService.getAverageTvScore(this.id).subscribe((res) => {
+                if (res.length) {
+                    this.rating = res[0].averageScore;
+                    console.log(this.rating);
+                }
             });
         }
     }
