@@ -23,7 +23,8 @@
             [created_at]="review.created_at"
             [last_changed_at]="review.last_changed_at"
             [user_name]="review.user_name"
-            [content]="review.content">
+            [content]="review.content"
+            [createdBy]="review.created_by">
         </app-review>
         <div class="flex flex-wrap justify-center" *ngIf="reviews.length">
             <a class="text-2xl" (click)="viewAllReviews()">View all reviews</a>

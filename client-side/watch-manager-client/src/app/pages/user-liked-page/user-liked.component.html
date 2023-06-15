@@ -1,0 +1,44 @@
+<div class="w-full pb-2.5 min-h-full text-white">
+    <div class="container mx-auto h-full flex gap-x-6">
+        <div class="w-2/12 pt-8" *ngIf="!isLoading">
+            <img class="w-full shadow-2xl rounded-2xl" src="../../../assets/images/no-user.jpg" alt="poster" />
+            <br />
+            <button mat-raised-button color="primary" class="w-full pt-3" (click)="!isFollowed ? follow() : unfollow()">
+                {{ !isFollowed ? "Folow" : "Unfollow" }}
+            </button>
+        </div>
+
+        <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start" class="w-10/12 pt-8">
+            <mat-tab label="Movies">
+                <div class="text-2xl font-bold py-3">Movies liked by {{ name }}</div>
+                <div class="flex flex-wrap gap-y-4 justify-between">
+                    <app-card
+                        class="card pr-3"
+                        *ngFor="let movie of movies"
+                        [mediaId]="movie.id"
+                        [mediaTitle]="movie.title"
+                        [mediaSubtitle]="movie.release_date | date"
+                        [mediaPoster]="movie.poster_path"
+                        [mediaType]="movieMediaType">
+                    </app-card>
+                    <div class="text-2xl" *ngIf="!movies.length">There are no movies to show</div>
+                </div>
+            </mat-tab>
+            <mat-tab label="TV Shows">
+                <div class="text-2xl font-bold py-3">Tv Shows liked by {{ name }}</div>
+                <div class="flex flex-wrap gap-y-4 justify-between">
+                    <app-card
+                        class="card pr-3"
+                        *ngFor="let tv of tvShows"
+                        [mediaId]="tv.id"
+                        [mediaTitle]="tv.name"
+                        [mediaSubtitle]="tv.first_air_date | date"
+                        [mediaPoster]="tv.poster_path"
+                        [mediaType]="tvMediaType">
+                    </app-card>
+                    <div class="text-2xl" *ngIf="!movies.length">There are no TV Shows to show</div>
+                </div>
+            </mat-tab>
+        </mat-tab-group>
+    </div>
+</div>

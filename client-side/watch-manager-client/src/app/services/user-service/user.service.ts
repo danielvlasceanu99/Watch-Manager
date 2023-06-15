@@ -75,4 +75,40 @@ export class UserService {
             headers: new HttpHeaders().set("authorization", this.cookieService.get("auth-token")),
         });
     }
+
+    getUserLiked(id: string) {
+        return this.httpClient.get<{ _id: string; likedMovies: string[]; likedTv: string[]; name: string }>(
+            `${this.USER_URL}/getUserLiked/${id}`
+        );
+    }
+
+    follow(userId: string) {
+        return this.httpClient.put<string>(
+            this.USER_URL + "/follow",
+            {
+                userId: userId,
+            },
+            {
+                headers: new HttpHeaders().set("authorization", this.cookieService.get("auth-token")),
+            }
+        );
+    }
+
+    unfollow(userId: string) {
+        return this.httpClient.put<string>(
+            this.USER_URL + "/unfollow",
+            {
+                userId: userId,
+            },
+            {
+                headers: new HttpHeaders().set("authorization", this.cookieService.get("auth-token")),
+            }
+        );
+    }
+
+    getAllFollowed() {
+        return this.httpClient.get<{ _id: string; name: string }[]>(this.USER_URL + "/getAllFollowed", {
+            headers: new HttpHeaders().set("authorization", this.cookieService.get("auth-token")),
+        });
+    }
 }

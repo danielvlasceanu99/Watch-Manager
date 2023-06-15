@@ -69,6 +69,7 @@ const controller = {
             reviewedTv: [],
             likedMovies: [],
             likedTv: [],
+            followedUsers: [],
         };
 
         let errors = {};
@@ -235,6 +236,80 @@ const controller = {
             });
 
         res.status(200).send(response);
+    },
+
+    follow: async (req, res) => {
+        const userId = req.body.userId;
+        if (!userId) {
+            res.status(400).send({ message: "Invalid request" });
+        }
+        try {
+            const user = await UserDb.findOne({ _id: ObjectId(userId) });
+            if (!user) {
+                res.status(404).send({ message: "There is no such account" });
+            }
+
+            if (!req.user["followedUsers"].includes(user._id)) {
+                req.user["followedUsers"].push(user._id);
+                await UserDb.updateOne(
+                    { _id: ObjectId(req.user._id) },
+                    { $set: { ["followedUsers"]: req.user["followedUsers"] } }
+                );
+            }
+            res.status(200).send({ message: `Following ${user.name}` });
+        } catch (err) {
+            res.status(401).send({ message: "Server error" });
+        }
+    },
+
+    unfollow: async (req, res) => {
+        const userId = req.body.userId;
+        if (!userId) {
+            res.status(400).send({ message: "Invalid request" });
+        }
+        try {
+            const index = req.user["followedUsers"].findIndex((objId) => objId.toString() === userId);
+            if (index > -1) {
+                req.user["followedUsers"].splice(index, 1);
+                await UserDb.updateOne(
+                    { _id: ObjectId(req.user._id) },
+                    { $set: { ["followedUsers"]: req.user["followedUsers"] } }
+                );
+            }
+            res.status(200).send({ message: `Unfollowed` });
+        } catch (err) {
+            res.status(401).send({ message: "Server error" });
+        }
+    },
+
+    getAllFollowed: async (req, res) => {
+        const filter = { _id: { $in: req.user.followedUsers } };
+        const projection = { _id: 1, name: 1 };
+
+        try {
+            const followedUsers = await UserDb.find(filter, { projection }).toArray();
+            res.status(200).send(followedUsers);
+        } catch (err) {
+            res.status(401).send({ message: "Server error" });
+        }
+    },
+
+    getUserLiked: async (req, res) => {
+        const userId = req.params.userId;
+        if (!userId) {
+            res.status(400).send({ message: "Invalid request" });
+        }
+        try {
+            const filter = { _id: ObjectId(userId) };
+            const projection = { _id: 1, name: 1, likedMovies: 1, likedTv: 1 };
+            const user = await UserDb.findOne(filter, { projection });
+            if (!user) {
+                res.status(404).send({ message: "There is no such account" });
+            }
+            res.status(200).send(user);
+        } catch (err) {
+            res.status(401).send({ message: "Server error" });
+        }
     },
 };
 

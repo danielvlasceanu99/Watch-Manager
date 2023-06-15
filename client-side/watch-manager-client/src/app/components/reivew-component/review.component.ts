@@ -13,6 +13,7 @@ export class ReviewComponent implements OnInit {
     @Input() last_changed_at: Date | undefined = new Date();
     @Input() user_name: string | undefined = "";
     @Input() content: string | undefined = "";
+    @Input() createdBy: string | undefined = "";
 
     constructor() {}
 

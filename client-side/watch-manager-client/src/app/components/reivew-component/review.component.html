@@ -5,7 +5,9 @@
             {{ title }}
             <span *ngIf="created_at !== last_changed_at">(Edited)</span>
         </mat-card-title>
-        <mat-card-subtitle>{{ user_name }} {{ created_at | date }}</mat-card-subtitle>
+        <mat-card-subtitle>
+            <a href="/user/{{ createdBy }}">{{ user_name }}</a> {{ created_at | date }}
+        </mat-card-subtitle>
     </mat-card-header>
     <mat-card-content class="mx-2">
         <p>{{ content }}</p>

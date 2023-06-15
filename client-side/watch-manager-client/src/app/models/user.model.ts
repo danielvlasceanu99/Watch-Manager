@@ -13,4 +13,5 @@ export interface User {
     reviewedTv: string[];
     likedMovies: string[];
     likedTv: string[];
+    followedUsers: string[];
 }

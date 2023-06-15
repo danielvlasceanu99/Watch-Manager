@@ -73,6 +73,8 @@ import { UserAccountComponent } from "./pages/user-account-page/user-account.com
 import { AdminMoviesComponent } from "./pages/admin-movies-page/admin-movies.component";
 import { AdminDashboardComponent } from "./pages/admin-dashboard-page/admin-dashboard.component";
 import { RecomandationsComponent } from "./pages/recomandations-page/recomandations.component";
+import { FollowedComponent } from "./pages/followed-page/followed.component";
+import { UserLikedComponent } from "./pages/user-liked-page/user-liked.component";
 
 // PIPES
 import { DatePipe } from "./pipes/date-pipe/date.pipe";
@@ -129,6 +131,8 @@ import { ColumnPipe } from "./pipes/column-pipe/column.pipe";
         DatePipe,
         RuntimePipe,
         ColumnPipe,
+        FollowedComponent,
+        UserLikedComponent,
     ],
     imports: [
         BrowserModule,
