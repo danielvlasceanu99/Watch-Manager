@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { AbstractControl, FormControl, FormGroup, Validators } from "@angular/forms";
 import { PageEvent } from "@angular/material/paginator";
+import { ActivatedRoute, Router } from "@angular/router";
 import { MediaType } from "src/app/models/helpers/media-type.model";
 import { Person } from "src/app/models/person.model";
 import { PersonService } from "src/app/services/person-service/person.service";
@@ -29,10 +30,13 @@ export class PeopleComponent implements OnInit {
     }
 
     pageEvent: PageEvent = new PageEvent();
-    constructor(private personService: PersonService) {}
+    constructor(private personService: PersonService, private route: ActivatedRoute, private router: Router) {}
 
     ngOnInit(): void {
-        this.search();
+        this.route.queryParams.subscribe((params) => {
+            this.name = params["name"] ? params["name"] : "";
+            this.search();
+        });
     }
 
     handlePageEvent(e: PageEvent) {
@@ -43,10 +47,7 @@ export class PeopleComponent implements OnInit {
 
     onSearch() {
         if (!this.formGroup.invalid) {
-            this.name = this.getName?.value;
-            this.page = 0;
-            this.search();
-            console.log(this.name);
+            this.router.navigate(["/people"], { queryParams: { name: this.getName?.value } });
         }
     }
 

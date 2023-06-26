@@ -1,7 +1,7 @@
 <div class="w-full pb-2.5 min-h-full text-white">
     <div class="container mx-auto h-full flex gap-x-6">
         <div class="w-2/12 pt-8" *ngIf="!isLoading">
-            <img class="w-full shadow-2xl rounded-2xl" src="../../../assets/images/no-user.jpg" alt="poster" />
+            <img class="w-full shadow-2xl rounded-2xl" src="{{ picture }}" alt="poster" />
             <br />
             <button mat-raised-button color="primary" class="w-full pt-3" (click)="!isFollowed ? follow() : unfollow()">
                 {{ !isFollowed ? "Folow" : "Unfollow" }}
@@ -9,7 +9,7 @@
         </div>
 
         <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start" class="w-10/12 pt-8">
-            <mat-tab label="Movies">
+            <mat-tab label="Liked movies">
                 <div class="text-2xl font-bold py-3">Movies liked by {{ name }}</div>
                 <div class="flex flex-wrap gap-y-4 justify-between">
                     <app-card
@@ -24,7 +24,7 @@
                     <div class="text-2xl" *ngIf="!movies.length">There are no movies to show</div>
                 </div>
             </mat-tab>
-            <mat-tab label="TV Shows">
+            <mat-tab label="Liked TV Shows">
                 <div class="text-2xl font-bold py-3">Tv Shows liked by {{ name }}</div>
                 <div class="flex flex-wrap gap-y-4 justify-between">
                     <app-card
@@ -38,6 +38,22 @@
                     </app-card>
                     <div class="text-2xl" *ngIf="!movies.length">There are no TV Shows to show</div>
                 </div>
+            </mat-tab>
+
+            <mat-tab label="Reviews">
+                <div class="text-2xl font-bold py-3">{{ name }}'s reviews</div>
+                <content *ngFor="let review of reviews" class="mb-7">
+                    <div class="text-xl font-bold py-3">{{ review?.movie?.title }} {{ review?.tv?.name }}</div>
+                    <app-review
+                        [title]="review.title"
+                        [created_at]="review.created_at"
+                        [last_changed_at]="review.last_changed_at"
+                        [user_name]="review.user_name"
+                        [content]="review.content"
+                        [createdBy]="review.created_by">
+                    </app-review>
+                </content>
+                <div class="text-2xl" *ngIf="!movies.length">There are no Reviews to show</div>
             </mat-tab>
         </mat-tab-group>
     </div>

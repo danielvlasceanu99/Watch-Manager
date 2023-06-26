@@ -19,6 +19,10 @@ export class ReviewService {
         return this.httpClient.get<Review[]>(`${this.REVIEW_URL}/getByTvId/${tv_id}`);
     }
 
+    getByUserId(user_id: string) {
+        return this.httpClient.get<Review[]>(`${this.REVIEW_URL}/getByUserId/${user_id}`);
+    }
+
     addReview(reviewTitle: string, reviewContent: string, mediaType: MediaType, mediaId: String) {
         return this.httpClient.post<Review>(
             `${this.REVIEW_URL}/addReview`,

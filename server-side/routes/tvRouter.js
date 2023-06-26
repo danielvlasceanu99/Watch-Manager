@@ -8,5 +8,6 @@ router.get("/filter", tvController.filter);
 router.get("/get/:id", tvController.getById);
 router.get("/getByList", tvController.getByList);
 router.get("/getRecomandations", tvController.getRecomandations);
+router.get("/getTopTv", tvController.getTopTv);
 
 module.exports = router;

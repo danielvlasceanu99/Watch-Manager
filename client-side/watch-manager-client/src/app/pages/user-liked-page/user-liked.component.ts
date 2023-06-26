@@ -3,9 +3,11 @@ import { MatSnackBar } from "@angular/material/snack-bar";
 import { ActivatedRoute, ParamMap, Router } from "@angular/router";
 import { MediaType } from "src/app/models/helpers/media-type.model";
 import { Movie } from "src/app/models/movie.model";
+import { Review } from "src/app/models/review.model";
 import { Tv } from "src/app/models/tv.model";
 import { User } from "src/app/models/user.model";
 import { MovieService } from "src/app/services/movie-service/movie.service";
+import { ReviewService } from "src/app/services/review-service/review.service";
 import { SessionService } from "src/app/services/session-service/session.service";
 import { TvService } from "src/app/services/tv-service/tv.service";
 import { UserService } from "src/app/services/user-service/user.service";
@@ -20,12 +22,13 @@ export class UserLikedComponent implements OnInit {
     name: string = "";
     movies: Movie[] = [];
     tvShows: Tv[] = [];
+    reviews: Review[] = [];
 
     isLoading: Boolean = false;
-
     isFollowed: boolean = false;
 
     user: User | null = null;
+    picture: string = "";
 
     movieMediaType: MediaType = MediaType.MOVIE;
     tvMediaType: MediaType = MediaType.TV;
@@ -34,6 +37,7 @@ export class UserLikedComponent implements OnInit {
         private movieService: MovieService,
         private tvService: TvService,
         private userService: UserService,
+        private reviewService: ReviewService,
         private route: Router,
         private activeRouter: ActivatedRoute,
         private session: SessionService,
@@ -55,6 +59,7 @@ export class UserLikedComponent implements OnInit {
 
                 this.userService.getUserLiked(this.id).subscribe((res) => {
                     this.name = res.name;
+                    this.picture = this.userService.getProfilePicture(this.name);
                     this.movieService.getbyList(res.likedMovies).subscribe((res) => {
                         this.movies = res;
                     });
@@ -63,6 +68,10 @@ export class UserLikedComponent implements OnInit {
                         this.tvShows = res;
                     });
                     this.isLoading = false;
+                });
+
+                this.reviewService.getByUserId(this.id).subscribe((res) => {
+                    this.reviews = res;
                 });
             }
         });

@@ -2,6 +2,7 @@ const { Op, Sequelize } = require("sequelize");
 const sequelize = require("../config/dbConfig");
 const TvDb = require("../models").TV;
 const GenreDb = require("../models").Genre;
+const UserDb = require("../models").Users;
 
 const controller = {
     getLatest: async (req, res) => {
@@ -166,6 +167,37 @@ const controller = {
             .catch((error) => {
                 res.status(500).send({ message: "Server error" });
             });
+    },
+
+    getTopTv: async (req, res) => {
+        const pipeline = [
+            { $unwind: "$ratedTv" },
+            {
+                $group: {
+                    _id: "$ratedTv.id",
+                    averageScore: { $avg: { $toDouble: "$ratedTv.rating" } },
+                },
+            },
+            { $sort: { averageScore: -1, _id: 1 } },
+            { $limit: 10 },
+        ];
+
+        try {
+            const result = await UserDb.aggregate(pipeline).toArray();
+            console.log("here");
+            let tvId = result.map((element) => element._id);
+            const tv = await TvDb.findAll({
+                where: {
+                    id: {
+                        [Op.in]: tvId,
+                    },
+                },
+            });
+            tv.sort((a, b) => tvId.indexOf(a.id) - tvId.indexOf(b.id));
+            res.status(200).send(tv);
+        } catch {
+            res.status(500).send({ message: "Server error" });
+        }
     },
 };
 

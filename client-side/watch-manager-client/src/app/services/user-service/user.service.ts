@@ -111,4 +111,40 @@ export class UserService {
             headers: new HttpHeaders().set("authorization", this.cookieService.get("auth-token")),
         });
     }
+
+    getProfilePicture(name: string | undefined) {
+        let leters = [
+            "A",
+            "B",
+            "C",
+            "D",
+            "E",
+            "F",
+            "G",
+            "H",
+            "I",
+            "J",
+            "K",
+            "L",
+            "M",
+            "N",
+            "O",
+            "P",
+            "Q",
+            "R",
+            "S",
+            "T",
+            "U",
+            "V",
+            "W",
+            "X",
+            "Y",
+            "Z",
+        ];
+        let index = leters.findIndex((element) => element === name?.charAt(0));
+        if (index !== -1) {
+            return `../../../assets/images/Logos/${leters[index]}.png`;
+        }
+        return "../../../assets/images/no-user.jpg";
+    }
 }

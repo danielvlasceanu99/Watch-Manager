@@ -1,6 +1,8 @@
 <mat-card class="mb-3">
     <mat-card-header>
-        <div mat-card-avatar class="example-header-image"></div>
+        <div mat-card-avatar>
+            <img class="example-header-image" src="{{ picture }}" alt="profile picture" />
+        </div>
         <mat-card-title>
             {{ title }}
             <span *ngIf="created_at !== last_changed_at">(Edited)</span>

@@ -44,4 +44,8 @@ export class TvService {
             `${this.RATING_URL}/getAverageTvRating/${id}`
         );
     }
+
+    getTopTv() {
+        return this.httpClient.get<Tv[]>(`${this.TV_URL}/getTopTv`);
+    }
 }

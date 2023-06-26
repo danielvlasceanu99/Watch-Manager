@@ -30,7 +30,9 @@
                             <table mat-table [dataSource]="!onTV ? movieToGenres : tvToGenres" class="w-full">
                                 <ng-container matColumnDef="genre">
                                     <th mat-header-cell *matHeaderCellDef>Genre</th>
-                                    <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+                                    <td mat-cell *matCellDef="let element" (click)="goToGenre(element.id)">
+                                        {{ element.name }}
+                                    </td>
                                 </ng-container>
                                 <ng-container matColumnDef="count">
                                     <th mat-header-cell *matHeaderCellDef>No.</th>
@@ -98,7 +100,9 @@
                             <table mat-table [dataSource]="episodesToShow" class="w-full">
                                 <ng-container matColumnDef="name">
                                     <th mat-header-cell *matHeaderCellDef>TV Show</th>
-                                    <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+                                    <td mat-cell *matCellDef="let element" (click)="goToSeries(element.id)">
+                                        {{ element.name }}
+                                    </td>
                                 </ng-container>
                                 <ng-container matColumnDef="episode_count">
                                     <th mat-header-cell *matHeaderCellDef>No.</th>

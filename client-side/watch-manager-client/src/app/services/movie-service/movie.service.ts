@@ -77,4 +77,7 @@ export class MovieService {
             `${this.RATING_URL}/getAverageMovieRating/${id}`
         );
     }
+    getTopMovies() {
+        return this.httpClient.get<Movie[]>(`${this.MOVIE_URL}/getTopMovies`);
+    }
 }

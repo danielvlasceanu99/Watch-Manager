@@ -75,6 +75,7 @@ import { AdminDashboardComponent } from "./pages/admin-dashboard-page/admin-dash
 import { RecomandationsComponent } from "./pages/recomandations-page/recomandations.component";
 import { FollowedComponent } from "./pages/followed-page/followed.component";
 import { UserLikedComponent } from "./pages/user-liked-page/user-liked.component";
+import { TopRatedComponent } from "./pages/top-rated-page/top-rated.component";
 
 // PIPES
 import { DatePipe } from "./pipes/date-pipe/date.pipe";
@@ -126,13 +127,14 @@ import { ColumnPipe } from "./pipes/column-pipe/column.pipe";
         AdminMoviesComponent,
         AdminDashboardComponent,
         RecomandationsComponent,
+        FollowedComponent,
+        UserLikedComponent,
+        TopRatedComponent,
         // PIPES
         DateYearPipe,
         DatePipe,
         RuntimePipe,
         ColumnPipe,
-        FollowedComponent,
-        UserLikedComponent,
     ],
     imports: [
         BrowserModule,

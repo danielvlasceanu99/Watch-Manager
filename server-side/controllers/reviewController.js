@@ -38,6 +38,24 @@ const controller = {
         }
     },
 
+    getReviewsByUserId: async (req, res) => {
+        try {
+            const reviews = await ReviewDb.findAll({
+                include: [
+                    { model: MovieDb, attributes: ["id", "title"] },
+                    { model: TvDb, attributes: ["id", "name"] },
+                ],
+                where: {
+                    created_by: req.params.user_id,
+                },
+                order: [["created_at", "DESC"]],
+            });
+            res.status(200).send(reviews);
+        } catch {
+            res.status(500).send({ message: "Server error" });
+        }
+    },
+
     addReview: async (req, res) => {
         const token = req.headers["authorization"];
         if (!token) {

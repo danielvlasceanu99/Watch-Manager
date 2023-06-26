@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from "@angular/core";
 import { Review } from "src/app/models/review.model";
+import { UserService } from "src/app/services/user-service/user.service";
 
 @Component({
     selector: "app-review",
@@ -15,7 +16,11 @@ export class ReviewComponent implements OnInit {
     @Input() content: string | undefined = "";
     @Input() createdBy: string | undefined = "";
 
-    constructor() {}
+    picture: string = "";
 
-    ngOnInit(): void {}
+    constructor(private userService: UserService) {}
+
+    ngOnInit(): void {
+        this.picture = this.userService.getProfilePicture(this.user_name);
+    }
 }

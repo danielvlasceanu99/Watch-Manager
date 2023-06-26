@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { AbstractControl, FormControl, FormGroup, Validators } from "@angular/forms";
 import { PageEvent } from "@angular/material/paginator";
+import { ActivatedRoute, Router } from "@angular/router";
 import { MediaType } from "src/app/models/helpers/media-type.model";
 import { Movie } from "src/app/models/movie.model";
 import { MovieService } from "src/app/services/movie-service/movie.service";
@@ -32,10 +33,18 @@ export class MoviesComponent implements OnInit {
     }
 
     pageEvent: PageEvent = new PageEvent();
-    constructor(private movieService: MovieService) {}
+    constructor(private movieService: MovieService, private route: ActivatedRoute, private router: Router) {}
 
     ngOnInit(): void {
-        this.search();
+        this.route.queryParams.subscribe((params) => {
+            this.gender = params["genre"];
+            if (this.gender) {
+                this.filter();
+            } else {
+                this.title = params["title"] ? params["title"] : "";
+                this.search();
+            }
+        });
     }
 
     handlePageEvent(e: PageEvent) {
@@ -50,19 +59,12 @@ export class MoviesComponent implements OnInit {
     }
 
     onFilterApplied(gender: string) {
-        this.gender = gender;
-        this.page = 0;
-        this.filter();
-        this.isFiltering = true;
-        this.getTitle?.setValue("");
+        this.router.navigate(["/movie"], { queryParams: { genre: gender } });
     }
 
     onSearch() {
         if (!this.formGroup.invalid) {
-            this.title = this.getTitle?.value;
-            this.page = 0;
-            this.search();
-            this.isFiltering = false;
+            this.router.navigate(["/movie"], { queryParams: { title: this.getTitle?.value } });
         }
     }
 

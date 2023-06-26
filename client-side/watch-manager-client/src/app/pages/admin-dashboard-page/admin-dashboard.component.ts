@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
 import { ChartConfiguration, ChartOptions } from "chart.js";
 import { UserService } from "src/app/services/user-service/user.service";
 
@@ -18,7 +19,7 @@ export class AdminDashboardComponent implements OnInit {
     movieToStatus: [{ count: number; status: string }] | [] = [];
     episodesToShow: [{ episode_count: string; name: string }] | [] = [];
 
-    constructor(private userService: UserService) {}
+    constructor(private userService: UserService, private router: Router) {}
 
     ngOnInit(): void {
         this.isLoading = true;
@@ -32,6 +33,7 @@ export class AdminDashboardComponent implements OnInit {
         });
     }
 
+    //Pie charts
     public pieChartOptions: ChartOptions<"pie"> = {
         responsive: true,
         plugins: {
@@ -40,26 +42,29 @@ export class AdminDashboardComponent implements OnInit {
             },
         },
     };
+    public pieChartLegend = true;
+    public pieChartPlugins = [];
+    // Movie
     public movie_pieChartLabels = [""];
     public movie_pieChartDatasets = [
         {
             data: [0],
             backgroundColor: [
-                "rgba(255, 99, 132, 0.2)",
-                "rgba(255, 159, 64, 0.2)",
-                "rgba(255, 205, 86, 0.2)",
-                "rgba(75, 192, 192, 0.2)",
-                "rgba(54, 162, 235, 0.2)",
-                "rgba(153, 102, 255, 0.2)",
-                "rgba(201, 203, 207, 0.2)",
-                "rgba(0, 35, 207, 0.2)",
-                "rgba(125, 12, 12, 0.2)",
-                "rgba(17, 122, 5, 0.2)",
-                "rgba(0, 65, 135, 0.2)",
-                "rgba(230, 230, 0, 0.2)",
-                "rgba(230, 0, 35, 0.2)",
-                "rgba(110, 115, 125, 0.2)",
-                "rgba(240, 70, 214, 0.2)",
+                "rgba(255, 99, 132, 0.8)",
+                "rgba(255, 159, 64, 0.8)",
+                "rgba(255, 205, 86, 0.8)",
+                "rgba(75, 192, 192, 0.8)",
+                "rgba(54, 162, 235, 0.8)",
+                "rgba(153, 102, 255, 0.8)",
+                "rgba(201, 203, 207, 0.8)",
+                "rgba(0, 35, 207, 0.8)",
+                "rgba(125, 12, 12, 0.8)",
+                "rgba(17, 122, 5, 0.8)",
+                "rgba(0, 65, 135, 0.8)",
+                "rgba(230, 230, 0, 0.8)",
+                "rgba(230, 0, 35, 0.8)",
+                "rgba(110, 115, 125, 0.8)",
+                "rgba(240, 70, 214, 0.8)",
             ],
             borderColor: [
                 "rgb(255, 99, 132)",
@@ -81,26 +86,27 @@ export class AdminDashboardComponent implements OnInit {
             borderWidth: 1,
         },
     ];
+    // TV
     public tv_pieChartLabels = [""];
     public tv_pieChartDatasets = [
         {
             data: [0],
             backgroundColor: [
-                "rgba(255, 99, 132, 0.2)",
-                "rgba(255, 159, 64, 0.2)",
-                "rgba(255, 205, 86, 0.2)",
-                "rgba(75, 192, 192, 0.2)",
-                "rgba(54, 162, 235, 0.2)",
-                "rgba(153, 102, 255, 0.2)",
-                "rgba(201, 203, 207, 0.2)",
-                "rgba(0, 35, 207, 0.2)",
-                "rgba(125, 12, 12, 0.2)",
-                "rgba(17, 122, 5, 0.2)",
-                "rgba(0, 65, 135, 0.2)",
-                "rgba(230, 230, 0, 0.2)",
-                "rgba(230, 0, 35, 0.2)",
-                "rgba(110, 115, 125, 0.2)",
-                "rgba(240, 70, 214, 0.2)",
+                "rgba(255, 99, 132, 0.8)",
+                "rgba(255, 159, 64, 0.8)",
+                "rgba(255, 205, 86, 0.8)",
+                "rgba(75, 192, 192, 0.8)",
+                "rgba(54, 162, 235, 0.8)",
+                "rgba(153, 102, 255, 0.8)",
+                "rgba(201, 203, 207, 0.8)",
+                "rgba(0, 35, 207, 0.8)",
+                "rgba(125, 12, 12, 0.8)",
+                "rgba(17, 122, 5, 0.8)",
+                "rgba(0, 65, 135, 0.8)",
+                "rgba(230, 230, 0, 0.8)",
+                "rgba(230, 0, 35, 0.8)",
+                "rgba(110, 115, 125, 0.8)",
+                "rgba(240, 70, 214, 0.8)",
             ],
             borderColor: [
                 "rgb(255, 99, 132)",
@@ -122,9 +128,8 @@ export class AdminDashboardComponent implements OnInit {
             borderWidth: 1,
         },
     ];
-    public pieChartLegend = true;
-    public pieChartPlugins = [];
 
+    // Barcharts
     public barChartLegend = false;
     public barChartPlugins = [];
     public barChartOptions: ChartConfiguration<"bar">["options"] = {
@@ -143,21 +148,21 @@ export class AdminDashboardComponent implements OnInit {
                 data: this.statusCount,
                 label: "Count",
                 backgroundColor: [
-                    "rgba(255, 99, 132, 0.2)",
-                    "rgba(255, 159, 64, 0.2)",
-                    "rgba(255, 205, 86, 0.2)",
-                    "rgba(75, 192, 192, 0.2)",
-                    "rgba(54, 162, 235, 0.2)",
-                    "rgba(153, 102, 255, 0.2)",
-                    "rgba(201, 203, 207, 0.2)",
-                    "rgba(0, 35, 207, 0.2)",
-                    "rgba(125, 12, 12, 0.2)",
-                    "rgba(17, 122, 5, 0.2)",
-                    "rgba(0, 65, 135, 0.2)",
-                    "rgba(230, 230, 0, 0.2)",
-                    "rgba(230, 0, 35, 0.2)",
-                    "rgba(110, 115, 125, 0.2)",
-                    "rgba(240, 70, 214, 0.2)",
+                    "rgba(255, 99, 132, 0.8)",
+                    "rgba(255, 159, 64, 0.8)",
+                    "rgba(255, 205, 86, 0.8)",
+                    "rgba(75, 192, 192, 0.8)",
+                    "rgba(54, 162, 235, 0.8)",
+                    "rgba(153, 102, 255, 0.8)",
+                    "rgba(201, 203, 207, 0.8)",
+                    "rgba(0, 35, 207, 0.8)",
+                    "rgba(125, 12, 12, 0.8)",
+                    "rgba(17, 122, 5, 0.8)",
+                    "rgba(0, 65, 135, 0.8)",
+                    "rgba(230, 230, 0, 0.8)",
+                    "rgba(230, 0, 35, 0.8)",
+                    "rgba(110, 115, 125, 0.8)",
+                    "rgba(240, 70, 214, 0.8)",
                 ],
                 borderColor: [
                     "rgb(255, 99, 132)",
@@ -190,21 +195,21 @@ export class AdminDashboardComponent implements OnInit {
                 data: this.episodeCount,
                 label: "Count",
                 backgroundColor: [
-                    "rgba(255, 99, 132, 0.2)",
-                    "rgba(255, 159, 64, 0.2)",
-                    "rgba(255, 205, 86, 0.2)",
-                    "rgba(75, 192, 192, 0.2)",
-                    "rgba(54, 162, 235, 0.2)",
-                    "rgba(153, 102, 255, 0.2)",
-                    "rgba(201, 203, 207, 0.2)",
-                    "rgba(0, 35, 207, 0.2)",
-                    "rgba(125, 12, 12, 0.2)",
-                    "rgba(17, 122, 5, 0.2)",
-                    "rgba(0, 65, 135, 0.2)",
-                    "rgba(230, 230, 0, 0.2)",
-                    "rgba(230, 0, 35, 0.2)",
-                    "rgba(110, 115, 125, 0.2)",
-                    "rgba(240, 70, 214, 0.2)",
+                    "rgba(255, 99, 132, 0.8)",
+                    "rgba(255, 159, 64, 0.8)",
+                    "rgba(255, 205, 86, 0.8)",
+                    "rgba(75, 192, 192, 0.8)",
+                    "rgba(54, 162, 235, 0.8)",
+                    "rgba(153, 102, 255, 0.8)",
+                    "rgba(201, 203, 207, 0.8)",
+                    "rgba(0, 35, 207, 0.8)",
+                    "rgba(125, 12, 12, 0.8)",
+                    "rgba(17, 122, 5, 0.8)",
+                    "rgba(0, 65, 135, 0.8)",
+                    "rgba(230, 230, 0, 0.8)",
+                    "rgba(230, 0, 35, 0.8)",
+                    "rgba(110, 115, 125, 0.8)",
+                    "rgba(240, 70, 214, 0.8)",
                 ],
                 borderColor: [
                     "rgb(255, 99, 132)",
@@ -261,5 +266,19 @@ export class AdminDashboardComponent implements OnInit {
             this.showLabel.push(e.name);
             this.episodeCount.push(Number(e.episode_count));
         });
+    }
+
+    goToGenre(id: any) {
+        if (this.onTV) {
+            const url = this.router.serializeUrl(this.router.createUrlTree(["/tv"], { queryParams: { genre: id } }));
+            window.open(url, "_blank");
+        } else {
+            const url = this.router.serializeUrl(this.router.createUrlTree(["/movie"], { queryParams: { genre: id } }));
+            window.open(url, "_blank");
+        }
+    }
+    goToSeries(id: any) {
+        const url = this.router.serializeUrl(this.router.createUrlTree([`/tv/${id}`]));
+        window.open(url, "_blank");
     }
 }

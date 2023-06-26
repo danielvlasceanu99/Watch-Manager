@@ -10,6 +10,7 @@ router.get("/get/:id", movieController.getById);
 router.get("/getByList", movieController.getByList);
 router.get("/getAll", movieController.getAll);
 router.get("/getRecomandations", movieController.getRecomandations);
+router.get("/getTopMovies", movieController.getTopMovies);
 
 router.post("/addMovie", adminMiddleware.adminMiddleware, movieController.addMovie);
 router.put("/editMovie/:id", adminMiddleware.adminMiddleware, movieController.editMovie);

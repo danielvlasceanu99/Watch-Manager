@@ -24,6 +24,7 @@ import { AdminDashboardComponent } from "./pages/admin-dashboard-page/admin-dash
 import { RecomandationsComponent } from "./pages/recomandations-page/recomandations.component";
 import { UserLikedComponent } from "./pages/user-liked-page/user-liked.component";
 import { FollowedComponent } from "./pages/followed-page/followed.component";
+import { TopRatedComponent } from "./pages/top-rated-page/top-rated.component";
 
 const routes: Routes = [
     { path: "home", component: LatestComponent },
@@ -52,6 +53,7 @@ const routes: Routes = [
     { path: "recomandations", component: RecomandationsComponent },
     { path: "user/:id", component: UserLikedComponent },
     { path: "followed", component: FollowedComponent },
+    { path: "top-rated", component: TopRatedComponent },
     { path: "**", redirectTo: "home", pathMatch: "full" },
 ];
 

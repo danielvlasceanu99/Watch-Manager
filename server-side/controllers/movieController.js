@@ -1,8 +1,8 @@
 const { Op, Sequelize } = require("sequelize");
 const sequelize = require("../config/dbConfig");
-const genre = require("../models/genre");
 const MovieDb = require("../models").Movie;
 const GenreDb = require("../models").Genre;
+const UserDb = require("../models").Users;
 
 const controller = {
     getLatest: async (req, res) => {
@@ -258,6 +258,36 @@ const controller = {
         try {
             await movie.destroy();
             res.status(200).send({ message: "Movie removed" });
+        } catch {
+            res.status(500).send({ message: "Server error" });
+        }
+    },
+
+    getTopMovies: async (req, res) => {
+        const pipeline = [
+            { $unwind: "$ratedMovies" },
+            {
+                $group: {
+                    _id: "$ratedMovies.id",
+                    averageScore: { $avg: { $toDouble: "$ratedMovies.rating" } },
+                },
+            },
+            { $sort: { averageScore: -1, _id: 1 } },
+            { $limit: 10 },
+        ];
+
+        try {
+            const result = await UserDb.aggregate(pipeline).toArray();
+            let moviesId = result.map((element) => element._id);
+            const movies = await MovieDb.findAll({
+                where: {
+                    id: {
+                        [Op.in]: moviesId,
+                    },
+                },
+            });
+            movies.sort((a, b) => moviesId.indexOf(a.id) - moviesId.indexOf(b.id));
+            res.status(200).send(movies);
         } catch {
             res.status(500).send({ message: "Server error" });
         }

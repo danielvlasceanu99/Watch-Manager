@@ -3,6 +3,7 @@ import { Router } from "@angular/router";
 import { User } from "src/app/models/user.model";
 import { SessionService } from "src/app/services/session-service/session.service";
 import { ChartConfiguration } from "chart.js";
+import { UserService } from "src/app/services/user-service/user.service";
 
 @Component({
     selector: "app-user-account",
@@ -23,13 +24,16 @@ export class UserAccountComponent implements OnInit {
     movieCount = [0, 0, 0, 0];
     tvCount = [0, 0, 0, 0];
 
-    constructor(private session: SessionService, private router: Router) {}
+    picture: string = "";
+
+    constructor(private session: SessionService, private router: Router, private userService: UserService) {}
 
     ngOnInit(): void {
         this.isLoadingChartOne = true;
         this.isLoadingChartTwo = true;
         this.session.userObservable.subscribe((user) => {
             this.user = user;
+            this.picture = this.userService.getProfilePicture(this.user?.name);
             if (this.user?.name.split(" ")) {
                 const names = this.user?.name.split(" ");
                 this.lastName = names[names.length - 1];
@@ -76,7 +80,7 @@ export class UserAccountComponent implements OnInit {
         responsive: false,
     };
     barChartDataOne: ChartConfiguration<"bar">["data"] = {
-        labels: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"],
+        labels: ["1 Star", "2 Star", "3 Star", "4 Star", "5 Star", "6 Star", "7 Star", "8 Star", "9 Star", "10 Star"],
         datasets: [
             { data: this.movieRatings, label: "Movies" },
             { data: this.tvRatings, label: "TV Shows" },

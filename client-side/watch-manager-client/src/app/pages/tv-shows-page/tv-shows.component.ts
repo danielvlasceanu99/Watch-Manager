@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { AbstractControl, FormControl, FormGroup, Validators } from "@angular/forms";
 import { PageEvent } from "@angular/material/paginator";
+import { ActivatedRoute, ParamMap, Router } from "@angular/router";
 import { MediaType } from "src/app/models/helpers/media-type.model";
 import { Tv } from "src/app/models/tv.model";
 import { TvService } from "src/app/services/tv-service/tv.service";
@@ -32,10 +33,18 @@ export class TvShowsComponent implements OnInit {
     }
 
     pageEvent: PageEvent = new PageEvent();
-    constructor(private tvService: TvService) {}
+    constructor(private tvService: TvService, private route: ActivatedRoute, private router: Router) {}
 
     ngOnInit(): void {
-        this.search();
+        this.route.queryParams.subscribe((params) => {
+            this.gender = params["genre"];
+            if (this.gender) {
+                this.filter();
+            } else {
+                this.name = params["name"] ? params["name"] : "";
+                this.search();
+            }
+        });
     }
 
     handlePageEvent(e: PageEvent) {
@@ -50,20 +59,12 @@ export class TvShowsComponent implements OnInit {
     }
 
     onFilterApplied(gender: string) {
-        this.gender = gender;
-        this.page = 0;
-        this.filter();
-        this.isFiltering = true;
-        this.getName?.setValue("");
+        this.router.navigate(["/tv"], { queryParams: { genre: gender } });
     }
 
     onSearch() {
         if (!this.formGroup.invalid) {
-            this.name = this.getName?.value;
-            this.page = 0;
-            this.search();
-            this.isFiltering = false;
-            console.log(this.name);
+            this.router.navigate(["/tv"], { queryParams: { name: this.getName?.value } });
         }
     }
 
